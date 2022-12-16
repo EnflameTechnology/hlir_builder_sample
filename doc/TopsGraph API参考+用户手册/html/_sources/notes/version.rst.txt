@@ -1,0 +1,54 @@
+Version
+=======
+
+This page provide the version information of the document.
+
+2.0_production(current)
+-----------------------
+
+October 10, 2022-HLIR Builder 2.0_production is available. The highlights of the release are:
+
+- Update document of TopsGraph Compiler for release of 2.0 production.
+
+The corresponding commit id is 482b5d50b0007e80bb3eeaf1c8f4603a7295baa0 
+This release continues the ongoing work to improve the client opset and add meta operation semantics.
+
+
+v0.4
+----
+
+September 28, 2022-HLIR Builder v0.4 is available. The highlights of the release are:
+
+- Add several client ops: Conv1D, Conv1DTranspose, MaxPool1D, Flatten, PRelu.
+- Remove a few meta ops: ConvDyn, Merge, Return, SoftmaxDyn, Split, TensorAttr, Terminator. 
+- Add operation semantics document of 28 meta ops.
+- Add document of TopsGraph Compiler.
+- Update interfaces from dtu_complier to topsgraph_compiler, from runtime 2.0 to 3.0 in the minimal example.
+
+The corresponding commit id is a955598c72ad7c4a92cb61eec0e6175fef28e538 
+This release continues the ongoing work to improve the client opset and starts to add meta operation semantics.
+
+
+v0.3
+----
+
+August 28, 2022-HLIR Builder v0.3 is available. The highlights of the release are:
+
+- Add some client ops: Equal, Greater, GreaterEqual, Less, LessEqual, NotEqual, Reciprocal, ReduceL2, ReduceMax, ReduceMean, ReduceMin, ReduceProd, ReduceSum.
+- Add a argument of ArgSort, which judges if return sorted indices only or both the sorted data and indices.
+- Update the setting of compile options in the minimal example.
+
+The corresponding commit id is ecf7a8c5e6c4bfd285a0c83ced1c6e85120e4692.
+This release continues the ongoing work to improve the client opset.
+
+
+v0.2
+----
+
+July 28, 2022-HLIR Builder v0.2 is available. The highlights of the release are:
+
+- Add some client ops: ArgSort, Conv2D, Conv2DTranspose, HardSigmoid, HardSwish, MaxPool2D, Square.
+- Add version information.
+
+The corresponding commit id is f4271d4124639ca1f897f12f5b402ce6b1e7d602.
+This release continues the ongoing work to improve the client opset. Client ops is much closer to ops of deep learning frameworks, and are for ease of use.

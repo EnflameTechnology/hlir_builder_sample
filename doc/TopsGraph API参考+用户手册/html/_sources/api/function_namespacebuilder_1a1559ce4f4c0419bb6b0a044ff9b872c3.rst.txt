@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a1559ce4f4c0419bb6b0a044ff9b872c3:
+
+Function builder::LeakyRelu
+===========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::LeakyRelu(builder::Op, float, builder::Type)

@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a89b214c8db76b827410457626d8c9b3c:
+
+Function builder::Split
+=======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Split(builder::Op, std::vector<int32_t>, builder::Type)
+   :project: HLIR Builder

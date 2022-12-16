@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ade58bd84ed101b4dbc360cd8de1dc5f3:
+
+Function builder::AveragePoolGrad(builder::Op, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, bool, bool, std::vector<std::vector<int64_t>>, builder::Type)
+====================================================================================================================================================================================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::AveragePoolGrad(builder::Op, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, bool, bool, std::vector<std::vector<int64_t>>, builder::Type)
+   :project: HLIR Builder

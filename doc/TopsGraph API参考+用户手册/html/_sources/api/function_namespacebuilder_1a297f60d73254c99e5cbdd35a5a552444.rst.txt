@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a297f60d73254c99e5cbdd35a5a552444:
+
+Function builder::NotEqual
+==========================
+
+- Defined in :ref:`file_headers_hlir_builder_client_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::NotEqual(builder::Op, builder::Op, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1aff3e4300010fb9c4267e9112527e35f2:
+
+Function builder::SubQuant
+==========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::SubQuant(builder::Op, builder::Op, float, float, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

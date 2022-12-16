@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a5566c7bdaa883880587429177a16a58d:
+
+Function builder::Transpose
+===========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Transpose(builder::Op, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

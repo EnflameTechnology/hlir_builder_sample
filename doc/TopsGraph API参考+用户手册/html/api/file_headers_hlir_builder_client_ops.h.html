@@ -1,0 +1,506 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>File hlir_builder_client_ops.h &mdash; HLIR Builder master documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://pytorch.org/docs/stable/api/file_headers_hlir_builder_client_ops.h.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="../_static/cpp_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <!-- Google Analytics -->
+  
+  <!-- End Google Analytics -->
+  
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <!--a class="header-logo" href="https://www.enflame-tech.com" aria-label="Builder"></a> -->
+      <a class="header-logo" aria-label="Builder"></a>
+
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a class="reference internal" href="get_started.html">Get Started</a>
+          </li>
+
+          <li>
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="resource-option with-down-orange-arrow">
+                Operation Semantics
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="doc-dropdown-option nav-dropdown-item" href="meta_operation_semantics.html">
+                  <span class="dropdown-title">Meta Ops</span>
+                  <p></p>
+                </a>
+                <a class="doc-dropdown-option nav-dropdown-item" href="client_operation_semantics.html">
+                  <span class="dropdown-title">Client Ops</span>
+                  <p></p>
+                </a>
+            </div>
+          </li>
+
+          <li>
+            <a class="reference internal" href="api/library_root.html">C++ API</a>
+          </li>
+
+          <li>
+            <!--<a href="https://www.enflame-tech.com">Python API</a> -->
+            <a>Python API</a>
+          </li>
+
+          <li>
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="resource-option with-down-orange-arrow">
+                Tutorials
+              </a>
+              <div class="resources-dropdown-menu">
+                <!--<a class="doc-dropdown-option nav-dropdown-item" href="https://www.enflame-tech.com"> -->
+                <a class="doc-dropdown-option nav-dropdown-item">
+                  <span class="dropdown-title">Inference</span>
+                  <p></p>
+                </a>
+                <!--<a class="doc-dropdown-option nav-dropdown-item" href="https://www.enflame-tech.com"> -->
+                <a class="doc-dropdown-option nav-dropdown-item">
+                  <span class="dropdown-title">Trainning</span>
+                  <p></p>
+                </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+  </div>
+</div>
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  master
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../get_started.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../meta_operation_semantics.html">Meta Operation Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client_operation_semantics.html">Client Operation Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tops_graph_compiler.html">TopsGraph Compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">C++ API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notes/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/version.html">Version</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../index.html">
+          
+            Docs
+          
+        </a> &gt;
+      </li>
+
+        
+      <li>File hlir_builder_client_ops.h</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/EnflameTechnology" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+
+        
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <div class="section" id="file-hlir-builder-client-ops-h">
+<span id="file-headers-hlir-builder-client-ops-h"></span><h1>File hlir_builder_client_ops.h<a class="headerlink" href="#file-hlir-builder-client-ops-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="dir_headers.html#dir-headers"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">headers</span></code>)</p>
+<div class="contents local topic" id="page-contents">
+<p class="topic-title">Page Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#definition-headers-hlir-builder-client-ops-h" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">headers/hlir_builder_client_ops.h</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#included-by" id="id2">Included By</a></p></li>
+<li><p><a class="reference internal" href="#namespaces" id="id3">Namespaces</a></p></li>
+<li><p><a class="reference internal" href="#functions" id="id4">Functions</a></p></li>
+</ul>
+</div>
+<div class="section" id="definition-headers-hlir-builder-client-ops-h">
+<h2>Definition (<code class="docutils literal notranslate"><span class="pre">headers/hlir_builder_client_ops.h</span></code>)<a class="headerlink" href="#definition-headers-hlir-builder-client-ops-h" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="program_listing_file_headers_hlir_builder_client_ops.h.html">Program Listing for File hlir_builder_client_ops.h</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="included-by">
+<h2>Included By<a class="headerlink" href="#included-by" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="file_headers_hlir_builder.h.html#file-headers-hlir-builder-h"><span class="std std-ref">File hlir_builder.h</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="namespaces">
+<h2>Namespaces<a class="headerlink" href="#namespaces" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="namespace_builder.html#namespace-builder"><span class="std std-ref">Namespace builder</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="function_namespacebuilder_1ae6a5d426c747ac2919978130b7487882.html#exhale-function-namespacebuilder-1ae6a5d426c747ac2919978130b7487882"><span class="std std-ref">Function builder::ArgMax</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1ac46efbb497d0364eb73c3311c1b11174.html#exhale-function-namespacebuilder-1ac46efbb497d0364eb73c3311c1b11174"><span class="std std-ref">Function builder::ArgMin</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1a7c4dd1f5bc2f8487f0575bed0c489b48.html#exhale-function-namespacebuilder-1a7c4dd1f5bc2f8487f0575bed0c489b48"><span class="std std-ref">Function builder::ArgSort</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1a1855443a554400b8cb1c3cc8076c6dd1.html#exhale-function-namespacebuilder-1a1855443a554400b8cb1c3cc8076c6dd1"><span class="std std-ref">Function builder::Conv1D</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1a6a440dc2813ff00788154c53a6e19039.html#exhale-function-namespacebuilder-1a6a440dc2813ff00788154c53a6e19039"><span class="std std-ref">Function builder::Conv1DTranspose</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1ae7cddd5cc3e2b0578e2d3eaa17e8f62e.html#exhale-function-namespacebuilder-1ae7cddd5cc3e2b0578e2d3eaa17e8f62e"><span class="std std-ref">Function builder::Conv2D</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1af73ecb8f9da771400eac377cbffb5fc9.html#exhale-function-namespacebuilder-1af73ecb8f9da771400eac377cbffb5fc9"><span class="std std-ref">Function builder::Conv2DTranspose</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1af0cbdadffdd056dc4081854ae9fe6794.html#exhale-function-namespacebuilder-1af0cbdadffdd056dc4081854ae9fe6794"><span class="std std-ref">Function builder::Equal</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1a264a698ca37175917ede7a90c932921b.html#exhale-function-namespacebuilder-1a264a698ca37175917ede7a90c932921b"><span class="std std-ref">Function builder::Flatten</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1a370912457dc7d4d98815606883e41531.html#exhale-function-namespacebuilder-1a370912457dc7d4d98815606883e41531"><span class="std std-ref">Function builder::Greater</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1aaaf0f61039a3e43a63e0b27507600ac5.html#exhale-function-namespacebuilder-1aaaf0f61039a3e43a63e0b27507600ac5"><span class="std std-ref">Function builder::GreaterEqual</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1ab1a141efc812f091dd2c9eaffd8fbdc2.html#exhale-function-namespacebuilder-1ab1a141efc812f091dd2c9eaffd8fbdc2"><span class="std std-ref">Function builder::HardSigmoid</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1ae239409601e2a4bfca6587028c1d867c.html#exhale-function-namespacebuilder-1ae239409601e2a4bfca6587028c1d867c"><span class="std std-ref">Function builder::HardSwish</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1ab918d03e0e5240bba535a53d119460ee.html#exhale-function-namespacebuilder-1ab918d03e0e5240bba535a53d119460ee"><span class="std std-ref">Function builder::Less</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1ad526357bddb87610def58aa36a005b96.html#exhale-function-namespacebuilder-1ad526357bddb87610def58aa36a005b96"><span class="std std-ref">Function builder::LessEqual</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1ac85755e2fd5afd155cc126d31036fb73.html#exhale-function-namespacebuilder-1ac85755e2fd5afd155cc126d31036fb73"><span class="std std-ref">Function builder::MaxPool1D</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1a9337f12e170f4fca6f35899b3e390222.html#exhale-function-namespacebuilder-1a9337f12e170f4fca6f35899b3e390222"><span class="std std-ref">Function builder::MaxPool2D</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1a297f60d73254c99e5cbdd35a5a552444.html#exhale-function-namespacebuilder-1a297f60d73254c99e5cbdd35a5a552444"><span class="std std-ref">Function builder::NotEqual</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1ac356ae3062452bb783c47fe935d51530.html#exhale-function-namespacebuilder-1ac356ae3062452bb783c47fe935d51530"><span class="std std-ref">Function builder::PRelu</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1a776607370df1d32380133f8a6006166c.html#exhale-function-namespacebuilder-1a776607370df1d32380133f8a6006166c"><span class="std std-ref">Function builder::Reciprocal</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1ab590b873bd46224349be1dc36651f414.html#exhale-function-namespacebuilder-1ab590b873bd46224349be1dc36651f414"><span class="std std-ref">Function builder::ReduceL2</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1a90aff8c6815b8787040e199609d91db8.html#exhale-function-namespacebuilder-1a90aff8c6815b8787040e199609d91db8"><span class="std std-ref">Function builder::ReduceMax</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1a5c294f76d9fb02b126730120f654cf9d.html#exhale-function-namespacebuilder-1a5c294f76d9fb02b126730120f654cf9d"><span class="std std-ref">Function builder::ReduceMean</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1ae9f9fb682eb09aab96a9cdbb6dea4d71.html#exhale-function-namespacebuilder-1ae9f9fb682eb09aab96a9cdbb6dea4d71"><span class="std std-ref">Function builder::ReduceMin</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1a4225587d682f7ce4eb129379b8759f34.html#exhale-function-namespacebuilder-1a4225587d682f7ce4eb129379b8759f34"><span class="std std-ref">Function builder::ReduceProd</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1a87c84770be0f705870c2b624fcdce653.html#exhale-function-namespacebuilder-1a87c84770be0f705870c2b624fcdce653"><span class="std std-ref">Function builder::ReduceSum</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacebuilder_1a0bf2759c40bccf4d1e4f4a079d5b4740.html#exhale-function-namespacebuilder-1a0bf2759c40bccf4d1e4f4a079d5b4740"><span class="std std-ref">Function builder::Square</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+             </article>
+             
+            </div>
+            <footer>
+  
+
+  
+
+    <hr>
+
+  
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HLIR Builder Contributors.
+
+    </p>
+  </div>
+    
+      <div>
+        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+     
+
+</footer>
+
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              <ul>
+<li><a class="reference internal" href="#">File hlir_builder_client_ops.h</a><ul>
+<li><a class="reference internal" href="#definition-headers-hlir-builder-client-ops-h">Definition (<code class="docutils literal notranslate"><span class="pre">headers/hlir_builder_client_ops.h</span></code>)</a></li>
+<li><a class="reference internal" href="#included-by">Included By</a></li>
+<li><a class="reference internal" href="#namespaces">Namespaces</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../_static/js/vendor/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <div class="container-fluid docs-tutorials-resources" id="docs-tutorials-resources">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <h2>Docs</h2>
+          <p>Access comprehensive developer documentation for HLIR Builder</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Docs</a> -->
+          <a class="with-right-arrow">View Docs</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Tutorials</h2>
+          <p>Get in-depth tutorials for beginners and advanced developers</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Tutorials</a> -->
+          <a class="with-right-arrow">View Tutorials</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Resources</h2>
+          <p>Find development resources and get your questions answered</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Resources</a> -->
+          <a class="with-right-arrow">View Resources</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <!--<div class="footer-logo-wrapper">
+        <a href="https://www.enflame-tech.com" class="footer-logo"></a>
+      </div>-->
+
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <ul>
+            <!--<li><a href="https://www.enflame-tech.com">Get Started</a></li> -->
+            <li><a>Get Started</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Features</a></li> -->
+            <li><a>C++ API</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Ecosystem</a></li> -->
+            <li><a>Python API</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Blog</a></li> -->
+            <li><a>Tutorials</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Contributing</a></li> -->
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <!--<li class="list-title"><a href="https://www.enflame-tech.com">Resources</a></li> -->
+            <li class="list-title"><a>Contributing</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Tutorials</a></li> -->
+            <!--<li><a href="https://www.enflame-tech.com">Docs</a></li> -->
+            <li><a>Applications</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Discuss</a></li> -->
+            <li><a>Discuss</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Github Issues</a></li> -->
+            <li><a>Github Issues</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Brand Guidelines</a></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cookie-banner-wrapper">
+  <div class="container">
+    <p class="gdpr-notice">To analyze traffic and optimize your experience, we serve cookies on this site. By clicking or navigating, you agree to allow our usage of cookies. As the current maintainers of this site, Facebook’s Cookies Policy applies. Learn more, including about available controls: <a href="https://www.facebook.com/policies/cookies/">Cookies Policy</a>.</p>
+    <img class="close-button" src="../_static/images/pytorch-x.svg">
+  </div>
+</div>
+
+  <!-- End Footer -->
+
+  <script type="text/javascript" src="../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+      mainMenuDropdown.bind();
+      filterTags.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

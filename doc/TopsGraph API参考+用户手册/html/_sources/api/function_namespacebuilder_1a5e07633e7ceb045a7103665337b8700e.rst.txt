@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a5e07633e7ceb045a7103665337b8700e:
+
+Function builder::BatchMatmulV2
+===============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::BatchMatmulV2(builder::Op, builder::Op, bool, bool, std::vector<std::string>, builder::Type)
+   :project: HLIR Builder

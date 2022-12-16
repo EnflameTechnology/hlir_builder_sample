@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_tops__graph__compiler_8h_1a9bed53ccdcfc428a03aa6c0f8e2a39d1:
+
+Function topsgraphGetBin
+========================
+
+- Defined in :ref:`file_headers_tops_graph_compiler.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: topsgraphGetBin(topsgraphProgram, char *)
+   :project: HLIR Builder

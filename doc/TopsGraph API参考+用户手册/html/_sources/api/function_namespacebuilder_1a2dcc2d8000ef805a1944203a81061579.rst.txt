@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a2dcc2d8000ef805a1944203a81061579:
+
+Function builder::Conv3D
+========================
+
+- Defined in :ref:`file_headers_hlir_builder_client_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Conv3D(std::vector<builder::Op>, int64_t, std::string, std::string, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

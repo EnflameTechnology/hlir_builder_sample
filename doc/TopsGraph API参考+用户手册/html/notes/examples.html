@@ -1,0 +1,847 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Examples &mdash; HLIR Builder master documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://pytorch.org/docs/stable/notes/examples.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="../_static/cpp_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Version" href="version.html" />
+    <link rel="prev" title="Typedef topsgraphProgram" href="../api/typedef_tops__graph__compiler_8h_1a3bedb0eb80a612e083009be7dbda10cb.html" />
+  <!-- Google Analytics -->
+  
+  <!-- End Google Analytics -->
+  
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <!--a class="header-logo" href="https://www.enflame-tech.com" aria-label="Builder"></a> -->
+      <a class="header-logo" aria-label="Builder"></a>
+
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a class="reference internal" href="get_started.html">Get Started</a>
+          </li>
+
+          <li>
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="resource-option with-down-orange-arrow">
+                Operation Semantics
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="doc-dropdown-option nav-dropdown-item" href="meta_operation_semantics.html">
+                  <span class="dropdown-title">Meta Ops</span>
+                  <p></p>
+                </a>
+                <a class="doc-dropdown-option nav-dropdown-item" href="client_operation_semantics.html">
+                  <span class="dropdown-title">Client Ops</span>
+                  <p></p>
+                </a>
+            </div>
+          </li>
+
+          <li>
+            <a class="reference internal" href="api/library_root.html">C++ API</a>
+          </li>
+
+          <li>
+            <!--<a href="https://www.enflame-tech.com">Python API</a> -->
+            <a>Python API</a>
+          </li>
+
+          <li>
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="resource-option with-down-orange-arrow">
+                Tutorials
+              </a>
+              <div class="resources-dropdown-menu">
+                <!--<a class="doc-dropdown-option nav-dropdown-item" href="https://www.enflame-tech.com"> -->
+                <a class="doc-dropdown-option nav-dropdown-item">
+                  <span class="dropdown-title">Inference</span>
+                  <p></p>
+                </a>
+                <!--<a class="doc-dropdown-option nav-dropdown-item" href="https://www.enflame-tech.com"> -->
+                <a class="doc-dropdown-option nav-dropdown-item">
+                  <span class="dropdown-title">Trainning</span>
+                  <p></p>
+                </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+  </div>
+</div>
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  master
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../get_started.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../meta_operation_semantics.html">Meta Operation Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client_operation_semantics.html">Client Operation Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tops_graph_compiler.html">TopsGraph Compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/library_root.html">C++ API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Notes</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version.html">Version</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../index.html">
+          
+            Docs
+          
+        </a> &gt;
+      </li>
+
+        
+      <li>Examples</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/notes/examples.rst.txt" rel="nofollow"><img src="../_static/images/view-page-source-icon.svg"></a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+
+        
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <div class="section" id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<p>This page shows some exmaples of using HLIR Builder C++ API.</p>
+<div class="section" id="bind-function-to-op">
+<h2>Bind Function to Op<a class="headerlink" href="#bind-function-to-op" title="Permalink to this headline">¶</a></h2>
+<p>There are some Ops need to bind <em>Function</em> to it. This behavior is similar to passing a
+comparison function to <code class="docutils literal notranslate"><span class="pre">std::sort</span></code> in C++. The function to bind is defined by users.
+Note that the function number to bind is pre-defined as the following table.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Op Name</p></th>
+<th class="head"><p>Bound Function Number</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Fusion</span></code></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Map</span></code></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PartialReduce</span></code></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Reduce</span></code></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ReduceWindow</span></code></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Scatter</span></code></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SelectAndScatter</span></code></p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Sort</span></code></p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<p>The following example is using <code class="docutils literal notranslate"><span class="pre">builder::ReduceWindow</span></code> and <code class="docutils literal notranslate"><span class="pre">builder::Max</span></code> to apply <code class="docutils literal notranslate"><span class="pre">MaxPool</span></code>.
+The input is a float tensor with shape = [1, 112, 112, 64] and layout of NHWC. The kernel_size is
+[3, 3], stride is [2, 2], padding size is 1 to be added on both sides.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">builder</span><span class="o">::</span><span class="n">Builder</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">dtype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">::</span><span class="n">F32</span><span class="p">();</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">input_shape</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">112</span><span class="p">,</span><span class="w"> </span><span class="mi">112</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">};</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">output_shape</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">};</span><span class="w"></span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="nf">input_type</span><span class="p">(</span><span class="n">input_shape</span><span class="p">,</span><span class="w"> </span><span class="n">dtype</span><span class="p">);</span><span class="w"></span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="nf">scalar_type</span><span class="p">(</span><span class="n">dtype</span><span class="p">);</span><span class="w"></span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="nf">output_type</span><span class="p">(</span><span class="n">output_shape</span><span class="p">,</span><span class="w"> </span><span class="n">dtype</span><span class="p">);</span><span class="w"></span>
+
+<span class="kt">float</span><span class="w"> </span><span class="n">min_f32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">lowest</span><span class="p">();</span><span class="w"></span>
+<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">data_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">min_f32</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">init_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span><span class="w"> </span><span class="n">data_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">scalar_type</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// create a function named body</span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">AddFunc</span><span class="p">(</span><span class="s">&quot;body&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">arg0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">scalar_type</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;body&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">arg1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">scalar_type</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;body&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">maximum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Max</span><span class="p">(</span><span class="n">arg0</span><span class="p">,</span><span class="w"> </span><span class="n">arg1</span><span class="p">,</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="n">scalar_type</span><span class="p">);</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetOutput</span><span class="p">({</span><span class="n">maximum</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;body&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">input_type</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">reduce_window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">ReduceWindow</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="n">input</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="n">init_value</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/*window_dimensions=*/</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;body&quot;</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/*window_strides=*/</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/*base_dilations=*/</span><span class="p">{},</span><span class="w"> </span><span class="cm">/*window_dilations=*/</span><span class="p">{},</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/*padding=*/</span><span class="p">{{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">}},</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;NOTSET&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="n">output_type</span><span class="p">);</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetOutput</span><span class="p">({</span><span class="n">reduce_window</span><span class="p">});</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">Dump</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In the following dumped ir, the function named “body” disappeared.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>module {
+  func @main(%arg0: tensor&lt;1x112x112x64xf32&gt;) -&gt; tensor&lt;1x56x56x64xf32&gt; {
+    %0 = dtu_hlir.constant dense&lt;-3.40282347E+38&gt; : tensor&lt;f32&gt;
+    %1 = &quot;dtu_hlir.reduce_window&quot;(%arg0, %0) ( {
+    ^bb0(%arg1: tensor&lt;f32&gt;, %arg2: tensor&lt;f32&gt;):       // no predecessors
+      %2 = &quot;dtu_hlir.max&quot;(%arg1, %arg2) : (tensor&lt;f32&gt;, tensor&lt;f32&gt;) -&gt; tensor&lt;f32&gt;
+      &quot;dtu_hlir.return&quot;(%2) : (tensor&lt;f32&gt;) -&gt; ()
+    }) {auto_pad = &quot;NOTSET&quot;, ceil_mode = false, padding = dense&lt;[[0, 0], [1, 1], [1, 1], [0, 0]]&gt; : tensor&lt;4x2xi64&gt;, window_dimensions = dense&lt;[1, 3, 3, 1]&gt; : tensor&lt;4xi64&gt;, window_strides = dense&lt;[1, 2, 2, 1]&gt; : tensor&lt;4xi64&gt;} : (tensor&lt;1x112x112x64xf32&gt;, tensor&lt;f32&gt;) -&gt; tensor&lt;1x56x56x64xf32&gt;
+    return %1 : tensor&lt;1x56x56x64xf32&gt;
+  }
+}
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The added <code class="docutils literal notranslate"><span class="pre">function</span></code> will be removed, and then acted as the <code class="docutils literal notranslate"><span class="pre">region</span></code> of the bound Op.
+So when another Op binds the same function, you need to call <code class="docutils literal notranslate"><span class="pre">builder-&gt;AddFunc</span></code> and create it again.</p>
+</div>
+</div>
+<div class="section" id="build-constant-ops">
+<h2>Build Constant Ops<a class="headerlink" href="#build-constant-ops" title="Permalink to this headline">¶</a></h2>
+<p>There is only one constant Op interface named <code class="docutils literal notranslate"><span class="pre">builder::Const</span></code>. User may assign a scalar, a tensor and even a empty value to it.
+For some ONNX operators, there are optional inputs. In this case, an empty tensor should be set as the placeholder when you don’t pass the optional input.
+Note that the empty <code class="docutils literal notranslate"><span class="pre">builder::Const</span></code> does not have shape or value, but data type should be set.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">builder</span><span class="o">::</span><span class="n">Builder</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="c1">// scalar</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">zero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">data_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">zero</span><span class="p">);</span><span class="w"></span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="nf">scalar_type</span><span class="p">(</span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">::</span><span class="n">F32</span><span class="p">());</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">constant_zero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span><span class="w"> </span><span class="n">data_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">scalar_type</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// tensor with shape [2, 3]</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ones</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="n">data_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">ones</span><span class="p">.</span><span class="n">data</span><span class="p">());</span><span class="w"></span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="nf">tensor_type</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">::</span><span class="n">S32</span><span class="p">());</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">constant_ones</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span><span class="w"> </span><span class="n">data_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">tensor_type</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// if the Op is Const, you can get the values as a std::vector</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">constant_ones</span><span class="p">.</span><span class="n">IsConstant</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">const_data_vec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">constant_ones</span><span class="p">.</span><span class="n">GetConstData</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// empty</span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">empty_type</span><span class="p">({},</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">::</span><span class="n">F16</span><span class="p">());</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">constant_empty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">empty_type</span><span class="p">);</span><span class="w"></span>
+<span class="n">data_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">constant_empty</span><span class="p">.</span><span class="n">GetConstDataPtr</span><span class="p">().</span><span class="n">get</span><span class="p">();</span><span class="w"></span>
+<span class="c1">// if data_ptr == nullptr, this Op is an empty Constant Op</span>
+
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetOutput</span><span class="p">({</span><span class="n">constant_empty</span><span class="p">});</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">Dump</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Attention should be paid to the difference of the following dumped ir.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>module {
+  func @main() -&gt; tensor&lt;f16&gt; {
+    %0 = dtu_hlir.constant dense&lt;0.000000e+00&gt; : tensor&lt;f32&gt;
+    %1 = dtu_hlir.constant dense&lt;1&gt; : tensor&lt;2x3xi32&gt;
+    %2 = dtu_hlir.constant dense&lt;[]&gt; : tensor&lt;0xf16&gt;
+    return %2 : tensor&lt;f16&gt;
+  }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-graph-with-dynamic-shape">
+<h2>Build Graph with Dynamic Shape<a class="headerlink" href="#build-graph-with-dynamic-shape" title="Permalink to this headline">¶</a></h2>
+<p>For some models of object detection, the input image size is not fixed. This is called dynamic shape because the input shapes may change.
+In the deployment environment, there must be a constraint on the shape range. So min/max dimensions of shape for each input should be set.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">builder</span><span class="o">::</span><span class="n">Builder</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="c1">// for dynamic shape, the unknown dimensions should be set as -1</span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="nf">type</span><span class="p">({</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">::</span><span class="n">F32</span><span class="p">());</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// set dynamic shape range of inputs</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">builder</span><span class="o">::</span><span class="n">Attribute</span><span class="o">&gt;</span><span class="w"> </span><span class="n">min_shape_dim</span><span class="p">;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">min_shape_0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">};</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">dtype_i64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">::</span><span class="n">S64</span><span class="p">();</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">attr_0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Attribute</span><span class="p">(</span><span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="p">({</span><span class="mi">2</span><span class="p">},</span><span class="w"> </span><span class="n">dtype_i64</span><span class="p">),</span><span class="w"></span>
+<span class="w">                                 </span><span class="n">min_shape_0</span><span class="p">.</span><span class="n">data</span><span class="p">());</span><span class="w"></span>
+<span class="n">min_shape_dim</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">attr_0</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">builder</span><span class="o">::</span><span class="n">Attribute</span><span class="o">&gt;</span><span class="w"> </span><span class="n">max_shape_dim</span><span class="p">;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">max_shape_0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">attr_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Attribute</span><span class="p">(</span><span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="p">({</span><span class="mi">2</span><span class="p">},</span><span class="w"> </span><span class="n">dtype_i64</span><span class="p">),</span><span class="w"></span>
+<span class="w">                                 </span><span class="n">max_shape_0</span><span class="p">.</span><span class="n">data</span><span class="p">());</span><span class="w"></span>
+<span class="n">max_shape_dim</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">attr_1</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// max and min shape info of the inputs are set respectively</span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetFuncAttribute</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;min_shape_dim&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">min_shape_dim</span><span class="p">);</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetFuncAttribute</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;max_shape_dim&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">max_shape_dim</span><span class="p">);</span><span class="w"></span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Relu</span><span class="p">(</span><span class="n">input</span><span class="p">);</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetOutput</span><span class="p">({</span><span class="n">res</span><span class="p">});</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">Dump</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>For this example, there is only one input with rank 2 and both dimensions sizes are unknown. We set the max/min shape information as the function attribute.
+The following is the dumped ir.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>module {
+  func @main(%arg0: tensor&lt;?x?xf32&gt;) -&gt; tensor&lt;?x?xf32&gt; attributes {max_shape_dim = [dense&lt;5&gt; : tensor&lt;2xi64&gt;], min_shape_dim = [dense&lt;1&gt; : tensor&lt;2xi64&gt;]} {
+    %0 = &quot;dtu_hlir.relu&quot;(%arg0) : (tensor&lt;?x?xf32&gt;) -&gt; tensor&lt;?x?xf32&gt;
+    return %0 : tensor&lt;?x?xf32&gt;
+  }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="debug-tips-of-printing-messages">
+<h2>Debug Tips of Printing Messages<a class="headerlink" href="#debug-tips-of-printing-messages" title="Permalink to this headline">¶</a></h2>
+<p>PrimitiveType, Type, Op, Attribute and Graph IR can be printed for debugging. The following sample code shows how to print the messages.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">builder</span><span class="o">::</span><span class="n">Builder</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">dtype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">::</span><span class="n">F32</span><span class="p">();</span><span class="w"></span>
+<span class="c1">// print instance of PrimitiveType</span>
+<span class="n">dtype</span><span class="p">.</span><span class="n">Dump</span><span class="p">();</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dtype</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// print instance of Type</span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="nf">type</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span><span class="w"> </span><span class="n">dtype</span><span class="p">);</span><span class="w"></span>
+<span class="n">type</span><span class="p">.</span><span class="n">Dump</span><span class="p">();</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">relu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Relu</span><span class="p">(</span><span class="n">input</span><span class="p">);</span><span class="w"></span>
+<span class="n">relu</span><span class="p">.</span><span class="n">SetAttribute</span><span class="p">(</span><span class="s">&quot;op_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Attribute</span><span class="p">(</span><span class="s">&quot;relu_0&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="c1">// print instance of Op</span>
+<span class="n">relu</span><span class="p">.</span><span class="n">Dump</span><span class="p">();</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">relu</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">attr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">relu</span><span class="p">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s">&quot;op_name&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// print instance of Attribute</span>
+<span class="n">attr</span><span class="p">.</span><span class="n">Dump</span><span class="p">();</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">attr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetOutput</span><span class="p">({</span><span class="n">relu</span><span class="p">});</span><span class="w"></span>
+<span class="c1">// print the built ir</span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">Dump</span><span class="p">();</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>You can read the printed messages below according to the upper codes.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>F32
+F32
+tensor&lt;2x3xf32&gt;
+tensor&lt;2x3xf32&gt;
+%0 = &quot;dtu_hlir.relu&quot;(&lt;&lt;UNKNOWN SSA VALUE&gt;&gt;) {op_name = &quot;relu_0&quot;} : (tensor&lt;2x3xf32&gt;) -&gt; tensor&lt;2x3xf32&gt;
+%0 = &quot;dtu_hlir.relu&quot;(%arg0) {op_name = &quot;relu_0&quot;} : (tensor&lt;2x3xf32&gt;) -&gt; tensor&lt;2x3xf32&gt;
+
+&quot;relu_0&quot;
+&quot;relu_0&quot;
+
+
+module {
+  func @main(%arg0: tensor&lt;2x3xf32&gt;) -&gt; tensor&lt;2x3xf32&gt; {
+    %0 = &quot;dtu_hlir.relu&quot;(%arg0) {op_name = &quot;relu_0&quot;} : (tensor&lt;2x3xf32&gt;) -&gt; tensor&lt;2x3xf32&gt;
+    return %0 : tensor&lt;2x3xf32&gt;
+  }
+}
+
+
+module {
+  func @main(%arg0: tensor&lt;2x3xf32&gt;) -&gt; tensor&lt;2x3xf32&gt; {
+    %0 = &quot;dtu_hlir.relu&quot;(%arg0) {op_name = &quot;relu_0&quot;} : (tensor&lt;2x3xf32&gt;) -&gt; tensor&lt;2x3xf32&gt;
+    return %0 : tensor&lt;2x3xf32&gt;
+  }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="easily-use-arithmetic-ops">
+<h2>Easily Use Arithmetic Ops<a class="headerlink" href="#easily-use-arithmetic-ops" title="Permalink to this headline">¶</a></h2>
+<p>There are some overloaded operators of Ops, such as <code class="docutils literal notranslate"><span class="pre">Add</span></code>, <code class="docutils literal notranslate"><span class="pre">Sub</span></code>, <code class="docutils literal notranslate"><span class="pre">Mul</span></code> and <code class="docutils literal notranslate"><span class="pre">Div</span></code>.
+You can use these operators as using them in C++.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implicit-broadcasting">
+<h2>Implicit Broadcasting<a class="headerlink" href="#implicit-broadcasting" title="Permalink to this headline">¶</a></h2>
+<p>Binary ops support Numpy-style broadcasting, for more details please check the <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">doc</a>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">test_add_broadcast</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">builder</span><span class="o">::</span><span class="n">Builder</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetShapeInference</span><span class="p">(</span><span class="cm">/*enable_shape_inference=*/</span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">dtype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">::</span><span class="n">S32</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">lhs_type</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span><span class="w"> </span><span class="n">dtype</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">rhs_type</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w"> </span><span class="n">dtype</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">lhs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">lhs_type</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">rhs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">rhs_type</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lhs</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rhs</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetOutput</span><span class="p">({</span><span class="n">output</span><span class="p">});</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The following dumped ir shows the broadcasting steps.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>module {
+  func @main(%arg0: tensor&lt;1x2xi32&gt;, %arg1: tensor&lt;2x1xi32&gt;) -&gt; tensor&lt;2x2xi32&gt; {
+    %0 = &quot;dtu_hlir.reshape&quot;(%arg0) : (tensor&lt;1x2xi32&gt;) -&gt; tensor&lt;2xi32&gt;
+    %1 = &quot;dtu_hlir.broadcast_in_dim&quot;(%0) {broadcast_dimensions = dense&lt;1&gt; : tensor&lt;1xi64&gt;} : (tensor&lt;2xi32&gt;) -&gt; tensor&lt;2x2xi32&gt;
+    %2 = &quot;dtu_hlir.reshape&quot;(%arg1) : (tensor&lt;2x1xi32&gt;) -&gt; tensor&lt;2xi32&gt;
+    %3 = &quot;dtu_hlir.broadcast_in_dim&quot;(%2) {broadcast_dimensions = dense&lt;0&gt; : tensor&lt;1xi64&gt;} : (tensor&lt;2xi32&gt;) -&gt; tensor&lt;2x2xi32&gt;
+    %4 = &quot;dtu_hlir.add&quot;(%1, %3) : (tensor&lt;2x2xi32&gt;, tensor&lt;2x2xi32&gt;) -&gt; tensor&lt;2x2xi32&gt;
+    return %4 : tensor&lt;2x2xi32&gt;
+  }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="pass-built-ir-to-topsgraph-compiler">
+<h2>Pass Built IR to TopsGraph Compiler<a class="headerlink" href="#pass-built-ir-to-topsgraph-compiler" title="Permalink to this headline">¶</a></h2>
+<p>The IR built by HLIR Builder should be passed to TopsGraph Compiler for further optimization.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hlir_builder/hlir_builder.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dtu_compiler/tops_graph_compiler.h&quot;</span><span class="cp"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">builder</span><span class="o">::</span><span class="n">Builder</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">...</span><span class="w"> </span><span class="c1">// codes of building ops</span>
+<span class="w">  </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetOutput</span><span class="p">({</span><span class="n">res</span><span class="p">});</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">hlir_module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">GetModule</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// compile</span>
+<span class="w">  </span><span class="n">topsgraphProgram</span><span class="w"> </span><span class="n">program</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topsgraphCreateProgramFromModule</span><span class="p">(</span><span class="o">&amp;</span><span class="n">program</span><span class="p">,</span><span class="w"> </span><span class="n">hlir_module</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// specify device by setting argumnents of &quot;-arch&quot; and &quot;-resource&quot;</span>
+<span class="w">  </span><span class="c1">// specify the pipeline of grpah optimization passes by setting &quot;-hlir&quot;</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">options</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;-arch=gcu210&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;-resource=1c4s&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;-hlir=hlir-pipeline{}&quot;</span><span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// here the numper of options is 3</span>
+<span class="w">  </span><span class="n">topsgraphCompileProgram</span><span class="p">(</span><span class="n">program</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">binary_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">topsgraphGetBinSize</span><span class="p">(</span><span class="n">program</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">binary_size</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// memory management of the binary belongs to the user</span>
+<span class="w">  </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">binary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">binary_size</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topsgraphGetBin</span><span class="p">(</span><span class="n">program</span><span class="p">,</span><span class="w"> </span><span class="n">binary</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">binary</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">topsgraphDestroyProgram</span><span class="p">(</span><span class="o">&amp;</span><span class="n">program</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-up-shape-inference">
+<h2>Set Up Shape Inference<a class="headerlink" href="#set-up-shape-inference" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Shape</span> <span class="pre">Inference</span></code> consists of inference of both shape and data type.
+It is turned off by default. In this example of matrix multiplication,
+we set the flag of <code class="docutils literal notranslate"><span class="pre">Shape</span> <span class="pre">Inference</span></code> as true.
+Then, we only set the types of inputs, and the correct type of output will be set automatically.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">builder</span><span class="o">::</span><span class="n">Builder</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetShapeInference</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">dtype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">::</span><span class="n">F32</span><span class="p">();</span><span class="w"></span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">lhs_type</span><span class="p">{{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span><span class="w"> </span><span class="n">dtype</span><span class="p">};</span><span class="w"></span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">rhs_type</span><span class="p">{{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">},</span><span class="w"> </span><span class="n">dtype</span><span class="p">};</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">arg0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">lhs_type</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">arg1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">rhs_type</span><span class="p">);</span><span class="w"></span>
+<span class="n">builder</span><span class="o">::</span><span class="n">DotDimensionNumbers</span><span class="w"> </span><span class="nf">dims_attr</span><span class="p">(</span><span class="cm">/*lhs_batching_dimensions*/</span><span class="p">{},</span><span class="w"></span>
+<span class="w">                                       </span><span class="cm">/*rhs_batching_dimensions*/</span><span class="p">{},</span><span class="w"></span>
+<span class="w">                                       </span><span class="cm">/*lhs_contracting_dimensions*/</span><span class="p">{</span><span class="mi">1</span><span class="p">},</span><span class="w"></span>
+<span class="w">                                       </span><span class="cm">/*rhs_contracting_dimensions*/</span><span class="p">{</span><span class="mi">0</span><span class="p">});</span><span class="w"></span>
+<span class="c1">// here we do not set the type of output</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">DotGeneral</span><span class="p">(</span><span class="n">arg0</span><span class="p">,</span><span class="w"> </span><span class="n">arg1</span><span class="p">,</span><span class="w"> </span><span class="n">dims_attr</span><span class="p">);</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetOutput</span><span class="p">({</span><span class="n">output</span><span class="p">});</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">Dump</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The following is the dumped ir. And we get the correct type of output with shape of [2, 4] and data type of float.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>module {
+  func @main(%arg0: tensor&lt;2x3xf32&gt;, %arg1: tensor&lt;3x4xf32&gt;) -&gt; tensor&lt;2x4xf32&gt; {
+    %0 = &quot;dtu_hlir.dot_general&quot;(%arg0, %arg1) {dot_dimension_numbers = {lhs_batching_dimensions = dense&lt;[]&gt; : tensor&lt;0xi64&gt;, lhs_contracting_dimensions = dense&lt;1&gt; : tensor&lt;1xi64&gt;, rhs_batching_dimensions = dense&lt;[]&gt; : tensor&lt;0xi64&gt;, rhs_contracting_dimensions = dense&lt;0&gt; : tensor&lt;1xi64&gt;}} : (tensor&lt;2x3xf32&gt;, tensor&lt;3x4xf32&gt;) -&gt; tensor&lt;2x4xf32&gt;
+    return %0 : tensor&lt;2x4xf32&gt;
+  }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="use-tuple">
+<h2>Use Tuple<a class="headerlink" href="#use-tuple" title="Permalink to this headline">¶</a></h2>
+<p>In HLIR, only one output is allowed for any Ops and Funcs. If you want to return more than one results, you must put them in a <code class="docutils literal notranslate"><span class="pre">builder::Tuple</span></code>.
+We defined a type named <code class="docutils literal notranslate"><span class="pre">builder::PrimitiveType::TUPLE()</span></code> and several interfaces to handle this.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">builder</span><span class="o">::</span><span class="n">Builder</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">dtype_f32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">::</span><span class="n">F32</span><span class="p">();</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">dtype_i32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">::</span><span class="n">S32</span><span class="p">();</span><span class="w"></span>
+<span class="c1">// shapes and dtypes in a tuple can be different</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">arg0_shape</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">};</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">arg1_shape</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">};</span><span class="w"></span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">arg0_type</span><span class="p">{</span><span class="n">arg0_shape</span><span class="p">,</span><span class="w"> </span><span class="n">dtype_f32</span><span class="p">};</span><span class="w"></span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">arg1_type</span><span class="p">{</span><span class="n">arg1_shape</span><span class="p">,</span><span class="w"> </span><span class="n">dtype_i32</span><span class="p">};</span><span class="w"></span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">arg0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">arg0_type</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">arg1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">arg1_type</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">tuple_shape</span><span class="p">{</span><span class="n">arg0_shape</span><span class="p">,</span><span class="w"> </span><span class="n">arg1_shape</span><span class="p">};</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tuple_dtype</span><span class="p">{</span><span class="n">dtype_f32</span><span class="p">,</span><span class="w"> </span><span class="n">dtype_i32</span><span class="p">};</span><span class="w"></span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="nf">outputs_type</span><span class="p">(</span><span class="n">tuple_shape</span><span class="p">,</span><span class="w"> </span><span class="n">tuple_dtype</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// make a tuple</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">outputs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Tuple</span><span class="p">({</span><span class="n">arg0</span><span class="p">,</span><span class="w"> </span><span class="n">arg1</span><span class="p">},</span><span class="w"> </span><span class="n">outputs_type</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">result_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outputs</span><span class="p">.</span><span class="n">GetType</span><span class="p">();</span><span class="w"></span>
+<span class="c1">// get infomation of tuple from Type</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">is_tuple</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result_type</span><span class="p">.</span><span class="n">IsTuple</span><span class="p">();</span><span class="w"></span>
+<span class="kt">int64_t</span><span class="w"> </span><span class="n">tuple_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result_type</span><span class="p">.</span><span class="n">GetTupleSize</span><span class="p">();</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">tuple_shapes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result_type</span><span class="p">.</span><span class="n">GetTupleShapes</span><span class="p">();</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">tuple_dtypes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result_type</span><span class="p">.</span><span class="n">GetTuplePrimitiveTypes</span><span class="p">();</span><span class="w"></span>
+<span class="c1">// get elements in the tuple</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">tuple_elem_0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">GetTupleElement</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">arg0_type</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">tuple_elem_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">GetTupleElement</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">arg1_type</span><span class="p">);</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetOutput</span><span class="p">({</span><span class="n">outputs</span><span class="p">});</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">Dump</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>You can learn the usage of tuple by comparing the upper codes and the dumped ir below.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>module {
+  func @main(%arg0: tensor&lt;1x2xf32&gt;, %arg1: tensor&lt;2x3x4xi32&gt;) -&gt; tuple&lt;tensor&lt;1x2xf32&gt;, tensor&lt;2x3x4xi32&gt;&gt; {
+    %0 = &quot;dtu_hlir.tuple&quot;(%arg0, %arg1) : (tensor&lt;1x2xf32&gt;, tensor&lt;2x3x4xi32&gt;) -&gt; tuple&lt;tensor&lt;1x2xf32&gt;, tensor&lt;2x3x4xi32&gt;&gt;
+    %1 = &quot;dtu_hlir.get_tuple_element&quot;(%0) {index = 0 : i32} : (tuple&lt;tensor&lt;1x2xf32&gt;, tensor&lt;2x3x4xi32&gt;&gt;) -&gt; tensor&lt;1x2xf32&gt;
+    %2 = &quot;dtu_hlir.get_tuple_element&quot;(%0) {index = 1 : i32} : (tuple&lt;tensor&lt;1x2xf32&gt;, tensor&lt;2x3x4xi32&gt;&gt;) -&gt; tensor&lt;2x3x4xi32&gt;
+    return %0 : tuple&lt;tensor&lt;1x2xf32&gt;, tensor&lt;2x3x4xi32&gt;&gt;
+  }
+}
+</pre></div>
+</div>
+</div>
+</div>
+
+
+             </article>
+             
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="version.html" class="btn btn-neutral float-right" title="Version" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+      
+      
+        <a href="../api/typedef_tops__graph__compiler_8h_1a3bedb0eb80a612e083009be7dbda10cb.html" class="btn btn-neutral" title="Typedef topsgraphProgram" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+      
+    </div>
+  
+
+  
+
+    <hr>
+
+  
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HLIR Builder Contributors.
+
+    </p>
+  </div>
+    
+      <div>
+        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+     
+
+</footer>
+
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              <ul>
+<li><a class="reference internal" href="#">Examples</a><ul>
+<li><a class="reference internal" href="#bind-function-to-op">Bind Function to Op</a></li>
+<li><a class="reference internal" href="#build-constant-ops">Build Constant Ops</a></li>
+<li><a class="reference internal" href="#build-graph-with-dynamic-shape">Build Graph with Dynamic Shape</a></li>
+<li><a class="reference internal" href="#debug-tips-of-printing-messages">Debug Tips of Printing Messages</a></li>
+<li><a class="reference internal" href="#easily-use-arithmetic-ops">Easily Use Arithmetic Ops</a></li>
+<li><a class="reference internal" href="#implicit-broadcasting">Implicit Broadcasting</a></li>
+<li><a class="reference internal" href="#pass-built-ir-to-topsgraph-compiler">Pass Built IR to TopsGraph Compiler</a></li>
+<li><a class="reference internal" href="#set-up-shape-inference">Set Up Shape Inference</a></li>
+<li><a class="reference internal" href="#use-tuple">Use Tuple</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../_static/js/vendor/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <div class="container-fluid docs-tutorials-resources" id="docs-tutorials-resources">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <h2>Docs</h2>
+          <p>Access comprehensive developer documentation for HLIR Builder</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Docs</a> -->
+          <a class="with-right-arrow">View Docs</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Tutorials</h2>
+          <p>Get in-depth tutorials for beginners and advanced developers</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Tutorials</a> -->
+          <a class="with-right-arrow">View Tutorials</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Resources</h2>
+          <p>Find development resources and get your questions answered</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Resources</a> -->
+          <a class="with-right-arrow">View Resources</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <!--<div class="footer-logo-wrapper">
+        <a href="https://www.enflame-tech.com" class="footer-logo"></a>
+      </div>-->
+
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <ul>
+            <!--<li><a href="https://www.enflame-tech.com">Get Started</a></li> -->
+            <li><a>Get Started</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Features</a></li> -->
+            <li><a>C++ API</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Ecosystem</a></li> -->
+            <li><a>Python API</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Blog</a></li> -->
+            <li><a>Tutorials</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Contributing</a></li> -->
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <!--<li class="list-title"><a href="https://www.enflame-tech.com">Resources</a></li> -->
+            <li class="list-title"><a>Contributing</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Tutorials</a></li> -->
+            <!--<li><a href="https://www.enflame-tech.com">Docs</a></li> -->
+            <li><a>Applications</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Discuss</a></li> -->
+            <li><a>Discuss</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Github Issues</a></li> -->
+            <li><a>Github Issues</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Brand Guidelines</a></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cookie-banner-wrapper">
+  <div class="container">
+    <p class="gdpr-notice">To analyze traffic and optimize your experience, we serve cookies on this site. By clicking or navigating, you agree to allow our usage of cookies. As the current maintainers of this site, Facebook’s Cookies Policy applies. Learn more, including about available controls: <a href="https://www.facebook.com/policies/cookies/">Cookies Policy</a>.</p>
+    <img class="close-button" src="../_static/images/pytorch-x.svg">
+  </div>
+</div>
+
+  <!-- End Footer -->
+
+  <script type="text/javascript" src="../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+      mainMenuDropdown.bind();
+      filterTags.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

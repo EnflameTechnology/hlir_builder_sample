@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ae70ca314bbd5f549072da97819e4055e:
+
+Function builder::Dropout
+=========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Dropout(builder::Op, float, bool, int64_t, std::vector<int64_t>, builder::Type)

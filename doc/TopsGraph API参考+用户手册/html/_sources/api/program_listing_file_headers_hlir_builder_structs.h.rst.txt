@@ -1,0 +1,219 @@
+:github_url: https://github.com/EnflameTechnology
+
+
+.. _program_listing_file_headers_hlir_builder_structs.h:
+
+Program Listing for File hlir_builder_structs.h
+===============================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_headers_hlir_builder_structs.h>` (``headers/hlir_builder_structs.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   /*===- TableGen'erated file -------------------------------------*- C++ -*-===*\
+   |*                                                                            *|
+   |* Struct Utility Declarations                                                *|
+   |*                                                                            *|
+   |* Automatically generated file, do not edit!                                 *|
+   |*                                                                            *|
+   \*===----------------------------------------------------------------------===*/
+   
+   #ifndef HLIR_BUILDER_DTU_HLIR_STRUCTS_H_
+   #define HLIR_BUILDER_DTU_HLIR_STRUCTS_H_
+   
+   namespace builder {
+   
+   
+   // two 64-bit integers 'handle' and 'type'
+   class ChannelHandle {
+    public:
+     ChannelHandle(
+         int64_t handle = 0,
+         int64_t type = 0);
+   
+     int64_t get_handle() const;
+     int64_t get_type() const;
+   
+     void set_handle(const int64_t& value);
+     void set_type(const int64_t& value);
+   
+     class Impl;
+     std::shared_ptr<Impl> GetImpl() { return impl_; }
+   
+    private:
+    std::shared_ptr<Impl> impl_;
+   };
+   
+   
+   // Structure of dimension information for conv op
+   class ConvDimensionNumbers {
+    public:
+     ConvDimensionNumbers(
+         int64_t input_batch_dimension = 0,
+         int64_t input_feature_dimension = 0,
+         std::vector<int64_t> input_spatial_dimensions = {},
+         int64_t kernel_input_feature_dimension = 0,
+         int64_t kernel_output_feature_dimension = 0,
+         std::vector<int64_t> kernel_spatial_dimensions = {},
+         int64_t output_batch_dimension = 0,
+         int64_t output_feature_dimension = 0,
+         std::vector<int64_t> output_spatial_dimensions = {});
+   
+     int64_t get_input_batch_dimension() const;
+     int64_t get_input_feature_dimension() const;
+     std::vector<int64_t> get_input_spatial_dimensions() const;
+     int64_t get_kernel_input_feature_dimension() const;
+     int64_t get_kernel_output_feature_dimension() const;
+     std::vector<int64_t> get_kernel_spatial_dimensions() const;
+     int64_t get_output_batch_dimension() const;
+     int64_t get_output_feature_dimension() const;
+     std::vector<int64_t> get_output_spatial_dimensions() const;
+   
+     void set_input_batch_dimension(const int64_t& value);
+     void set_input_feature_dimension(const int64_t& value);
+     void set_input_spatial_dimensions(const std::vector<int64_t>& value);
+     void set_kernel_input_feature_dimension(const int64_t& value);
+     void set_kernel_output_feature_dimension(const int64_t& value);
+     void set_kernel_spatial_dimensions(const std::vector<int64_t>& value);
+     void set_output_batch_dimension(const int64_t& value);
+     void set_output_feature_dimension(const int64_t& value);
+     void set_output_spatial_dimensions(const std::vector<int64_t>& value);
+   
+     void add_input_spatial_dimensions(int64_t dim);
+     void add_kernel_spatial_dimensions(int64_t dim);
+     void add_output_spatial_dimensions(int64_t dim);
+   
+     class Impl;
+     std::shared_ptr<Impl> GetImpl() { return impl_; }
+   
+    private:
+    std::shared_ptr<Impl> impl_;
+   };
+   
+   
+   // Structure of dimension information for layout.
+   class DimensionsLayout {
+    public:
+     DimensionsLayout(
+         int64_t batch_dimension = 0,
+         int64_t feature_dimension = 0,
+         std::vector<int64_t> spatial_dimensions = {});
+   
+     int64_t get_batch_dimension() const;
+     int64_t get_feature_dimension() const;
+     std::vector<int64_t> get_spatial_dimensions() const;
+   
+     void set_batch_dimension(const int64_t& value);
+     void set_feature_dimension(const int64_t& value);
+     void set_spatial_dimensions(const std::vector<int64_t>& value);
+   
+     void add_spatial_dimensions(int64_t dim);
+   
+     class Impl;
+     std::shared_ptr<Impl> GetImpl() { return impl_; }
+   
+    private:
+    std::shared_ptr<Impl> impl_;
+   };
+   
+   
+   // Structure of dimension information for dot product
+   class DotDimensionNumbers {
+    public:
+     DotDimensionNumbers(
+         std::vector<int64_t> lhs_batching_dimensions = {},
+         std::vector<int64_t> rhs_batching_dimensions = {},
+         std::vector<int64_t> lhs_contracting_dimensions = {},
+         std::vector<int64_t> rhs_contracting_dimensions = {});
+   
+     std::vector<int64_t> get_lhs_batching_dimensions() const;
+     std::vector<int64_t> get_rhs_batching_dimensions() const;
+     std::vector<int64_t> get_lhs_contracting_dimensions() const;
+     std::vector<int64_t> get_rhs_contracting_dimensions() const;
+   
+     void set_lhs_batching_dimensions(const std::vector<int64_t>& value);
+     void set_rhs_batching_dimensions(const std::vector<int64_t>& value);
+     void set_lhs_contracting_dimensions(const std::vector<int64_t>& value);
+     void set_rhs_contracting_dimensions(const std::vector<int64_t>& value);
+   
+     void add_lhs_batching_dimensions(int64_t dim);
+     void add_rhs_batching_dimensions(int64_t dim);
+     void add_lhs_contracting_dimensions(int64_t dim);
+     void add_rhs_contracting_dimensions(int64_t dim);
+   
+     class Impl;
+     std::shared_ptr<Impl> GetImpl() { return impl_; }
+   
+    private:
+    std::shared_ptr<Impl> impl_;
+   };
+   
+   
+   // Structure of dimension information for gather
+   class GatherDimensionNumbers {
+    public:
+     GatherDimensionNumbers(
+         std::vector<int64_t> offset_dims = {},
+         std::vector<int64_t> collapsed_slice_dims = {},
+         std::vector<int64_t> start_index_map = {},
+         int64_t index_vector_dim = 0);
+   
+     std::vector<int64_t> get_offset_dims() const;
+     std::vector<int64_t> get_collapsed_slice_dims() const;
+     std::vector<int64_t> get_start_index_map() const;
+     int64_t get_index_vector_dim() const;
+   
+     void set_offset_dims(const std::vector<int64_t>& value);
+     void set_collapsed_slice_dims(const std::vector<int64_t>& value);
+     void set_start_index_map(const std::vector<int64_t>& value);
+     void set_index_vector_dim(const int64_t& value);
+   
+     void add_offset_dims(int64_t dim);
+     void add_collapsed_slice_dims(int64_t dim);
+     void add_start_index_map(int64_t dim);
+   
+     class Impl;
+     std::shared_ptr<Impl> GetImpl() { return impl_; }
+   
+    private:
+    std::shared_ptr<Impl> impl_;
+   };
+   
+   
+   // Structure of dimension information for scatter
+   class ScatterDimensionNumbers {
+    public:
+     ScatterDimensionNumbers(
+         std::vector<int64_t> update_window_dims = {},
+         std::vector<int64_t> inserted_window_dims = {},
+         std::vector<int64_t> scatter_dims_to_operand_dims = {},
+         int64_t index_vector_dim = 0);
+   
+     std::vector<int64_t> get_update_window_dims() const;
+     std::vector<int64_t> get_inserted_window_dims() const;
+     std::vector<int64_t> get_scatter_dims_to_operand_dims() const;
+     int64_t get_index_vector_dim() const;
+   
+     void set_update_window_dims(const std::vector<int64_t>& value);
+     void set_inserted_window_dims(const std::vector<int64_t>& value);
+     void set_scatter_dims_to_operand_dims(const std::vector<int64_t>& value);
+     void set_index_vector_dim(const int64_t& value);
+   
+     void add_update_window_dims(int64_t dim);
+     void add_inserted_window_dims(int64_t dim);
+     void add_scatter_dims_to_operand_dims(int64_t dim);
+   
+     class Impl;
+     std::shared_ptr<Impl> GetImpl() { return impl_; }
+   
+    private:
+    std::shared_ptr<Impl> impl_;
+   };
+   
+   
+   }  // namespace builder
+   
+   #endif  // HLIR_BUILDER_DTU_HLIR_STRUCTS_H_
+   

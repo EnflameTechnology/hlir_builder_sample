@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ac3513672196d5addd92c46d16f0a659d:
+
+Function builder::SliceInDim
+============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::SliceInDim(builder::Op, int64_t, int64_t, int64_t, int64_t, builder::Type)
+   :project: HLIR Builder

@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a958d6e04d4667e79beba0ab6bfd152ef:
+
+Function builder::UnpackTensor
+==============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::UnpackTensor(builder::Op, std::vector<int32_t>, int32_t, builder::Type)
+   :project: HLIR Builder

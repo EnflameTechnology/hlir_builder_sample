@@ -1,0 +1,134 @@
+:github_url: https://github.com/EnflameTechnology
+
+
+.. _file_headers_hlir_builder_common.h:
+
+File hlir_builder_common.h
+==========================
+
+|exhale_lsh| :ref:`Parent directory <dir_headers>` (``headers``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``headers/hlir_builder_common.h``)
+----------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_headers_hlir_builder_common.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``cfloat``
+
+- ``climits``
+
+- ``cstdint``
+
+- ``experimental/optional``
+
+- ``functional``
+
+- ``memory``
+
+- ``numeric``
+
+- ``set``
+
+- ``string``
+
+- ``tuple``
+
+- ``utility``
+
+- ``vector``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_headers_hlir_builder.h`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_builder`
+
+- :ref:`namespace_hlir`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structbuilder_1_1_get_call_args`
+
+- :ref:`exhale_struct_structbuilder_1_1_get_call_args_3_01_tuple_00_011_01_4`
+
+- :ref:`exhale_class_classbuilder_1_1_attribute`
+
+- :ref:`exhale_class_classbuilder_1_1_builder`
+
+- :ref:`exhale_class_classbuilder_1_1_op`
+
+- :ref:`exhale_class_classbuilder_1_1_primitive_type`
+
+- :ref:`exhale_class_classbuilder_1_1_type`
+
+
+Enums
+-----
+
+
+- :ref:`exhale_enum_namespacebuilder_1ae3439b8a43926382d916b4d640f6c7bc`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_namespacebuilder_1ac2d3d89ca6eb41ee5632e5fa548d9bd3`
+
+- :ref:`exhale_function_namespacebuilder_1a2564dd2fcd7aa9fe326e655ee4498a8a`
+
+- :ref:`exhale_function_namespacebuilder_1a12924db993fc7be2094710e8e716fc80`
+
+- :ref:`exhale_function_namespacebuilder_1aefe82c77d9e63bfa4226ff96f3ca5866`
+
+- :ref:`exhale_function_namespacebuilder_1a0b3b2234f1063394faa1971b6b85340e`
+
+- :ref:`exhale_function_namespacebuilder_1a913054a24a6345cee92e5e285aacefd4`
+
+- :ref:`exhale_function_namespacebuilder_1a5a19ddb210ff91556b0e70a5d784d163`
+
+- :ref:`exhale_function_namespacebuilder_1a81135e7997d951f328ebcc66ff7e708a`
+
+
+Variables
+---------
+
+
+- :ref:`exhale_variable_namespacebuilder_1ae5ad53ec21842db4683472b8271d1e2a`
+
+- :ref:`exhale_variable_namespacebuilder_1ad88b3eb3e417abc34944a3371448de51`
+
+- :ref:`exhale_variable_namespacebuilder_1a4403558c20f9f53d18ff3bb1cd7a22f0`
+

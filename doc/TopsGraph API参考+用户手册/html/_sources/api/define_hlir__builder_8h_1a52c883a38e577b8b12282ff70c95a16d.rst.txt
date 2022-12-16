@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_define_hlir__builder_8h_1a52c883a38e577b8b12282ff70c95a16d:
+
+Define GET_OP_CLASSES
+=====================
+
+- Defined in :ref:`file_headers_hlir_builder.h`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: GET_OP_CLASSES

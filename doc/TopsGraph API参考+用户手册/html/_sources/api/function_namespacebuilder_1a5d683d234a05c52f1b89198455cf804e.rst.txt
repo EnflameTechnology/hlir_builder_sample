@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a5d683d234a05c52f1b89198455cf804e:
+
+Function builder::QuantConvert
+==============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::QuantConvert(builder::Op, builder::Type)
+   :project: HLIR Builder

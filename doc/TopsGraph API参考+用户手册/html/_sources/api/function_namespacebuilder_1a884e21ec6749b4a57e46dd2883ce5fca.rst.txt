@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a884e21ec6749b4a57e46dd2883ce5fca:
+
+Function builder::GetDimensionSize
+==================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::GetDimensionSize(builder::Op, int32_t, builder::Type)
+   :project: HLIR Builder

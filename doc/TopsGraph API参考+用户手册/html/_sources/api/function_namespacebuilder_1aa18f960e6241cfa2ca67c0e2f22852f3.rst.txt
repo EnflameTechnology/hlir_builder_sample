@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1aa18f960e6241cfa2ca67c0e2f22852f3:
+
+Function builder::L2Loss
+========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::L2Loss(builder::Op, builder::Op, bool, bool, std::string, builder::Type)

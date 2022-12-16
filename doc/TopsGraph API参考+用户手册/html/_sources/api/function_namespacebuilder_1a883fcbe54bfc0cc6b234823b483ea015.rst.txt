@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a883fcbe54bfc0cc6b234823b483ea015:
+
+Function builder::Atan2
+=======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Atan2(builder::Op, builder::Op, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

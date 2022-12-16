@@ -1,0 +1,815 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Class Builder &mdash; HLIR Builder master documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://pytorch.org/docs/stable/api/classbuilder_1_1_builder.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="../_static/cpp_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class ChannelHandle" href="classbuilder_1_1_channel_handle.html" />
+    <link rel="prev" title="Class Attribute" href="classbuilder_1_1_attribute.html" />
+  <!-- Google Analytics -->
+  
+  <!-- End Google Analytics -->
+  
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <!--a class="header-logo" href="https://www.enflame-tech.com" aria-label="Builder"></a> -->
+      <a class="header-logo" aria-label="Builder"></a>
+
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a class="reference internal" href="get_started.html">Get Started</a>
+          </li>
+
+          <li>
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="resource-option with-down-orange-arrow">
+                Operation Semantics
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="doc-dropdown-option nav-dropdown-item" href="meta_operation_semantics.html">
+                  <span class="dropdown-title">Meta Ops</span>
+                  <p></p>
+                </a>
+                <a class="doc-dropdown-option nav-dropdown-item" href="client_operation_semantics.html">
+                  <span class="dropdown-title">Client Ops</span>
+                  <p></p>
+                </a>
+            </div>
+          </li>
+
+          <li>
+            <a class="reference internal" href="api/library_root.html">C++ API</a>
+          </li>
+
+          <li>
+            <!--<a href="https://www.enflame-tech.com">Python API</a> -->
+            <a>Python API</a>
+          </li>
+
+          <li>
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="resource-option with-down-orange-arrow">
+                Tutorials
+              </a>
+              <div class="resources-dropdown-menu">
+                <!--<a class="doc-dropdown-option nav-dropdown-item" href="https://www.enflame-tech.com"> -->
+                <a class="doc-dropdown-option nav-dropdown-item">
+                  <span class="dropdown-title">Inference</span>
+                  <p></p>
+                </a>
+                <!--<a class="doc-dropdown-option nav-dropdown-item" href="https://www.enflame-tech.com"> -->
+                <a class="doc-dropdown-option nav-dropdown-item">
+                  <span class="dropdown-title">Trainning</span>
+                  <p></p>
+                </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+  </div>
+</div>
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  master
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get_started.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../meta_operation_semantics.html">Meta Operation Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client_operation_semantics.html">Client Operation Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tops_graph_compiler.html">TopsGraph Compiler</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="library_root.html">C++ API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notes/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/version.html">Version</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../index.html">
+          
+            Docs
+          
+        </a> &gt;
+      </li>
+
+        
+          <li><a href="library_root.html">C++ API</a> &gt;</li>
+        
+      <li>Class Builder</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/EnflameTechnology" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+
+        
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <div class="section" id="class-builder">
+<span id="exhale-class-classbuilder-1-1-builder"></span><h1>Class Builder<a class="headerlink" href="#class-builder" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_headers_hlir_builder_common.h.html#file-headers-hlir-builder-common-h"><span class="std std-ref">File hlir_builder_common.h</span></a></p></li>
+</ul>
+<div class="contents local topic" id="page-contents">
+<p class="topic-title">Page Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#inheritance-relationships" id="id1">Inheritance Relationships</a></p>
+<ul>
+<li><p><a class="reference internal" href="#base-type" id="id2">Base Type</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#class-documentation" id="id3">Class Documentation</a></p></li>
+</ul>
+</div>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">std::enable_shared_from_this&lt;</span> <span class="pre">Builder</span> <span class="pre">&gt;</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt id="_CPPv4N7builder7BuilderE">
+<span id="_CPPv3N7builder7BuilderE"></span><span id="_CPPv2N7builder7BuilderE"></span><span id="builder::Builder"></span><span class="target" id="classbuilder_1_1_builder"></span><em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">builder</span><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">Builder</span></code> <span class="pre">:</span> <em class="property"><span class="pre">public</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">enable_shared_from_this</span><span class="pre">&lt;</span><a class="reference internal" href="#_CPPv4N7builder7BuilderE" title="builder::Builder"><span class="pre">Builder</span></a><span class="pre">&gt;</span><a class="headerlink" href="#_CPPv4N7builder7BuilderE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>This class helps build IR, which consist of Ops. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder7BuilderEv">
+<span id="_CPPv3N7builder7Builder7BuilderEv"></span><span id="_CPPv2N7builder7Builder7BuilderEv"></span><span id="builder::Builder::Builder"></span><span class="target" id="classbuilder_1_1_builder_1a73ccb8c2601509fc3ad05e1d26abc376"></span><code class="sig-name descname"><span class="pre">Builder</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder7BuilderEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor of <a class="reference internal" href="#classbuilder_1_1_builder"><span class="std std-ref">Builder</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7BuilderD0Ev">
+<span id="_CPPv3N7builder7BuilderD0Ev"></span><span id="_CPPv2N7builder7BuilderD0Ev"></span><span id="builder::Builder::~Builder"></span><span class="target" id="classbuilder_1_1_builder_1a38f20afa2ddb2a285dc1d7884b4036d1"></span><code class="sig-name descname"><span class="pre">~Builder</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="pre">=</span> <span class="pre">default</span><a class="headerlink" href="#_CPPv4N7builder7BuilderD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder7BuilderERK7Builder">
+<span id="_CPPv3N7builder7Builder7BuilderERK7Builder"></span><span id="_CPPv2N7builder7Builder7BuilderERK7Builder"></span><span id="builder::Builder::Builder__BuilderCR"></span><span class="target" id="classbuilder_1_1_builder_1ad35022eb156fa83b108befe80d2661a7"></span><code class="sig-name descname"><span class="pre">Builder</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv4N7builder7Builder7BuilderERK7Builder" title="builder::Builder::Builder"><span class="pre">Builder</span></a><span class="pre">&amp;</span><span class="sig-paren">)</span> <span class="pre">=</span> <span class="pre">delete</span><a class="headerlink" href="#_CPPv4N7builder7Builder7BuilderERK7Builder" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7BuilderaSERK7Builder">
+<span id="_CPPv3N7builder7BuilderaSERK7Builder"></span><span id="_CPPv2N7builder7BuilderaSERK7Builder"></span><span id="builder::Builder::assign-operator__BuilderCR"></span><span class="target" id="classbuilder_1_1_builder_1a939f043a89ead2464d2b95fca1d7966e"></span><a class="reference internal" href="#_CPPv4N7builder7BuilderE" title="builder::Builder"><span class="pre">Builder</span></a> <span class="pre">&amp;</span><code class="sig-name descname"><span class="pre">operator=</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv4N7builder7BuilderE" title="builder::Builder"><span class="pre">Builder</span></a><span class="pre">&amp;</span><span class="sig-paren">)</span> <span class="pre">=</span> <span class="pre">delete</span><a class="headerlink" href="#_CPPv4N7builder7BuilderaSERK7Builder" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder7BuilderERR7Builder">
+<span id="_CPPv3N7builder7Builder7BuilderERR7Builder"></span><span id="_CPPv2N7builder7Builder7BuilderERR7Builder"></span><span id="builder::Builder::Builder__BuilderRR"></span><span class="target" id="classbuilder_1_1_builder_1aec22f123271fbf01fb66bc1f37ff91ff"></span><code class="sig-name descname"><span class="pre">Builder</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7builder7Builder7BuilderERR7Builder" title="builder::Builder::Builder"><span class="pre">Builder</span></a><span class="pre">&amp;</span><span class="pre">&amp;</span><span class="sig-paren">)</span> <span class="pre">=</span> <span class="pre">delete</span><a class="headerlink" href="#_CPPv4N7builder7Builder7BuilderERR7Builder" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7BuilderaSERR7Builder">
+<span id="_CPPv3N7builder7BuilderaSERR7Builder"></span><span id="_CPPv2N7builder7BuilderaSERR7Builder"></span><span id="builder::Builder::assign-operator__BuilderRR"></span><span class="target" id="classbuilder_1_1_builder_1a475f96826ed69e8814719448b328dae6"></span><a class="reference internal" href="#_CPPv4N7builder7BuilderE" title="builder::Builder"><span class="pre">Builder</span></a> <span class="pre">&amp;</span><code class="sig-name descname"><span class="pre">operator=</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7builder7BuilderE" title="builder::Builder"><span class="pre">Builder</span></a><span class="pre">&amp;</span><span class="pre">&amp;</span><span class="sig-paren">)</span> <span class="pre">=</span> <span class="pre">delete</span><a class="headerlink" href="#_CPPv4N7builder7BuilderaSERR7Builder" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder11CreateInputERKN7builder4TypeERKNSt6stringE">
+<span id="_CPPv3N7builder7Builder11CreateInputERKN7builder4TypeERKNSt6stringE"></span><span id="_CPPv2N7builder7Builder11CreateInputERKN7builder4TypeERKNSt6stringE"></span><span id="builder::Builder::CreateInput__builder::TypeCR.ssCR"></span><span class="target" id="classbuilder_1_1_builder_1a3b995cb04ec87b939c8f4b17315f6e4e"></span><span class="pre">builder</span><span class="pre">::</span><a class="reference internal" href="classbuilder_1_1_op.html#_CPPv4N7builder2OpE" title="builder::Op"><span class="pre">Op</span></a> <code class="sig-name descname"><span class="pre">CreateInput</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">builder</span><span class="pre">::</span><a class="reference internal" href="classbuilder_1_1_type.html#_CPPv4N7builder4TypeE" title="builder::Type"><span class="pre">Type</span></a> <span class="pre">&amp;</span><em><span class="pre">type</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">func_name</span></em> <span class="pre">=</span> <span class="pre">&quot;main&quot;</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder11CreateInputERKN7builder4TypeERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create an input <a class="reference internal" href="classbuilder_1_1_op.html#classbuilder_1_1_op"><span class="std std-ref">Op</span></a> for a Function. </p>
+<p>You can smiply consider a Function as a C++ function which consist of Ops.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> – <a class="reference internal" href="classbuilder_1_1_type.html#classbuilder_1_1_type"><span class="std std-ref">Type</span></a> of the input </p></li>
+<li><p><strong>func_name</strong> – Name of the specific Function, default is main </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created input <a class="reference internal" href="classbuilder_1_1_op.html#classbuilder_1_1_op"><span class="std std-ref">Op</span></a> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder9GetInputsERKNSt6stringE">
+<span id="_CPPv3N7builder7Builder9GetInputsERKNSt6stringE"></span><span id="_CPPv2N7builder7Builder9GetInputsERKNSt6stringE"></span><span id="builder::Builder::GetInputs__ssCR"></span><span class="target" id="classbuilder_1_1_builder_1acab8eae7b1faffe1fe3dc7fbc36e5baa"></span><span class="pre">std</span><span class="pre">::</span><span class="pre">vector</span><span class="pre">&lt;</span><span class="pre">builder</span><span class="pre">::</span><a class="reference internal" href="classbuilder_1_1_op.html#_CPPv4N7builder2OpE" title="builder::Op"><span class="pre">Op</span></a><span class="pre">&gt;</span> <code class="sig-name descname"><span class="pre">GetInputs</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">func_name</span></em> <span class="pre">=</span> <span class="pre">&quot;main&quot;</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder9GetInputsERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>get inputs <a class="reference internal" href="classbuilder_1_1_op.html#classbuilder_1_1_op"><span class="std std-ref">Op</span></a> for a Function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>func_name</strong> – Name of the specific Function, default is main </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>inputs <a class="reference internal" href="classbuilder_1_1_op.html#classbuilder_1_1_op"><span class="std std-ref">Op</span></a> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder9SetOutputERKNSt6vectorIN7builder2OpEEERKNSt6stringE">
+<span id="_CPPv3N7builder7Builder9SetOutputERKNSt6vectorIN7builder2OpEEERKNSt6stringE"></span><span id="_CPPv2N7builder7Builder9SetOutputERKNSt6vectorIN7builder2OpEEERKNSt6stringE"></span><span id="builder::Builder::SetOutput__std::vector:builder::Op:CR.ssCR"></span><span class="target" id="classbuilder_1_1_builder_1ad01f14db73abc43cf969fac49c1887a0"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">SetOutput</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">vector</span><span class="pre">&lt;</span><span class="pre">builder</span><span class="pre">::</span><a class="reference internal" href="classbuilder_1_1_op.html#_CPPv4N7builder2OpE" title="builder::Op"><span class="pre">Op</span></a><span class="pre">&gt;</span> <span class="pre">&amp;</span><em><span class="pre">outputs</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">func_name</span></em> <span class="pre">=</span> <span class="pre">&quot;main&quot;</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder9SetOutputERKNSt6vectorIN7builder2OpEEERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set output Ops of a Function. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outputs</strong> – A vector of output Ops </p></li>
+<li><p><strong>func_name</strong> – Name of the specific Function, default is main </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder21SetChlirCompileOptionERKNSt6stringE">
+<span id="_CPPv3N7builder7Builder21SetChlirCompileOptionERKNSt6stringE"></span><span id="_CPPv2N7builder7Builder21SetChlirCompileOptionERKNSt6stringE"></span><span id="builder::Builder::SetChlirCompileOption__ssCR"></span><span class="target" id="classbuilder_1_1_builder_1a279eb71fa6e36d15c49d871298fd184f"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">SetChlirCompileOption</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">options</span></em> <span class="pre">=</span> <span class="pre">&quot;&quot;</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder21SetChlirCompileOptionERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the compile options of chlir passes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>options</strong> – string. default: “” </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder12GetModuleStrE8uint32_t">
+<span id="_CPPv3N7builder7Builder12GetModuleStrE8uint32_t"></span><span id="_CPPv2N7builder7Builder12GetModuleStrE8uint32_t"></span><span id="builder::Builder::GetModuleStr__uint32_t"></span><span class="target" id="classbuilder_1_1_builder_1a89795842f24d93b5cb3bd90e31b33171"></span><span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <code class="sig-name descname"><span class="pre">GetModuleStr</span></code><span class="sig-paren">(</span><span class="pre">uint32_t</span> <em><span class="pre">flags</span></em> <span class="pre">=</span> <a class="reference internal" href="enum_namespacebuilder_1ae3439b8a43926382d916b4d640f6c7bc.html#_CPPv4N7builder13PrintingFlagsE" title="builder::PrintingFlags"><span class="pre">PrintingFlags</span></a><span class="pre">::</span><a class="reference internal" href="enum_namespacebuilder_1ae3439b8a43926382d916b4d640f6c7bc.html#_CPPv4N7builder13PrintingFlags4NoneE" title="builder::PrintingFlags::None"><span class="pre">None</span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder12GetModuleStrE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the built IR string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>flags</strong> – Print flag. Default: PrintingFlags::None. </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Built IR string. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder9GetModuleEv">
+<span id="_CPPv3N7builder7Builder9GetModuleEv"></span><span id="_CPPv2N7builder7Builder9GetModuleEv"></span><span id="builder::Builder::GetModule"></span><span class="target" id="classbuilder_1_1_builder_1aa7786cbd9624d1fdc7ea859c22bbc357"></span><span class="pre">std</span><span class="pre">::</span><span class="pre">shared_ptr</span><span class="pre">&lt;</span><span class="pre">hlir</span><span class="pre">::</span><span class="pre">Module</span><span class="pre">&gt;</span> <code class="sig-name descname"><span class="pre">GetModule</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder9GetModuleEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get built IR as hlir::Module instance. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Built IR as hlir::Module instance </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder12GetModulePtrEv">
+<span id="_CPPv3N7builder7Builder12GetModulePtrEv"></span><span id="_CPPv2N7builder7Builder12GetModulePtrEv"></span><span id="builder::Builder::GetModulePtr"></span><span class="target" id="classbuilder_1_1_builder_1a70dcc7bc39e0ca4897904da755b4c666"></span><span class="pre">void</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">GetModulePtr</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder12GetModulePtrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get built IR as a void pointer, caller needs to free it by using <a class="reference internal" href="#classbuilder_1_1_builder_1ac1f4f57189295ceacad918e0e4c91c0b"><span class="std std-ref">FreeModulePtr(void* module_ptr)</span></a>. </p>
+<p>It is a temporary interface, will be removed in the future.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Built IR as a void pointer </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder13FreeModulePtrEPv">
+<span id="_CPPv3N7builder7Builder13FreeModulePtrEPv"></span><span id="_CPPv2N7builder7Builder13FreeModulePtrEPv"></span><span id="builder::Builder::FreeModulePtr__voidP"></span><span class="target" id="classbuilder_1_1_builder_1ac1f4f57189295ceacad918e0e4c91c0b"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">FreeModulePtr</span></code><span class="sig-paren">(</span><span class="pre">void</span> <span class="pre">*</span><em><span class="pre">module_ptr</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder13FreeModulePtrEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Free the module pointer got from <a class="reference internal" href="#classbuilder_1_1_builder_1a70dcc7bc39e0ca4897904da755b4c666"><span class="std std-ref">GetModulePtr()</span></a>. </p>
+<p>It is a temporary interface, will be removed in the future.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Built IR as a void pointer </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder7AddFuncENSt6stringE">
+<span id="_CPPv3N7builder7Builder7AddFuncENSt6stringE"></span><span id="_CPPv2N7builder7Builder7AddFuncENSt6stringE"></span><span id="builder::Builder::AddFunc__ss"></span><span class="target" id="classbuilder_1_1_builder_1a43bc8816285a6e05aeb69239ff33d52a"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">AddFunc</span></code><span class="sig-paren">(</span><span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <em><span class="pre">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder7AddFuncENSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Add a Function with a specific name to the <a class="reference internal" href="#classbuilder_1_1_builder"><span class="std std-ref">Builder</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – The specific name of the Function </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder17SetShapeInferenceEb">
+<span id="_CPPv3N7builder7Builder17SetShapeInferenceEb"></span><span id="_CPPv2N7builder7Builder17SetShapeInferenceEb"></span><span id="builder::Builder::SetShapeInference__b"></span><span class="target" id="classbuilder_1_1_builder_1a172f999c049b60bdb778c62610df1a68"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">SetShapeInference</span></code><span class="sig-paren">(</span><span class="pre">bool</span> <em><span class="pre">enable_flag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder17SetShapeInferenceEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Turn on or off shape inference when building an <a class="reference internal" href="classbuilder_1_1_op.html#classbuilder_1_1_op"><span class="std std-ref">Op</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder7Builder17GetShapeInferenceEv">
+<span id="_CPPv3NK7builder7Builder17GetShapeInferenceEv"></span><span id="_CPPv2NK7builder7Builder17GetShapeInferenceEv"></span><span id="builder::Builder::GetShapeInferenceC"></span><span class="target" id="classbuilder_1_1_builder_1a6931e58232ffabdbf7bec9cb1f280a74"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">GetShapeInference</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder7Builder17GetShapeInferenceEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the status of on or off for shape inference. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder9SetFuncMCERKNSt6stringERKNSt6vectorI7int64_tEE">
+<span id="_CPPv3N7builder7Builder9SetFuncMCERKNSt6stringERKNSt6vectorI7int64_tEE"></span><span id="_CPPv2N7builder7Builder9SetFuncMCERKNSt6stringERKNSt6vectorI7int64_tEE"></span><span id="builder::Builder::SetFuncMC__ssCR.std::vector:int64_t:CR"></span><span class="target" id="classbuilder_1_1_builder_1ad865841c42aa77f12aaac303e3e2b978"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">SetFuncMC</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">func_name</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">vector</span><span class="pre">&lt;</span><span class="pre">int64_t</span><span class="pre">&gt;</span> <span class="pre">&amp;</span><em><span class="pre">mc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder9SetFuncMCERKNSt6stringERKNSt6vectorI7int64_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Add a MC index info to the Func. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> – The specific name of the Function </p></li>
+<li><p><strong>mc</strong> – MC index info </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder7Builder9GetFuncMCERKNSt6stringE">
+<span id="_CPPv3NK7builder7Builder9GetFuncMCERKNSt6stringE"></span><span id="_CPPv2NK7builder7Builder9GetFuncMCERKNSt6stringE"></span><span id="builder::Builder::GetFuncMC__ssCRC"></span><span class="target" id="classbuilder_1_1_builder_1ab40b9d5cc325d68386078b325ba1fd0b"></span><span class="pre">std</span><span class="pre">::</span><span class="pre">vector</span><span class="pre">&lt;</span><span class="pre">int64_t</span><span class="pre">&gt;</span> <code class="sig-name descname"><span class="pre">GetFuncMC</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">func_name</span></em><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder7Builder9GetFuncMCERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get MC Info from the Func. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> – The specific name of the Function </p></li>
+<li><p><strong>return</strong> – MC index info. If threr is no MC in op, return {} </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder7Builder8HaveFuncERKNSt6stringE">
+<span id="_CPPv3NK7builder7Builder8HaveFuncERKNSt6stringE"></span><span id="_CPPv2NK7builder7Builder8HaveFuncERKNSt6stringE"></span><span id="builder::Builder::HaveFunc__ssCRC"></span><span class="target" id="classbuilder_1_1_builder_1a778c8a073ebb23c7cea59c95439cc529"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">HaveFunc</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">func_name</span></em><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder7Builder8HaveFuncERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Does the function name already exist. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>func_name</strong> – Name of the specific Function </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns true if it exists, otherwise returns false </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder16SetFuncAttributeERKNSt6stringERKNSt6stringERK9Attribute">
+<span id="_CPPv3N7builder7Builder16SetFuncAttributeERKNSt6stringERKNSt6stringERK9Attribute"></span><span id="_CPPv2N7builder7Builder16SetFuncAttributeERKNSt6stringERKNSt6stringERK9Attribute"></span><span id="builder::Builder::SetFuncAttribute__ssCR.ssCR.AttributeCR"></span><span class="target" id="classbuilder_1_1_builder_1ac198db962760c830f4ab7717e5299e5b"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">SetFuncAttribute</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">func_name</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">name</span></em>, <em class="property"><span class="pre">const</span></em> <a class="reference internal" href="classbuilder_1_1_attribute.html#_CPPv4N7builder9AttributeE" title="builder::Attribute"><span class="pre">Attribute</span></a> <span class="pre">&amp;</span><em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder16SetFuncAttributeERKNSt6stringERKNSt6stringERK9Attribute" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set function attribute parameters. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> – Name of the specific Function </p></li>
+<li><p><strong>name</strong> – attribute name </p></li>
+<li><p><strong>value</strong> – attribute object </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder16SetFuncAttributeERKNSt6stringERKNSt6stringERKNSt6vectorI9AttributeEE">
+<span id="_CPPv3N7builder7Builder16SetFuncAttributeERKNSt6stringERKNSt6stringERKNSt6vectorI9AttributeEE"></span><span id="_CPPv2N7builder7Builder16SetFuncAttributeERKNSt6stringERKNSt6stringERKNSt6vectorI9AttributeEE"></span><span id="builder::Builder::SetFuncAttribute__ssCR.ssCR.std::vector:Attribute:CR"></span><span class="target" id="classbuilder_1_1_builder_1adcf7a50eb1196b9ed51ecfe010c0cf7a"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">SetFuncAttribute</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">func_name</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">name</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">vector</span><span class="pre">&lt;</span><a class="reference internal" href="classbuilder_1_1_attribute.html#_CPPv4N7builder9AttributeE" title="builder::Attribute"><span class="pre">Attribute</span></a><span class="pre">&gt;</span> <span class="pre">&amp;</span><em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder16SetFuncAttributeERKNSt6stringERKNSt6stringERKNSt6vectorI9AttributeEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set function array attribute parameters. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> – Name of the specific Function </p></li>
+<li><p><strong>name</strong> – attribute name </p></li>
+<li><p><strong>value</strong> – vector of attribute object </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder7Builder16GetFuncAttributeERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3NK7builder7Builder16GetFuncAttributeERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2NK7builder7Builder16GetFuncAttributeERKNSt6stringERKNSt6stringE"></span><span id="builder::Builder::GetFuncAttribute__ssCR.ssCRC"></span><span class="target" id="classbuilder_1_1_builder_1af36302af9774fcfa65af1c466b3d3c6b"></span><a class="reference internal" href="classbuilder_1_1_attribute.html#_CPPv4N7builder9AttributeE" title="builder::Attribute"><span class="pre">Attribute</span></a> <code class="sig-name descname"><span class="pre">GetFuncAttribute</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">func_name</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">name</span></em><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder7Builder16GetFuncAttributeERKNSt6stringERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>get function attribute parameters info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> – Name of the specific Function </p></li>
+<li><p><strong>name</strong> – attribute name </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>attribute object </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder18SetModuleAttributeERKNSt6stringERK9Attribute">
+<span id="_CPPv3N7builder7Builder18SetModuleAttributeERKNSt6stringERK9Attribute"></span><span id="_CPPv2N7builder7Builder18SetModuleAttributeERKNSt6stringERK9Attribute"></span><span id="builder::Builder::SetModuleAttribute__ssCR.AttributeCR"></span><span class="target" id="classbuilder_1_1_builder_1a5ec899c484fb567d5110cd26210c08a7"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">SetModuleAttribute</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">name</span></em>, <em class="property"><span class="pre">const</span></em> <a class="reference internal" href="classbuilder_1_1_attribute.html#_CPPv4N7builder9AttributeE" title="builder::Attribute"><span class="pre">Attribute</span></a> <span class="pre">&amp;</span><em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder18SetModuleAttributeERKNSt6stringERK9Attribute" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set module attribute parameters. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – attribute name </p></li>
+<li><p><strong>value</strong> – attribute object </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder7Builder18SetModuleAttributeERKNSt6stringERKNSt6vectorI9AttributeEE">
+<span id="_CPPv3N7builder7Builder18SetModuleAttributeERKNSt6stringERKNSt6vectorI9AttributeEE"></span><span id="_CPPv2N7builder7Builder18SetModuleAttributeERKNSt6stringERKNSt6vectorI9AttributeEE"></span><span id="builder::Builder::SetModuleAttribute__ssCR.std::vector:Attribute:CR"></span><span class="target" id="classbuilder_1_1_builder_1a331c602f618b2bfce2edf32b3f852b6c"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">SetModuleAttribute</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">name</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">vector</span><span class="pre">&lt;</span><a class="reference internal" href="classbuilder_1_1_attribute.html#_CPPv4N7builder9AttributeE" title="builder::Attribute"><span class="pre">Attribute</span></a><span class="pre">&gt;</span> <span class="pre">&amp;</span><em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder7Builder18SetModuleAttributeERKNSt6stringERKNSt6vectorI9AttributeEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set module array attribute parameters. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – attribute name </p></li>
+<li><p><strong>value</strong> – vector of attribute object </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder7Builder18GetModuleAttributeERKNSt6stringE">
+<span id="_CPPv3NK7builder7Builder18GetModuleAttributeERKNSt6stringE"></span><span id="_CPPv2NK7builder7Builder18GetModuleAttributeERKNSt6stringE"></span><span id="builder::Builder::GetModuleAttribute__ssCRC"></span><span class="target" id="classbuilder_1_1_builder_1a74cef9ddf0ca95bf70e60364336c1eb1"></span><a class="reference internal" href="classbuilder_1_1_attribute.html#_CPPv4N7builder9AttributeE" title="builder::Attribute"><span class="pre">Attribute</span></a> <code class="sig-name descname"><span class="pre">GetModuleAttribute</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">name</span></em><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder7Builder18GetModuleAttributeERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>get module attribute parameters info. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – attribute name </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>attribute object </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder7Builder5PrintERNSt7ostreamE8uint32_t">
+<span id="_CPPv3NK7builder7Builder5PrintERNSt7ostreamE8uint32_t"></span><span id="_CPPv2NK7builder7Builder5PrintERNSt7ostreamE8uint32_t"></span><span id="builder::Builder::Print__osR.uint32_tC"></span><span class="target" id="classbuilder_1_1_builder_1aa8d4c2de8f53087abf107e87075b624e"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">Print</span></code><span class="sig-paren">(</span><span class="pre">std</span><span class="pre">::</span><span class="pre">ostream</span> <span class="pre">&amp;</span><em><span class="pre">out</span></em>, <span class="pre">uint32_t</span> <em><span class="pre">flags</span></em> <span class="pre">=</span> <a class="reference internal" href="enum_namespacebuilder_1ae3439b8a43926382d916b4d640f6c7bc.html#_CPPv4N7builder13PrintingFlagsE" title="builder::PrintingFlags"><span class="pre">PrintingFlags</span></a><span class="pre">::</span><a class="reference internal" href="enum_namespacebuilder_1ae3439b8a43926382d916b4d640f6c7bc.html#_CPPv4N7builder13PrintingFlags4NoneE" title="builder::PrintingFlags::None"><span class="pre">None</span></a><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder7Builder5PrintERNSt7ostreamE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Print the built IR to the specific output stream. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out</strong> – Output stream </p></li>
+<li><p><strong>flags</strong> – Print flag </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder7Builder4DumpEv">
+<span id="_CPPv3NK7builder7Builder4DumpEv"></span><span id="_CPPv2NK7builder7Builder4DumpEv"></span><span id="builder::Builder::DumpC"></span><span class="target" id="classbuilder_1_1_builder_1a78f44a7d1cdadfbe0dcd012b7a206362"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">Dump</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder7Builder4DumpEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Print the built IR to stdout. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder7Builder7GetImplEv">
+<span id="_CPPv3NK7builder7Builder7GetImplEv"></span><span id="_CPPv2NK7builder7Builder7GetImplEv"></span><span id="builder::Builder::GetImplC"></span><span class="target" id="classbuilder_1_1_builder_1a25dab310bf4b6995754cf010335c9a6f"></span><span class="pre">std</span><span class="pre">::</span><span class="pre">shared_ptr</span><span class="pre">&lt;</span><span class="pre">Impl</span><span class="pre">&gt;</span> <code class="sig-name descname"><span class="pre">GetImpl</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder7Builder7GetImplEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the inner implementation object pointer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The inner implementation object pointer </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+             </article>
+             
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="classbuilder_1_1_channel_handle.html" class="btn btn-neutral float-right" title="Class ChannelHandle" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+      
+      
+        <a href="classbuilder_1_1_attribute.html" class="btn btn-neutral" title="Class Attribute" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+      
+    </div>
+  
+
+  
+
+    <hr>
+
+  
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HLIR Builder Contributors.
+
+    </p>
+  </div>
+    
+      <div>
+        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+     
+
+</footer>
+
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              <ul>
+<li><a class="reference internal" href="#">Class Builder</a><ul>
+<li><a class="reference internal" href="#inheritance-relationships">Inheritance Relationships</a><ul>
+<li><a class="reference internal" href="#base-type">Base Type</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../_static/js/vendor/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <div class="container-fluid docs-tutorials-resources" id="docs-tutorials-resources">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <h2>Docs</h2>
+          <p>Access comprehensive developer documentation for HLIR Builder</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Docs</a> -->
+          <a class="with-right-arrow">View Docs</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Tutorials</h2>
+          <p>Get in-depth tutorials for beginners and advanced developers</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Tutorials</a> -->
+          <a class="with-right-arrow">View Tutorials</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Resources</h2>
+          <p>Find development resources and get your questions answered</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Resources</a> -->
+          <a class="with-right-arrow">View Resources</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <!--<div class="footer-logo-wrapper">
+        <a href="https://www.enflame-tech.com" class="footer-logo"></a>
+      </div>-->
+
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <ul>
+            <!--<li><a href="https://www.enflame-tech.com">Get Started</a></li> -->
+            <li><a>Get Started</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Features</a></li> -->
+            <li><a>C++ API</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Ecosystem</a></li> -->
+            <li><a>Python API</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Blog</a></li> -->
+            <li><a>Tutorials</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Contributing</a></li> -->
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <!--<li class="list-title"><a href="https://www.enflame-tech.com">Resources</a></li> -->
+            <li class="list-title"><a>Contributing</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Tutorials</a></li> -->
+            <!--<li><a href="https://www.enflame-tech.com">Docs</a></li> -->
+            <li><a>Applications</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Discuss</a></li> -->
+            <li><a>Discuss</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Github Issues</a></li> -->
+            <li><a>Github Issues</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Brand Guidelines</a></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cookie-banner-wrapper">
+  <div class="container">
+    <p class="gdpr-notice">To analyze traffic and optimize your experience, we serve cookies on this site. By clicking or navigating, you agree to allow our usage of cookies. As the current maintainers of this site, Facebook’s Cookies Policy applies. Learn more, including about available controls: <a href="https://www.facebook.com/policies/cookies/">Cookies Policy</a>.</p>
+    <img class="close-button" src="../_static/images/pytorch-x.svg">
+  </div>
+</div>
+
+  <!-- End Footer -->
+
+  <script type="text/javascript" src="../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+      mainMenuDropdown.bind();
+      filterTags.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

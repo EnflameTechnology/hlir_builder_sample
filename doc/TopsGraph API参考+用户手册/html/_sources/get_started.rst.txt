@@ -1,0 +1,245 @@
+Get Started
+===========
+
+We provide binary distributions of all headers, libraries and CMake configuration files.
+
+Minimal Example
+---------------
+
+The first step is to get and install the released dtu sdk.
+
+.. code-block:: sh
+
+  # First, get and install the released sdk. such as:
+  dpkg -i tops-sdk_xxx.deb 
+  # Once the sdk is installed, the location of header file for hlir builder is:
+  tree /usr/include/dtu/hlir_builder/
+  # /usr/include/dtu/hlir_builder/
+  # |-- hlir_builder.h
+  # |-- hlir_builder_client_ops.h
+  # |-- hlir_builder_common.h
+  # |-- hlir_builder_ops.h
+  # `-- hlir_builder_structs.h
+  # and the lib is:
+  ls /usr/lib/libdtu_sdk.so
+
+Next, we can write a minimal CMake build configuration to develop a small
+application that depends on dtu sdk. CMake is not a hard requirement for using
+dtu sdk, but it is the recommended and blessed build system and will be well
+supported into the future. A most basic `CMakeLists.txt` file could look like
+this:
+
+.. code-block:: cmake
+
+  cmake_minimum_required(VERSION 3.2)
+  project(hlir_builder_demo)
+  set(CMAKE_CXX_STANDARD 14)
+
+  # if libdtu_sdk.so is compiled with ABI=0(default), uncomment Line 6 and comment Line 7
+  add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)   # Line 6
+  # if libdtu_sdk.so is compiled with ABI=1, comment Line 6 and uncomment Line 7
+  #add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=1)  # Line 7
+
+  include_directories(/usr/include/dtu)
+  include_directories(/usr/include/dtu/3_0/runtime)
+  aux_source_directory(${CMAKE_CURRENT_LIST_DIR}/src demo_src)
+  link_directories(/usr/lib)
+  add_executable(${PROJECT_NAME} ${demo_src})
+  target_link_libraries(${PROJECT_NAME} -ldtu_sdk)
+
+The implementation of our example(src/demo.cpp) will simply create a new `MatMul` op, compile and run it:
+
+.. code-block:: cpp
+
+  #include <string>
+  #include <vector>
+  #include <sstream>
+  #include <iostream>
+  #include "hlir_builder/hlir_builder.h"
+  #include "dtu_compiler/tops_graph_compiler.h"
+  #include "3_0/runtime/tops/tops_runtime_api.h"
+  #include "3_0/runtime/tops/tops_ext.h"
+  
+  int main() {
+    // stage 1: build the ir
+    auto builder = std::make_shared<builder::Builder>();
+    builder->SetShapeInference(true);
+    auto ptype = builder::PrimitiveType::F32();
+    std::vector<int64_t> shape = {2, 2};
+    builder::Type type(shape, ptype);
+    auto arg0 = builder->CreateInput(type);
+    auto arg1 = builder->CreateInput(type);
+    builder::DotDimensionNumbers dims_attr({}, {}, {1}, {0});
+    auto res = builder::DotGeneral(arg0, arg1, dims_attr);
+    res.SetAttribute("op_name", builder::Attribute("MatMul"));
+    builder->SetOutput({res});
+    builder->Dump();
+    auto hlir_module = builder->GetModule();
+
+    // stage 2: compile
+    topsgraphProgram program;
+    auto ret = topsgraphCreateProgramFromModule(&program, hlir_module.get());
+    const char * options[] = {
+        "-arch=gcu210",
+        "-resource=1c4s",
+        "-hlir=hlir-pipeline{}"};
+    topsgraphCompileProgram(program, 3, options);
+    size_t binary_size = 0;
+    topsgraphGetBinSize(program, &binary_size);
+    char* binary = new char[binary_size];
+    ret = topsgraphGetBin(program, binary);
+
+    // stage 3: run
+    topsInit(0);
+    int device_id = 0;
+    topsSetDevice(device_id);
+    topsExecutable_t exec;
+    topsCreateExecutable(&exec, binary, binary_size);
+    delete [] binary;
+    topsgraphDestroyProgram(&program);
+    topsResource_t resource;
+    topsCreateResourceForExecutable(&resource, exec);
+    topsStream_t stream;
+    topsStreamCreate(&stream);
+    std::vector<int *> dev_inputs;
+    std::vector<int *> dev_outputs;
+    std::vector<float> lhs{0, 1, 2, 3};
+    std::vector<float> rhs{1, 2, 3, 4};
+    std::vector<void*> data_ptrs;
+    data_ptrs.emplace_back(static_cast<void*>(lhs.data()));
+    data_ptrs.emplace_back(static_cast<void*>(rhs.data()));
+    uint64_t input_count = 0;
+    topsExecutableQueryInfo(exec, topsExecutableInfoInputCount, &input_count);
+    uint64_t *input_size_list = (uint64_t *)malloc(sizeof(uint64_t)* input_count);
+    topsExecutableQueryInfo(exec, topsExecutableInfoInputSizeList,
+                            input_size_list);
+    for (size_t index = 0; index < input_count; index++) {
+      auto input_size = (size_t)input_size_list[index];
+      int *input = nullptr;
+      topsMallocForResource((void**)&input, input_size, resource);
+      topsMemcpyAsync(input, data_ptrs[index], input_size_list[index],
+                      topsMemcpyHostToDevice, stream);
+      dev_inputs.push_back(input);
+    }
+    uint64_t output_count = 0;
+    topsExecutableQueryInfo(exec, topsExecutableInfoOutputCount, &output_count);
+    auto output_size_list = (uint64_t *)malloc(sizeof(uint64_t)* output_count);
+    topsExecutableQueryInfo(exec, topsExecutableInfoOutputSizeList,
+                            output_size_list);
+    for (size_t i = 0; i < output_count; i++) {
+      uint64_t output_size = output_size_list[i];
+      int *output = nullptr;
+      topsMallocForResource((void**)&output, output_size, resource);
+      dev_outputs.push_back(output);
+    }
+    topsLaunchExecutableV2(exec, resource,
+                           (void**)dev_inputs.data(), dev_inputs.size(),
+                           (void**)dev_outputs.data(), dev_outputs.size(),
+                           stream);
+    auto output_rank_list = (uint64_t *)malloc(sizeof(uint64_t)* output_count);
+    topsExecutableQueryInfo(exec, topsExecutableInfoOutputRank, output_rank_list);
+    uint64_t output_dims_size =
+            std::accumulate(output_rank_list, output_rank_list + output_count, 0);
+    uint64_t *output_dim_list =
+            (uint64_t *)malloc(sizeof(uint64_t) * output_dims_size);
+    topsExecutableQueryInfo(exec, topsExecutableInfoOutputDimsList,
+                            output_dim_list);
+    uint64_t dim_index = 0;
+    for (size_t i = 0; i < output_count; i++) {
+      uint64_t output_size = output_size_list[i];
+      std::vector<uint64_t> shape_v;
+      for(size_t j =0; j < output_rank_list[i]; j++) {
+        shape_v.push_back(output_dim_list[dim_index++]);
+      }
+      void *host_output = malloc(output_size);
+      topsMemcpyAsync(host_output, dev_outputs[i], output_size,
+                      topsMemcpyDeviceToHost, stream);
+      topsStreamSynchronize(stream);
+      float* output_data = static_cast<float*>(host_output);
+      std::cout << "output data: ";
+      for (int j = 0; j < 4; ++j) {
+        std::cout << output_data[j] << ", ";
+      }
+      std::cout << std::endl;
+      free(host_output);
+    }
+    for (auto dev_input : dev_inputs) {
+      topsFree(dev_input);
+    }
+    for (auto dev_output : dev_outputs) {
+      topsFree(dev_output);
+    }
+    topsStreamDestroy(stream);
+    topsDestroyResource(resource);
+    topsDestroyExecutable(exec);
+    return 0;
+  }
+
+`hlir_builder.h` is the only header you should include.
+The last step is to build the application. For this, assume our example
+directory is laid out like the following. Here we copied the header files and
+library into the example directory. You can use the installed files in `/usr/` directly.
+
+.. code-block:: sh
+
+  demo
+  |-- CMakeLists.txt
+  `-- src
+      `-- demo.cpp
+
+We can now run the following commands to build the application from within the
+``demo/`` folder:
+
+.. code-block:: sh
+
+  mkdir build
+  cd build
+  cmake ..
+  make
+
+If all goes well, it will look something like this:
+
+.. code-block:: sh
+
+  root@c76cafeb287f:/home/develop/hlir_builder/demo/build# cmake ..
+  -- The C compiler identification is GNU 7.5.0
+  -- The CXX compiler identification is GNU 7.5.0
+  -- Detecting C compiler ABI info
+  -- Detecting C compiler ABI info - done
+  -- Check for working C compiler: /usr/bin/cc - skipped
+  -- Detecting C compile features
+  -- Detecting C compile features - done
+  -- Detecting CXX compiler ABI info
+  -- Detecting CXX compiler ABI info - done
+  -- Check for working CXX compiler: /usr/bin/c++ - skipped
+  -- Detecting CXX compile features
+  -- Detecting CXX compile features - done
+  -- Configuring done
+  -- Generating done
+  -- Build files have been written to: /home/hong.liu/develop/hlir_builder/demo/build
+  root@c76cafeb287f:/home/hong.liu/develop/hlir_builder/demo/build# make
+  [ 50%] Building CXX object CMakeFiles/hlir_builder_demo.dir/src/demo.cpp.o
+  [100%] Linking CXX executable hlir_builder_demo
+  [100%] Built target hlir_builder_demo
+
+Executing the resulting ``hlir_builder_demo`` binary found in the ``build`` folder
+should now merrily print the built IR and the calculation result:
+
+.. code-block:: sh
+
+  root@c76cafeb287f:/home/develop/hlir_builder/demo/build# ./hlir_builder_demo
+  # dumped ir
+  module {
+    func @main(%arg0: tensor<2x2xf32>, %arg1: tensor<2x2xf32>) -> tensor<2x2xf32> {
+      %0 = "dtu_hlir.dot_general"(%arg0, %arg1) {dot_dimension_numbers = {lhs_batching_dimensions = dense<[]> : tensor<0xi64>, lhs_contracting_dimensions = dense<1> : tensor<1xi64>, rhs_batching_dimensions = dense<[]> : tensor<0xi64>, rhs_contracting_dimensions = dense<0> : tensor<1xi64>}, op_name = "MatMul"} : (tensor<2x2xf32>, tensor<2x2xf32>) -> tensor<2x2xf32>
+      return %0 : tensor<2x2xf32>
+    }
+  }
+  # calculation result
+  output data: 3, 4, 11, 16,
+
+Support
+-------
+
+If you run into any troubles with this installation and minimal usage guide,
+please use our `forum <https://www.enflame-tech.com/>`_ to get in touch.

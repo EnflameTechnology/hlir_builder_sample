@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1aa5441b2dd24a97f54a7a8c3a0403c6f3:
+
+Function builder::OcrLinkSoftmax
+================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::OcrLinkSoftmax(builder::Op, builder::Type)
+   :project: HLIR Builder

@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a5cdaca0e5f1d5f13d4d21377b0033a40:
+
+Function builder::Pad
+=====================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Pad(builder::Op, builder::Op, int64_t, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

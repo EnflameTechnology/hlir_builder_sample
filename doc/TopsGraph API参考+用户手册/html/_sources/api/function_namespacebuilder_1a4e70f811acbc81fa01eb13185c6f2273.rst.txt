@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a4e70f811acbc81fa01eb13185c6f2273:
+
+Function builder::AngleCaliRotate
+=================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::AngleCaliRotate(std::vector<builder::Op>, builder::Op, int64_t, builder::Type)

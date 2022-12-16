@@ -1,0 +1,420 @@
+:github_url: https://github.com/EnflameTechnology
+
+
+.. _program_listing_file_headers_hlir_builder_common.h:
+
+Program Listing for File hlir_builder_common.h
+==============================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_headers_hlir_builder_common.h>` (``headers/hlir_builder_common.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   // =============================================================================
+   //
+   // Copyright 2021-2022 The Enflame-tech Company.
+   //
+   // Licensed under the Apache License, Version 2.0 (the "License");
+   // you may not use this file except in compliance with the License.
+   // You may obtain a copy of the License at
+   //
+   //   http://www.apache.org/licenses/LICENSE-2.0
+   //
+   // Unless required by applicable law or agreed to in writing, software
+   // distributed under the License is distributed on an "AS IS" BASIS,
+   // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   // See the License for the specific language governing permissions and
+   // limitations under the License.
+   // =============================================================================
+   
+   #ifndef HLIR_BUILDER_COMMON_H_
+   #define HLIR_BUILDER_COMMON_H_
+   
+   #include <experimental/optional>
+   #include <cfloat>
+   #include <climits>
+   #include <cstdint>
+   #include <functional>
+   #include <memory>
+   #include <numeric>
+   #include <string>
+   #include <utility>
+   #include <vector>
+   #include <set>
+   #include <tuple>
+   
+   namespace hlir {
+   class Module;
+   }  // namespace hlir
+   
+   namespace builder {
+   
+   constexpr int64_t kUnknownDim = -1;
+   constexpr int64_t kUnknownRank = -2;
+   constexpr std::experimental::nullopt_t nullopt = std::experimental::nullopt;
+   
+   class Op;
+   class Type;
+   class Attribute;
+   
+   enum PrintingFlags {
+     None = 0x00000,
+     ElideLargeElementsAttrs = 0x00001,
+     EnableDebugInfo = 0x00010,
+     EnableDebugInfoPrettyFormFlag = 0x00100,
+     PrintGenericOpForm = 0x01000,
+     UseLocalScope = 0x10000
+   };
+   
+   class Builder : public std::enable_shared_from_this<Builder> {
+    public:
+     Builder();
+   
+     ~Builder() = default;
+     Builder(const Builder&) = delete;
+     Builder& operator=(const Builder&) = delete;
+     Builder(Builder&&) = delete;
+     Builder& operator=(Builder&&) = delete;
+   
+     builder::Op CreateInput(const builder::Type& type,
+                             const std::string& func_name = "main");
+   
+     std::vector<builder::Op> GetInputs(const std::string& func_name = "main");
+   
+     void SetOutput(const std::vector<builder::Op>& outputs,
+                    const std::string& func_name = "main");
+   
+     void SetChlirCompileOption(const std::string& options = "");
+   
+     std::string GetModuleStr(uint32_t flags = PrintingFlags::None);
+   
+     std::shared_ptr<hlir::Module> GetModule();
+   
+     void* GetModulePtr();
+   
+     void FreeModulePtr(void* module_ptr);
+   
+     void AddFunc(std::string name);
+   
+     void SetShapeInference(bool enable_flag);
+   
+     bool GetShapeInference() const;
+   
+     void SetFuncMC(const std::string& func_name,
+                   const std::vector<int64_t>& mc);
+   
+     std::vector<int64_t> GetFuncMC(const std::string& func_name) const;
+   
+     bool HaveFunc(const std::string& func_name) const;
+   
+     void SetFuncAttribute(const std::string& func_name, const std::string& name,
+                           const Attribute& value);
+   
+     void SetFuncAttribute(const std::string& func_name, const std::string& name,
+                           const std::vector<Attribute>& value);
+   
+     Attribute GetFuncAttribute(const std::string& func_name,
+                                const std::string& name) const;
+   
+     void SetModuleAttribute(const std::string& name, const Attribute& value);
+   
+     void SetModuleAttribute(const std::string& name,
+                             const std::vector<Attribute>& value);
+   
+     Attribute GetModuleAttribute(const std::string& name) const;
+   
+     void Print(std::ostream& out, uint32_t flags = PrintingFlags::None) const;
+   
+     void Dump() const;
+   
+     class Impl;
+   
+     std::shared_ptr<Impl> GetImpl() const;
+   
+    private:
+     std::shared_ptr<Impl> impl_;
+   };
+   
+   std::ostream& operator<<(std::ostream& out,
+                            std::shared_ptr<builder::Builder> builder);
+   
+   class PrimitiveType {
+    public:
+     static PrimitiveType NONE();
+   
+     static PrimitiveType PRED();
+   
+     static PrimitiveType S8();
+   
+     static PrimitiveType F16();
+   
+     static PrimitiveType BF16();
+   
+     static PrimitiveType S16();
+   
+     static PrimitiveType F32();
+   
+     static PrimitiveType S32();
+   
+     static PrimitiveType S64();
+   
+     static PrimitiveType F64();
+   
+     static PrimitiveType TUPLE();
+   
+     bool operator==(const PrimitiveType& prim_type) const;
+   
+     bool operator!=(const PrimitiveType& prim_type) const;
+   
+     void Print(std::ostream& out) const;
+   
+     void Dump() const;
+   
+     class Impl;
+     explicit PrimitiveType(std::shared_ptr<Impl>);
+   
+     ~PrimitiveType() = default;
+     PrimitiveType(const PrimitiveType&) = default;
+     PrimitiveType& operator=(const PrimitiveType&) = default;
+     PrimitiveType(PrimitiveType&&) = default;
+     PrimitiveType& operator=(PrimitiveType&&) = default;
+   
+    private:
+     std::shared_ptr<Impl> GetImpl() const;
+     friend class Attribute;
+     friend class Type;
+   
+    private:
+     std::shared_ptr<Impl> impl_;
+   };
+   
+   std::ostream& operator<<(std::ostream& out, PrimitiveType type);
+   
+   class Type {
+    public:
+     explicit Type(PrimitiveType primitive_type = builder::PrimitiveType::NONE());
+   
+     Type(const std::vector<int64_t>& shape, const PrimitiveType& primitive_ype);
+   
+     Type(const std::vector<std::vector<int64_t>>& shape,
+          const std::vector<PrimitiveType>& primitive_type);
+   
+     explicit Type(const std::vector<Type*>& types);
+   
+     ~Type() = default;
+     Type(const Type&) = default;
+     Type& operator=(const Type&) = default;
+     Type(Type&&) = default;
+     Type& operator=(Type&&) = default;
+   
+     bool operator==(const Type& type) const;
+   
+     bool operator!=(const Type& type) const;
+   
+     bool IsEmpty() const;
+   
+     bool IsTuple() const;
+   
+     int64_t GetRank() const;
+   
+     int64_t GetSize() const;
+   
+     void SetShape(const std::vector<int64_t>& shape);
+   
+     std::vector<int64_t> GetShape() const;
+   
+     void AddDimSize(int64_t size);
+   
+     void SetDimSize(int index, int64_t size);
+   
+     int64_t GetDimSize(int index) const;
+   
+     void SetPrimitiveType(const PrimitiveType& prim_type);
+   
+     PrimitiveType GetPrimitiveType() const;
+   
+     int64_t GetTupleSize() const;
+   
+     std::vector<std::vector<int64_t>> GetTupleShapes() const;
+   
+     std::vector<PrimitiveType> GetTuplePrimitiveTypes() const;
+   
+     void Print(std::ostream& out) const;
+   
+     void Dump() const;
+   
+     class Impl;
+     std::shared_ptr<Impl> GetImpl() const;
+   
+    private:
+     std::shared_ptr<Impl> impl_;
+   };
+   
+   std::ostream& operator<<(std::ostream& out, Type type);
+   
+   class Op {
+    public:
+     class Impl;
+   
+     Op(std::shared_ptr<Builder> builder, std::shared_ptr<Impl> impl);
+   
+     Op() = default;
+     ~Op() = default;
+     Op(const Op&) = default;
+     Op& operator=(const Op&) = default;
+     Op(Op&&) = default;
+     Op& operator=(Op&&) = default;
+   
+     std::shared_ptr<Builder> GetBuilder() const;
+   
+     Type GetType() const;
+   
+     std::shared_ptr<void> GetConstDataPtr() const;
+   
+     bool IsValid() const;
+   
+     bool IsNull() const;
+   
+     bool IsConstant() const;
+   
+     bool IsDynamic() const;
+   
+     bool IsUnknownRank() const;
+   
+     template <typename T>
+     std::vector<T> GetConstData() const {
+       auto data_ptr = GetConstDataPtr();
+       T* target_ptr = static_cast<T*>(data_ptr.get());
+       auto shape = GetType().GetShape();
+       int64_t size = std::accumulate(shape.begin(), shape.end(),
+                                      1, std::multiplies<int64_t>());
+       std::vector<T> ret(target_ptr, target_ptr + size);
+       return std::move(ret);
+     }
+   
+     std::shared_ptr<Impl> GetImpl() const;
+   
+     void AddAccessory(Op& accessory);
+   
+     void SetAttribute(const std::string& name,
+                       const Attribute& value,
+                       const std::string& mode = "");
+   
+     void SetAttribute(const std::string& name,
+                       const std::vector<Attribute>& value);
+   
+     Attribute GetAttribute(const std::string& name) const;
+   
+     void SetMC(const std::vector<int64_t>& mc);
+   
+     std::vector<int64_t> GetMC() const;
+   
+     void Dump() const;
+   
+     void Print(std::ostream& out, uint32_t flags = PrintingFlags::None) const;
+   
+    private:
+     std::shared_ptr<Builder> builder_ = nullptr;
+     std::shared_ptr<Impl> impl_ = nullptr;
+     std::set<std::shared_ptr<Impl>> accessories_;
+   };
+   
+   std::ostream& operator<<(std::ostream& out, Op op);
+   
+   class Attribute {
+    public:
+     explicit Attribute(const char* value);
+   
+     explicit Attribute(const std::string& value);
+   
+     explicit Attribute(bool value);
+   
+     explicit Attribute(int32_t value);
+   
+     explicit Attribute(int64_t value);
+   
+     explicit Attribute(float value);
+   
+     explicit Attribute(double value);
+   
+     Attribute(Type data_type, void* data);
+   
+     Attribute(Type data_type, std::shared_ptr<void> data_ptr);
+   
+     ~Attribute() = default;
+     Attribute(const Attribute&) = default;
+     Attribute& operator=(const Attribute&) = default;
+     Attribute(Attribute&&) = default;
+     Attribute& operator=(Attribute&&) = default;
+   
+     bool operator==(const Attribute& attr);
+   
+     Type GetType() const;
+   
+     double GetValueAsDouble() const;
+   
+     int64_t GetValueAsInt() const;
+   
+     bool GetValueAsBool() const;
+   
+     std::string GetValueAsString() const;
+   
+     std::shared_ptr<void> GetValueAsDataPtr() const;
+   
+     void Print(std::ostream& out) const;
+   
+     void Dump() const;
+   
+     class Impl;
+   
+    private:
+     const std::shared_ptr<Impl> GetImpl() const { return impl_; }
+     friend class Op;
+     friend class Builder;
+   
+    private:
+     std::shared_ptr<Impl> impl_;
+   };
+   
+   std::ostream& operator<<(std::ostream& out, Attribute attr);
+   
+   template<class Tuple, size_t N>
+   struct GetCallArgs {
+     static void GetArg(std::vector<std::shared_ptr<builder::Op::Impl>>& ops_impl,
+                        const Tuple& args){
+       GetCallArgs<Tuple, N - 1>::GetArg(ops_impl, args);
+       ops_impl.emplace_back(std::get<N - 1>(args).GetImpl());
+     }
+   };
+   
+   template<class Tuple>
+   struct GetCallArgs<Tuple, 1> {
+     static void GetArg(std::vector<std::shared_ptr<builder::Op::Impl>>& ops_impl,
+                        const Tuple& args) {
+       ops_impl.emplace_back(std::get<0>(args).GetImpl());
+     }
+   };
+   
+   template<class... Args>
+   void ConvertCallArgs(std::vector<std::shared_ptr<builder::Op::Impl>>& ops_impl,
+                        const std::tuple<Args...>& args) {
+     GetCallArgs<decltype(args), sizeof...(Args)>::GetArg(ops_impl, args);
+   }
+   
+   Op GetCallOp(std::shared_ptr<Builder> builder, const std::string& func_name,
+                std::vector<std::shared_ptr<builder::Op::Impl>> ops_impl);
+   
+   template<class... Args>
+   Op Call(std::shared_ptr<Builder> builder,
+           const std::string& func_name, Args... args) {
+     auto tuple_args = std::make_tuple(args...);
+     std::vector<std::shared_ptr<builder::Op::Impl>> ops_impl;
+     ConvertCallArgs(ops_impl, tuple_args);
+     return std::move(GetCallOp(builder, func_name, ops_impl));
+   }
+   
+   }  // namespace builder
+   
+   #endif

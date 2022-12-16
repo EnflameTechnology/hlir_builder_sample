@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a66706c96eb0ebb70e7c198ad66773df0:
+
+Function builder::Gelu
+======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Gelu(builder::Op, bool, builder::Type)
+   :project: HLIR Builder

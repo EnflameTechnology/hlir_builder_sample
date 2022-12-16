@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a08cf1c3ed0b48c79cab3f1afd4e1140a:
+
+Function builder::Trilu
+=======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Trilu(builder::Op, bool, int64_t, builder::Type)
+   :project: HLIR Builder

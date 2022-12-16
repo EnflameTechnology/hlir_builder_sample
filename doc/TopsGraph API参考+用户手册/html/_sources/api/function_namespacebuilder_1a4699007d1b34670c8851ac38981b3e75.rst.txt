@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a4699007d1b34670c8851ac38981b3e75:
+
+Function builder::DotGeneralBiasQuant
+=====================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::DotGeneralBiasQuant(builder::Op, builder::Op, std::vector<builder::Op>, builder::DotDimensionNumbers, float, std::vector<std::string>, builder::Type)
+   :project: HLIR Builder

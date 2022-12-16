@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ae87889ee31e9b22e5a8ff6809b1f62eb:
+
+Function builder::Gtu
+=====================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Gtu(builder::Op, int64_t, builder::Type)
+   :project: HLIR Builder

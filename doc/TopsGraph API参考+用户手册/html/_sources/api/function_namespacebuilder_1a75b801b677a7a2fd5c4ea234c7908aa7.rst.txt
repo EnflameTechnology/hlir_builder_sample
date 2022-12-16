@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a75b801b677a7a2fd5c4ea234c7908aa7:
+
+Function builder::SpaceToDepth
+==============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::SpaceToDepth(builder::Op, std::vector<int64_t>, int64_t, int64_t, builder::Type)
+   :project: HLIR Builder

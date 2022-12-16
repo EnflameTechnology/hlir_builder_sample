@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a1ea99fc8594f9719d0dcfdd7a4df5914:
+
+Function builder::Merge
+=======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Merge(builder::Op, std::vector<int32_t>, builder::Type)
+   :project: HLIR Builder

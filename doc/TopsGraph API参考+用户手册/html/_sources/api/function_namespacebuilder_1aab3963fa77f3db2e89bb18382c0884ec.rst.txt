@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1aab3963fa77f3db2e89bb18382c0884ec:
+
+Function builder::Sqrt
+======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Sqrt(builder::Op, builder::Type)
+   :project: HLIR Builder

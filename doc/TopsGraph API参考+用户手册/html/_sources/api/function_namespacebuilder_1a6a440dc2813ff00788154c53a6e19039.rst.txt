@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a6a440dc2813ff00788154c53a6e19039:
+
+Function builder::Conv1DTranspose
+=================================
+
+- Defined in :ref:`file_headers_hlir_builder_client_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Conv1DTranspose(std::vector<builder::Op>, int64_t, std::string, std::string, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

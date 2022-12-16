@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a958549613fcf89adf8bc7bd7941475ab:
+
+Function builder::Copy
+======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Copy(builder::Op, builder::Type)
+   :project: HLIR Builder

@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a87c84770be0f705870c2b624fcdce653:
+
+Function builder::ReduceSum
+===========================
+
+- Defined in :ref:`file_headers_hlir_builder_client_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::ReduceSum(builder::Op, bool, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

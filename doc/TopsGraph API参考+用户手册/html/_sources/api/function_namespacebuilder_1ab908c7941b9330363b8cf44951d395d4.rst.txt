@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ab908c7941b9330363b8cf44951d395d4:
+
+Function builder::DequantizeLinearQuant
+=======================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::DequantizeLinearQuant(builder::Op, float, builder::Type)
+   :project: HLIR Builder

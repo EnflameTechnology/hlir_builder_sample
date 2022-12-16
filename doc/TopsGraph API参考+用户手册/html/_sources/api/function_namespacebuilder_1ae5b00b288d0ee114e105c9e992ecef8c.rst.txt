@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ae5b00b288d0ee114e105c9e992ecef8c:
+
+Function builder::DynamicUpdateSlice
+====================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::DynamicUpdateSlice(builder::Op, builder::Op, std::vector<builder::Op>, builder::Type)
+   :project: HLIR Builder

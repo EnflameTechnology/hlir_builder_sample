@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ac356ae3062452bb783c47fe935d51530:
+
+Function builder::PRelu
+=======================
+
+- Defined in :ref:`file_headers_hlir_builder_client_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::PRelu(builder::Op, builder::Op, builder::Type)
+   :project: HLIR Builder

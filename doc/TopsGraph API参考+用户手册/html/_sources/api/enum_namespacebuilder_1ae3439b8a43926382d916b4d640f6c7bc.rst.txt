@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_enum_namespacebuilder_1ae3439b8a43926382d916b4d640f6c7bc:
+
+Enum PrintingFlags
+==================
+
+- Defined in :ref:`file_headers_hlir_builder_common.h`
+
+
+Enum Documentation
+------------------
+
+
+.. doxygenenum:: builder::PrintingFlags
+   :project: HLIR Builder

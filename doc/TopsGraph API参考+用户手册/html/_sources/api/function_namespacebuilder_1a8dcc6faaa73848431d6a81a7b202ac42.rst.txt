@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a8dcc6faaa73848431d6a81a7b202ac42:
+
+Function builder::ConvBias(std::vector<builder::Op>, builder::ConvDimensionNumbers, int64_t, int64_t, std::vector<int64_t>, std::vector<std::vector<int64_t>>, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::string, std::vector<std::string>, builder::Type)
+======================================================================================================================================================================================================================================================================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::ConvBias(std::vector<builder::Op>, builder::ConvDimensionNumbers, int64_t, int64_t, std::vector<int64_t>, std::vector<std::vector<int64_t>>, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::string, std::vector<std::string>, builder::Type)
+   :project: HLIR Builder

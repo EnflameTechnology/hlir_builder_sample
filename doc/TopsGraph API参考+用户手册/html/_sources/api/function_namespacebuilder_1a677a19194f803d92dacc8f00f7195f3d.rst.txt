@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a677a19194f803d92dacc8f00f7195f3d:
+
+Function builder::Scatter
+=========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Scatter(builder::Op, builder::Op, builder::Op, builder::ScatterDimensionNumbers, bool, bool, std::vector<std::string>, builder::Type)

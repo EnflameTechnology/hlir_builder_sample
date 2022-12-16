@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a4f3ef168690273de8b1cef7f09ff4f96:
+
+Function builder::Softplus
+==========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Softplus(builder::Op, std::experimental::optional<int64_t>, std::experimental::optional<int64_t>, builder::Type)
+   :project: HLIR Builder

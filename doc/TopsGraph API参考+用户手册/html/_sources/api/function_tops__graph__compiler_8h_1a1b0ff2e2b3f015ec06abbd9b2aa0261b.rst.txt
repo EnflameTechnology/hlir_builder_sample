@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_tops__graph__compiler_8h_1a1b0ff2e2b3f015ec06abbd9b2aa0261b:
+
+Function topsgraphGetBinSize
+============================
+
+- Defined in :ref:`file_headers_tops_graph_compiler.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: topsgraphGetBinSize(topsgraphProgram, size_t *)
+   :project: HLIR Builder

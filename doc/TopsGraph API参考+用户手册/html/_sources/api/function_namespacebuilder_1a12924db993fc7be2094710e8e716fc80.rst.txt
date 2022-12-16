@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a12924db993fc7be2094710e8e716fc80:
+
+Function builder::GetCallOp
+===========================
+
+- Defined in :ref:`file_headers_hlir_builder_common.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::GetCallOp(std::shared_ptr<Builder>, const std::string&, std::vector<std::shared_ptr<builder::Op::Impl>>)
+   :project: HLIR Builder

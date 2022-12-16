@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a3efa47edf3ddc57618fe8ce269354e04:
+
+Function builder::ArgMax
+========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::ArgMax(builder::Op, int64_t, bool, bool, builder::Type)

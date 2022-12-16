@@ -2,7 +2,7 @@
 
 Hlir builder sample
 
-本repo包含了多个常见op和神经网络结构在hlir的实现,用于展示如何基于tops sdk搭建常见op或网络结构的hlir
+本repo包含了多个常见op和神经网络结构在hlir的实现,用于展示如何基于tops sdk搭建常见op或网络结构的hlir；相关api调用也可参考**doc/TopsGraph API参考+用户手册**。
 
 ## 安装
 
@@ -10,6 +10,15 @@ Hlir builder sample
 
 ```sh
 $ dpkg -i tops-sdk.deb
+```
+
+**本版本sample在i20的2.0 production(2.0.178)SDK验证可跑通，具体sample执行情况如下：**
+
+```
+total_case:43, successed:38, result_failed:0, run_failed:5
+successed list:Flatten Dropout ReduceMean Squeeze DotGeneral Slice Sqrt Convert Transpose MaxPool_by_ReduceWindow Reshape Tanh BatchNorm Split AveragePool Add_fp16 Concat Reciprocal Add_fp16_without_convert Clip Tile Copy GlobalAveragePool Add MaxPool Gather ResidualBlock Mul Unsqueeze ResidualBlock_fp16_without_convert Conv2D Sub Relu OneHot Softmax Shape Pow Less
+result_failed:
+run_failed:Sigmoid Conv Gemm TopK Resize
 ```
 
 ## 编译

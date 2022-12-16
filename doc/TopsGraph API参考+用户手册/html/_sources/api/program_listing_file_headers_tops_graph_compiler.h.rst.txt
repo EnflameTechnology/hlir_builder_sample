@@ -1,0 +1,76 @@
+:github_url: https://github.com/EnflameTechnology
+
+
+.. _program_listing_file_headers_tops_graph_compiler.h:
+
+Program Listing for File tops_graph_compiler.h
+==============================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_headers_tops_graph_compiler.h>` (``headers/tops_graph_compiler.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   // =============================================================================
+   //
+   // Copyright 2021-2022 The Enflame-tech Company.
+   //
+   // Licensed under the Apache License, Version 2.0 (the "License");
+   // you may not use this file except in compliance with the License.
+   // You may obtain a copy of the License at
+   //
+   //   http://www.apache.org/licenses/LICENSE-2.0
+   //
+   // Unless required by applicable law or agreed to in writing, software
+   // distributed under the License is distributed on an "AS IS" BASIS,
+   // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   // See the License for the specific language governing permissions and
+   // limitations under the License.
+   // =============================================================================
+   #ifndef _TOPS_GRAPH_COMPILER_H_
+   #define _TOPS_GRAPH_COMPILER_H_
+   
+   namespace hlir {
+   class Module;
+   }
+   
+   #ifdef __cplusplus
+   extern "C" {
+   #endif /* __cplusplus */
+   
+   typedef void* topsgraphProgram;
+   
+   enum topsgraphResult {
+     TOPS_GRAPH_SUCCESS = 0,
+     TOPS_GRAPH_ERROR_INVALID_INPUT,
+     TOPS_GRAPH_ERROR_INVALID_PROGRAM,
+     TOPS_GRAPH_ERROR_INVALID_OPTION,
+     TOPS_GRAPH_ERROR_OUT_OF_MEMORY
+   };
+   
+   topsgraphResult topsgraphCreateProgramFromString(topsgraphProgram* program,
+                                                    const char* module);
+   topsgraphResult topsgraphCreateProgramFromModule(topsgraphProgram* program,
+                                                    hlir::Module* module);
+   
+   topsgraphResult topsgraphDestroyProgram(topsgraphProgram* program);
+   
+   topsgraphResult topsgraphCompileProgram(topsgraphProgram program,
+                                           int numOptions,
+                                           const char** options);
+   
+   topsgraphResult topsgraphGetBin(topsgraphProgram program,
+                                   char* binary);
+   
+   topsgraphResult topsgraphGetBinSize(topsgraphProgram program,
+                                       size_t* binary_size);
+   
+   topsgraphResult topsgraphSaveBinFile(topsgraphProgram program,
+                                        const char* save_file);
+   
+   #ifdef __cplusplus
+   }
+   #endif /* __cplusplus */
+   
+   #endif  // _TOPS_GRAPH_COMPILER_H_

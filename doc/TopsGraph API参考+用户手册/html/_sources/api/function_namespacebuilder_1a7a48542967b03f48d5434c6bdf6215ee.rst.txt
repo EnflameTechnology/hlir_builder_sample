@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a7a48542967b03f48d5434c6bdf6215ee:
+
+Function builder::DynamicGather
+===============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::DynamicGather(builder::Op, builder::Op, builder::Op, builder::GatherDimensionNumbers, bool, builder::Type)
+   :project: HLIR Builder

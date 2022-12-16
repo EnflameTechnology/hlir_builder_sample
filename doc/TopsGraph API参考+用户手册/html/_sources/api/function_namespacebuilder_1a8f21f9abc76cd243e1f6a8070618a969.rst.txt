@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a8f21f9abc76cd243e1f6a8070618a969:
+
+Function builder::Gather
+========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Gather(builder::Op, builder::Op, builder::GatherDimensionNumbers, std::vector<int64_t>, bool, builder::Type)

@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a216c343845dfb35d5d14a8f7e8013c58:
+
+Function builder::ShiftRightArithmetic
+======================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::ShiftRightArithmetic(builder::Op, builder::Op, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

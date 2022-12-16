@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a720f93bb5c196bd0c9146e34ae828ee6:
+
+Function builder::Max
+=====================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Max(builder::Op, builder::Op, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

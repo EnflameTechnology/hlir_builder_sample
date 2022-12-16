@@ -1,0 +1,63 @@
+:github_url: https://github.com/EnflameTechnology
+
+
+.. _file_headers_hlir_builder_structs.h:
+
+File hlir_builder_structs.h
+===========================
+
+|exhale_lsh| :ref:`Parent directory <dir_headers>` (``headers``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``headers/hlir_builder_structs.h``)
+-----------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_headers_hlir_builder_structs.h.rst
+
+
+
+
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_headers_hlir_builder.h`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_builder`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classbuilder_1_1_channel_handle`
+
+- :ref:`exhale_class_classbuilder_1_1_conv_dimension_numbers`
+
+- :ref:`exhale_class_classbuilder_1_1_dimensions_layout`
+
+- :ref:`exhale_class_classbuilder_1_1_dot_dimension_numbers`
+
+- :ref:`exhale_class_classbuilder_1_1_gather_dimension_numbers`
+
+- :ref:`exhale_class_classbuilder_1_1_scatter_dimension_numbers`
+

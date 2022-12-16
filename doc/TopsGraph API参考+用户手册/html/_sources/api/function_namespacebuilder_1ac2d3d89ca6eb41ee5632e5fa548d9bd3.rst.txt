@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ac2d3d89ca6eb41ee5632e5fa548d9bd3:
+
+Template Function builder::Call
+===============================
+
+- Defined in :ref:`file_headers_hlir_builder_common.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Call(std::shared_ptr<Builder>, const std::string&, Args...)
+   :project: HLIR Builder

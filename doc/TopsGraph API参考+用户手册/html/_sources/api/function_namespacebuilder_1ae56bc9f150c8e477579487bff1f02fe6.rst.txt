@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ae56bc9f150c8e477579487bff1f02fe6:
+
+Function builder::TopK
+======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::TopK(builder::Op, int64_t, int64_t, bool, bool, builder::Type)

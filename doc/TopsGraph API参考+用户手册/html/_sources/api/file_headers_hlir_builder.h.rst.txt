@@ -1,0 +1,45 @@
+:github_url: https://github.com/EnflameTechnology
+
+
+.. _file_headers_hlir_builder.h:
+
+File hlir_builder.h
+===================
+
+|exhale_lsh| :ref:`Parent directory <dir_headers>` (``headers``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``headers/hlir_builder.h``)
+---------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_headers_hlir_builder.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``hlir_builder_client_ops.h`` (:ref:`file_headers_hlir_builder_client_ops.h`)
+
+- ``hlir_builder_common.h`` (:ref:`file_headers_hlir_builder_common.h`)
+
+- ``hlir_builder_ops.h`` (:ref:`file_headers_hlir_builder_ops.h`)
+
+- ``hlir_builder_structs.h`` (:ref:`file_headers_hlir_builder_structs.h`)
+
+
+
+
+

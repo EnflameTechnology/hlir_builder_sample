@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a2564dd2fcd7aa9fe326e655ee4498a8a:
+
+Template Function builder::ConvertCallArgs
+==========================================
+
+- Defined in :ref:`file_headers_hlir_builder_common.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::ConvertCallArgs(std::vector<std::shared_ptr<builder::Op::Impl>>&, const std::tuple<Args...>&)
+   :project: HLIR Builder

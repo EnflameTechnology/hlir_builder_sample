@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a832c64f21a88bf0f77f9723813ddc1e1:
+
+Function builder::ConcatQuant
+=============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::ConcatQuant(std::vector<builder::Op>, builder::Op, int64_t, builder::Type)
+   :project: HLIR Builder

@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a776607370df1d32380133f8a6006166c:
+
+Function builder::Reciprocal
+============================
+
+- Defined in :ref:`file_headers_hlir_builder_client_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Reciprocal(builder::Op, builder::Type)
+   :project: HLIR Builder

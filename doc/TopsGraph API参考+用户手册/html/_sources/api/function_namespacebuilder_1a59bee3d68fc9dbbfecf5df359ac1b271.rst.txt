@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a59bee3d68fc9dbbfecf5df359ac1b271:
+
+Function builder::Rem
+=====================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Rem(builder::Op, builder::Op, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

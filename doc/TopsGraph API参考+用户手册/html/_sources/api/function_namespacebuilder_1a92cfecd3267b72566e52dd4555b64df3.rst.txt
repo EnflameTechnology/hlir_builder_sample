@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a92cfecd3267b72566e52dd4555b64df3:
+
+Function builder::Sigmoid
+=========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Sigmoid(builder::Op, builder::Type)
+   :project: HLIR Builder

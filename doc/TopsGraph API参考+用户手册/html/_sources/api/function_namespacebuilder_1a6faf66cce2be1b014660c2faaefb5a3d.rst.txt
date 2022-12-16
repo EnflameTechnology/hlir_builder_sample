@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a6faf66cce2be1b014660c2faaefb5a3d:
+
+Function builder::Map
+=====================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Map(std::vector<builder::Op>, std::vector<int64_t>, std::vector<std::string>, builder::Type)
+   :project: HLIR Builder

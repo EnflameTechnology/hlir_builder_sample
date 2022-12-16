@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a3666f873280fd5eb01326ef26bc94802:
+
+Function builder::LayerNormTraining
+===================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::LayerNormTraining(builder::Op, int64_t, float, builder::Type)
+   :project: HLIR Builder

@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_variable_namespacebuilder_1a4403558c20f9f53d18ff3bb1cd7a22f0:
+
+Variable builder::nullopt
+=========================
+
+- Defined in :ref:`file_headers_hlir_builder_common.h`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: builder::nullopt
+   :project: HLIR Builder

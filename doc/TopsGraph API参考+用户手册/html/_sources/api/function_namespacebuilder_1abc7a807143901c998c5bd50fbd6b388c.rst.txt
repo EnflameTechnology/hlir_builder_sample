@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1abc7a807143901c998c5bd50fbd6b388c:
+
+Function builder::FreePrefetch
+==============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::FreePrefetch(builder::Op)
+   :project: HLIR Builder

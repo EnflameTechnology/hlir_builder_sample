@@ -1,0 +1,850 @@
+:github_url: https://github.com/EnflameTechnology
+
+
+.. _program_listing_file_headers_hlir_builder_ops.h:
+
+Program Listing for File hlir_builder_ops.h
+===========================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_headers_hlir_builder_ops.h>` (``headers/hlir_builder_ops.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   /*===- TableGen'erated file -------------------------------------*- C++ -*-===*\
+   |*                                                                            *|
+   |* Op Declarations                                                            *|
+   |*                                                                            *|
+   |* Automatically generated file, do not edit!                                 *|
+   |*                                                                            *|
+   \*===----------------------------------------------------------------------===*/
+   
+   #ifndef HLIR_BUILDER_DTU_HLIR_OPS_H_
+   #define HLIR_BUILDER_DTU_HLIR_OPS_H_
+   
+   namespace builder {
+   
+   builder::Op GeneralSplit(builder::Op input, builder::Op split, int64_t axis=0,
+                            builder::Type resultType=builder::Type());
+   
+   builder::Op GlobalAveragePool(builder::Op input, std::vector<int64_t> dims,
+                                 builder::Type resultType=builder::Type());
+   
+   builder::Op GlobalAveragePoolQuant(builder::Op input, std::vector<int64_t> dims,
+                                      float scale,
+                                      builder::Type resultType=builder::Type());
+   
+   builder::Op Range(builder::Op start, builder::Op limit, builder::Op delta,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op Abs(builder::Op operand,
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op Acos(builder::Op operand,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Add(builder::Op lhs, builder::Op rhs,
+                   std::vector<int64_t> broadcast_dimensions = {},
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op operator+(builder::Op lhs ,builder::Op rhs);
+   
+   builder::Op AddQuant(builder::Op lhs, builder::Op rhs, float lhs_scale,
+                        float rhs_scale,
+                        std::vector<int64_t> broadcast_dimensions = {},
+                        builder::Type resultType=builder::Type());
+   
+   builder::Op And(builder::Op lhs, builder::Op rhs,
+                   std::vector<int64_t> broadcast_dimensions = {},
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op operator&(builder::Op lhs ,builder::Op rhs);
+   
+   builder::Op AngleCaliRotate(std::vector<builder::Op> imgs,
+                               builder::Op rotate_params, int64_t buck_width=1600,
+                               int64_t height=32, int64_t version=4,
+                               builder::Type resultType=builder::Type());
+   
+   builder::Op Asin(builder::Op operand,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Asinh(builder::Op operand,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op Atan2(builder::Op lhs, builder::Op rhs,
+                     std::vector<int64_t> broadcast_dimensions = {},
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op Atan(builder::Op operand,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Atanh(builder::Op operand,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op AveragePoolGrad(builder::Op out_backprop, std::vector<int64_t> dims,
+                               std::vector<int64_t> gradients_size,
+                               std::vector<int64_t> kernel_shape,
+                               std::vector<int64_t> strides, bool ceil_mode=false,
+                               bool count_include_pad=false,
+                               std::vector<int64_t> padding = {},
+                               builder::Type resultType=builder::Type());
+   
+   builder::Op AveragePoolGrad(builder::Op out_backprop, std::vector<int64_t> dims,
+                               std::vector<int64_t> gradients_size,
+                               std::vector<int64_t> kernel_shape,
+                               std::vector<int64_t> strides, bool ceil_mode=false,
+                               bool count_include_pad=false,
+                               std::vector<std::vector<int64_t>> padding = {{}},
+                               builder::Type resultType=builder::Type());
+   
+   builder::Op AveragePool(builder::Op input, std::vector<int64_t> dims,
+                           std::vector<int64_t> kernel_shape, bool ceil_mode=false,
+                           bool count_include_pad=false,
+                           std::vector<int64_t> strides = {},
+                           std::vector<int64_t> padding = {},
+                           std::string auto_pad = "",
+                           builder::Type resultType=builder::Type());
+   
+   builder::Op AveragePool(builder::Op input, std::vector<int64_t> dims,
+                           std::vector<int64_t> kernel_shape, bool ceil_mode=false,
+                           bool count_include_pad=false,
+                           std::vector<int64_t> strides = {},
+                           std::vector<std::vector<int64_t>> padding = {{}},
+                           std::string auto_pad = "",
+                           builder::Type resultType=builder::Type());
+   
+   builder::Op AveragePoolQuant(builder::Op input, std::vector<int64_t> dims,
+                                float scale, std::vector<int64_t> kernel_shape,
+                                bool ceil_mode=false, bool count_include_pad=false,
+                                std::vector<int64_t> strides = {},
+                                std::vector<int64_t> padding = {},
+                                std::string auto_pad = "",
+                                builder::Type resultType=builder::Type());
+   
+   builder::Op AveragePoolQuant(builder::Op input, std::vector<int64_t> dims,
+                                float scale, std::vector<int64_t> kernel_shape,
+                                bool ceil_mode=false, bool count_include_pad=false,
+                                std::vector<int64_t> strides = {},
+                                std::vector<std::vector<int64_t>> padding = {{}},
+                                std::string auto_pad = "",
+                                builder::Type resultType=builder::Type());
+   
+   builder::Op BCELoss(std::vector<builder::Op> operands,
+                       std::string reduction = "",
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op BatchMatmulV2(builder::Op lhs, builder::Op rhs, bool adj_x,
+                             bool adj_y,
+                             std::vector<std::string> precision_config = {},
+                             builder::Type resultType=builder::Type());
+   
+   builder::Op BatchNormGrad(builder::Op operand, builder::Op scale,
+                             builder::Op mean, builder::Op variance,
+                             builder::Op grad_output, float epsilon,
+                             int64_t feature_index,
+                             builder::Type resultType=builder::Type());
+   
+   builder::Op BatchNormInference(builder::Op operand, builder::Op scale,
+                                  builder::Op offset, builder::Op mean,
+                                  builder::Op variance, float epsilon,
+                                  int64_t feature_index,
+                                  builder::Type resultType=builder::Type());
+   
+   builder::Op BatchNormTraining(builder::Op operand, builder::Op scale,
+                                 builder::Op offset, float epsilon,
+                                 int64_t feature_index,
+                                 builder::Type resultType=builder::Type());
+   
+   builder::Op BitcastConvert(builder::Op operand,
+                              builder::Type resultType=builder::Type());
+   
+   builder::Op Bitcast(builder::Op operand,
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op BroadcastInDim(builder::Op operand,
+                              std::vector<int64_t> broadcast_dimensions,
+                              builder::Type resultType);
+   
+   builder::Op Broadcast(builder::Op operand, std::vector<int64_t> broadcast_sizes,
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op CTCGreedyDecoderDense(builder::Op in, builder::Op seq_len,
+                                     int64_t default_value,
+                                     int64_t merge_repeated=1,
+                                     int64_t blank_index=-1,
+                                     builder::Type resultType=builder::Type());
+   
+   builder::Op Cbrt(builder::Op operand,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Ceil(builder::Op operand,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Cholesky(builder::Op a, bool lower=false,
+                        builder::Type resultType=builder::Type());
+   
+   builder::Op Clamp(builder::Op min, builder::Op operand, builder::Op max,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op Compare(builder::Op lhs, builder::Op rhs,
+                       std::string comparison_direction,
+                       std::vector<int64_t> broadcast_dimensions = {},
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op Complex(builder::Op lhs, builder::Op rhs,
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op ConcatQuant(std::vector<builder::Op> inputs, builder::Op scales,
+                           int64_t axis,
+                           builder::Type resultType=builder::Type());
+   
+   builder::Op Concatenate(std::vector<builder::Op> val, int64_t dimension,
+                           builder::Type resultType=builder::Type());
+   
+   builder::Op Const(std::shared_ptr<builder::Builder> builder, void* value,
+                     builder::Type resultType);
+   
+   builder::Op ConvBias(std::vector<builder::Op> input,
+                        builder::ConvDimensionNumbers dimension_numbers,
+                        int64_t feature_group_count, int64_t batch_group_count,
+                        std::vector<int64_t> window_strides = {},
+                        std::vector<int64_t> padding = {},
+                        std::vector<int64_t> lhs_dilation = {},
+                        std::vector<int64_t> rhs_dilation = {},
+                        std::vector<int64_t> window_reversal = {},
+                        std::string auto_pad = "",
+                        std::vector<std::string> precision_config = {},
+                        builder::Type resultType=builder::Type());
+   
+   builder::Op ConvBias(std::vector<builder::Op> input,
+                        builder::ConvDimensionNumbers dimension_numbers,
+                        int64_t feature_group_count, int64_t batch_group_count,
+                        std::vector<int64_t> window_strides = {},
+                        std::vector<std::vector<int64_t>> padding = {{}},
+                        std::vector<int64_t> lhs_dilation = {},
+                        std::vector<int64_t> rhs_dilation = {},
+                        std::vector<int64_t> window_reversal = {},
+                        std::string auto_pad = "",
+                        std::vector<std::string> precision_config = {},
+                        builder::Type resultType=builder::Type());
+   
+   builder::Op Conv(builder::Op lhs, builder::Op rhs,
+                    builder::ConvDimensionNumbers dimension_numbers,
+                    std::vector<int64_t> window_strides = {},
+                    std::vector<int64_t> padding = {},
+                    std::vector<int64_t> lhs_dilation = {},
+                    std::vector<int64_t> rhs_dilation = {},
+                    std::vector<int64_t> window_reversal = {},
+                    std::string auto_pad = "", int64_t feature_group_count = 1,
+                    int64_t batch_group_count = 1,
+                    std::vector<std::string> precision_config = {},
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Conv(builder::Op lhs, builder::Op rhs,
+                    builder::ConvDimensionNumbers dimension_numbers,
+                    std::vector<int64_t> window_strides = {},
+                    std::vector<std::vector<int64_t>> padding = {{}},
+                    std::vector<int64_t> lhs_dilation = {},
+                    std::vector<int64_t> rhs_dilation = {},
+                    std::vector<int64_t> window_reversal = {},
+                    std::string auto_pad = "", int64_t feature_group_count = 1,
+                    int64_t batch_group_count = 1,
+                    std::vector<std::string> precision_config = {},
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op ConvQuant(builder::Op lhs, builder::Op rhs, builder::Op bias,
+                         builder::Op scale,
+                         builder::ConvDimensionNumbers dimension_numbers,
+                         int64_t feature_group_count, int64_t batch_group_count,
+                         std::vector<int64_t> window_strides = {},
+                         std::vector<int64_t> padding = {},
+                         std::vector<int64_t> lhs_dilation = {},
+                         std::vector<int64_t> rhs_dilation = {},
+                         std::vector<int64_t> window_reversal = {},
+                         std::string auto_pad = "",
+                         std::vector<std::string> precision_config = {},
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op ConvQuant(builder::Op lhs, builder::Op rhs, builder::Op bias,
+                         builder::Op scale,
+                         builder::ConvDimensionNumbers dimension_numbers,
+                         int64_t feature_group_count, int64_t batch_group_count,
+                         std::vector<int64_t> window_strides = {},
+                         std::vector<std::vector<int64_t>> padding = {{}},
+                         std::vector<int64_t> lhs_dilation = {},
+                         std::vector<int64_t> rhs_dilation = {},
+                         std::vector<int64_t> window_reversal = {},
+                         std::string auto_pad = "",
+                         std::vector<std::string> precision_config = {},
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op ConvTranspose(builder::Op input, builder::Op W, builder::Op B,
+                             std::string auto_pad="NOTSET", int64_t group=1,
+                             std::vector<int64_t> dilations = {},
+                             std::vector<int64_t> kernel_shape = {},
+                             std::vector<int64_t> output_padding = {},
+                             std::vector<int64_t> output_shape = {},
+                             std::vector<int64_t> pads = {},
+                             std::vector<int64_t> strides = {},
+                             builder::Type resultType=builder::Type());
+   
+   builder::Op Convert(builder::Op input,
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op Copy(builder::Op operand,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Cos(builder::Op operand,
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op CustomCall(std::vector<builder::Op> args,
+                          std::string call_target_name,
+                          builder::Type resultType=builder::Type());
+   
+   builder::Op DepthToSpace(builder::Op input, std::vector<int64_t> space_dims,
+                            int64_t depth_dim, int64_t blocksize,
+                            std::string mode="DCR",
+                            builder::Type resultType=builder::Type());
+   
+   builder::Op DequantizeLinearQuant(builder::Op operand, float scale,
+                                     builder::Type resultType=builder::Type());
+   
+   builder::Op Div(builder::Op lhs, builder::Op rhs,
+                   std::vector<int64_t> broadcast_dimensions = {},
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op operator/(builder::Op lhs ,builder::Op rhs);
+   
+   builder::Op DotGeneralBias(builder::Op lhs, builder::Op rhs,
+                              std::vector<builder::Op> bias,
+                              builder::DotDimensionNumbers dot_dimension_numbers,
+                              std::vector<std::string> precision_config = {},
+                              builder::Type resultType=builder::Type());
+   
+   builder::Op DotGeneralBiasQuant(builder::Op lhs, builder::Op rhs,
+                                   std::vector<builder::Op> bias,
+                                   builder::DotDimensionNumbers dot_dimension_numbers,
+                                   builder::Op scales,
+                                   std::vector<std::string> precision_config = {},
+                                   builder::Type resultType=builder::Type());
+   
+   builder::Op DotGeneral(builder::Op lhs, builder::Op rhs,
+                          builder::DotDimensionNumbers dot_dimension_numbers,
+                          std::vector<std::string> precision_config = {},
+                          builder::Type resultType=builder::Type());
+   
+   builder::Op Dot(builder::Op lhs, builder::Op rhs,
+                   std::vector<std::string> precision_config = {},
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op Dropout(builder::Op data, float ratio, bool training_mode=true,
+                       std::experimental::optional<int64_t> sed = builder::nullopt,
+                       std::vector<int64_t> noise_shape = {},
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op Duplicate(builder::Op operand, int32_t duplicate_num,
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op DynamicBroadcastInDim(builder::Op operand,
+                                     builder::Op output_dimensions,
+                                     std::vector<int64_t> broadcast_dimensions = {},
+                                     builder::Type resultType=builder::Type());
+   
+   builder::Op DynamicIota(builder::Op output_shape, int64_t iota_dimension,
+                           builder::Type resultType=builder::Type());
+   
+   builder::Op DynamicPad(builder::Op operand, builder::Op pads,
+                          builder::Op padding_value, int64_t mode,
+                          builder::Type resultType=builder::Type());
+   
+   builder::Op DynamicReshape(builder::Op operand, builder::Op output_shape,
+                              std::experimental::optional<int64_t> allowzero = builder::nullopt,
+                              builder::Type resultType=builder::Type());
+   
+   builder::Op DynamicSlice(builder::Op operand,
+                            std::vector<builder::Op> start_indices,
+                            std::vector<int64_t> slice_sizes,
+                            builder::Type resultType=builder::Type());
+   
+   builder::Op DynamicUpdateSlice(builder::Op operand, builder::Op update,
+                                  std::vector<builder::Op> start_indices,
+                                  builder::Type resultType=builder::Type());
+   
+   builder::Op Elu(builder::Op operand, float alpha=1,
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op Erf(builder::Op operand,
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op Exp(builder::Op operand,
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op Expand(builder::Op input, builder::Op shape,
+                      builder::Type resultType=builder::Type());
+   
+   builder::Op Expm1(builder::Op operand,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op Floor(builder::Op operand,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op FreePrefetch(builder::Op operand);
+   
+   builder::Op Fusion(std::vector<builder::Op> operands,
+                      std::vector<std::string> region_list,
+                      std::experimental::optional<int32_t> fusion_kind = builder::nullopt,
+                      std::vector<builder::Type> resultType=std::vector<builder::Type>());
+   
+   builder::Op Gather(builder::Op operand, builder::Op start_indices,
+                      builder::GatherDimensionNumbers dimension_numbers,
+                      std::vector<int64_t> slice_sizes,
+                      bool indices_are_sorted=false,
+                      builder::Type resultType=builder::Type());
+   
+   builder::Op Gelu(builder::Op operand, bool approximate=true,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Gemm(std::vector<builder::Op> operands, float alpha=1.0,
+                    float beta=1.0, int64_t transA=0, int64_t transB=0,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op GetTupleElement(builder::Op input, int32_t index,
+                               builder::Type resultType=builder::Type());
+   
+   builder::Op GlobalMaxPool(builder::Op input, std::vector<int64_t> dims,
+                             builder::Type resultType=builder::Type());
+   
+   builder::Op Glu(builder::Op input, int64_t dim=-1,
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op Gtu(builder::Op input, int64_t dim=-1,
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op Imag(builder::Op operand,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op InstanceNorm(builder::Op input, builder::Op scale, builder::Op B,
+                            float epsilon, builder::DimensionsLayout layout,
+                            builder::Type resultType=builder::Type());
+   
+   builder::Op Iota(std::shared_ptr<builder::Builder> builder,
+                    int64_t iota_dimension,
+                    builder::Type resultType);
+   
+   builder::Op IsFinite(builder::Op operand,
+                        builder::Type resultType=builder::Type());
+   
+   builder::Op LayerNormInference(builder::Op operand,
+                                  builder::Op gamma_constraint,
+                                  builder::Op beta_constraint, int64_t axis,
+                                  float epsilon,
+                                  builder::Type resultType=builder::Type());
+   
+   builder::Op LayerNormTraining(builder::Op operand, int64_t axis, float epsilon,
+                                 builder::Type resultType=builder::Type());
+   
+   builder::Op LeakyRelu(builder::Op operand, float alpha=0.01,
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op Log1p(builder::Op operand,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op Log(builder::Op operand,
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op Map(std::vector<builder::Op> operands,
+                   std::vector<int64_t> dimensions,
+                   std::vector<std::string> region_list,
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op Max(builder::Op lhs, builder::Op rhs,
+                   std::vector<int64_t> broadcast_dimensions = {},
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op MaxPool(builder::Op input, std::vector<int64_t> kernel_shape,
+                       bool ceil_mode=false, bool return_indices=false,
+                       int64_t storage_order=0, std::vector<int64_t> strides = {},
+                       std::vector<int64_t> padding = {},
+                       std::vector<int64_t> dilations = {},
+                       std::string auto_pad = "",
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op MaxPool(builder::Op input, std::vector<int64_t> kernel_shape,
+                       bool ceil_mode=false, bool return_indices=false,
+                       int64_t storage_order=0, std::vector<int64_t> strides = {},
+                       std::vector<std::vector<int64_t>> padding = {{}},
+                       std::vector<int64_t> dilations = {},
+                       std::string auto_pad = "",
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op MaxRoiPool(builder::Op input, builder::Op rois,
+                          std::vector<int64_t> dimensions,
+                          std::vector<int64_t> pooled_shape,
+                          float spatial_scale=1.0,
+                          builder::Type resultType=builder::Type());
+   
+   builder::Op Min(builder::Op lhs, builder::Op rhs,
+                   std::vector<int64_t> broadcast_dimensions = {},
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op Mish(builder::Op input,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Mul(builder::Op lhs, builder::Op rhs,
+                   std::vector<int64_t> broadcast_dimensions = {},
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op operator*(builder::Op lhs ,builder::Op rhs);
+   
+   builder::Op MulQuant(builder::Op lhs, builder::Op rhs, float lhs_scale,
+                        float rhs_scale,
+                        std::vector<int64_t> broadcast_dimensions = {},
+                        builder::Type resultType=builder::Type());
+   
+   builder::Op NMS(builder::Op boxes, builder::Op scores,
+                   int64_t max_output_boxes_per_class=0, float iou_threshold=0.0,
+                   float score_threshold=0.0, int32_t center_point_box=0,
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op Neg(builder::Op operand,
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op operator-(builder::Op operand );
+   
+   builder::Op NonZero(builder::Op input,
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op Not(builder::Op operand,
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op operator~(builder::Op operand );
+   
+   builder::Op OcrClsSoftmax(builder::Op input,
+                             builder::Type resultType=builder::Type());
+   
+   builder::Op OcrLinkSoftmax(builder::Op input,
+                              builder::Type resultType=builder::Type());
+   
+   builder::Op OcrRGB2Gray(std::vector<builder::Op> input_imgs, builder::Op params,
+                           int64_t version=4,
+                           builder::Type resultType=builder::Type());
+   
+   builder::Op OneHot(builder::Op indices, builder::Op depth, builder::Op values,
+                      int64_t axis=-1,
+                      builder::Type resultType=builder::Type());
+   
+   builder::Op Or(builder::Op lhs, builder::Op rhs,
+                  std::vector<int64_t> broadcast_dimensions = {},
+                  builder::Type resultType=builder::Type());
+   
+   builder::Op operator|(builder::Op lhs ,builder::Op rhs);
+   
+   builder::Op PackTensor(std::vector<builder::Op> operand,
+                          std::vector<int32_t> tensor_split,
+                          int32_t tensor_duplicate,
+                          builder::Type resultType=builder::Type());
+   
+   builder::Op Pad(builder::Op operand, builder::Op padding_value, int64_t mode,
+                   std::vector<int64_t> edge_padding_low,
+                   std::vector<int64_t> edge_padding_high,
+                   std::vector<int64_t> interior_padding,
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op PartialReduce(builder::Op lhs, builder::Op rhs, builder::Op size,
+                             std::vector<std::string> region_list,
+                             std::string op_name,
+                             builder::Type resultType=builder::Type());
+   
+   builder::Op PopulationCount(builder::Op operand,
+                               builder::Type resultType=builder::Type());
+   
+   builder::Op Pow(builder::Op lhs, builder::Op rhs,
+                   std::vector<int64_t> broadcast_dimensions = {},
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op Prefetch(builder::Op operand,
+                        builder::Type resultType=builder::Type());
+   
+   builder::Op QuantConvert(builder::Op input,
+                            builder::Type resultType=builder::Type());
+   
+   builder::Op QuantizeLinearQuant(builder::Op operand, float scale,
+                                   builder::Type resultType=builder::Type());
+   
+   builder::Op RealDynamicSlice(builder::Op operand, builder::Op start_indices,
+                                builder::Op limit_indices, builder::Op strides,
+                                std::vector<builder::Op> axes,
+                                builder::Type resultType=builder::Type());
+   
+   builder::Op Real(builder::Op operand,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op ReduceAny(builder::Op input, builder::Op init_values,
+                         std::vector<std::string> region_list, int64_t axis=-1,
+                         bool keep_dims=false, std::string type = "",
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op Reduce(std::vector<builder::Op> operands,
+                      std::vector<builder::Op> init_values,
+                      std::vector<int64_t> dimensions,
+                      std::vector<std::string> region_list, std::string type = "",
+                      builder::Type resultType=builder::Type());
+   
+   builder::Op ReduceWindow(std::vector<builder::Op> operand,
+                            std::vector<builder::Op> init_value,
+                            std::vector<int64_t> window_dimensions,
+                            std::vector<std::string> region_list,
+                            std::vector<int64_t> window_strides = {},
+                            std::vector<int64_t> base_dilations = {},
+                            std::vector<int64_t> window_dilations = {},
+                            std::vector<int64_t> padding = {},
+                            std::string auto_pad = "",
+                            std::experimental::optional<bool> ceil_mode = builder::nullopt,
+                            builder::Type resultType=builder::Type());
+   
+   builder::Op ReduceWindow(std::vector<builder::Op> operand,
+                            std::vector<builder::Op> init_value,
+                            std::vector<int64_t> window_dimensions,
+                            std::vector<std::string> region_list,
+                            std::vector<int64_t> window_strides = {},
+                            std::vector<int64_t> base_dilations = {},
+                            std::vector<int64_t> window_dilations = {},
+                            std::vector<std::vector<int64_t>> padding = {{}},
+                            std::string auto_pad = "",
+                            std::experimental::optional<bool> ceil_mode = builder::nullopt,
+                            builder::Type resultType=builder::Type());
+   
+   builder::Op Reduceall(builder::Op operands, builder::Op init_values,
+                         std::vector<std::string> region_list,
+                         std::string type = "",
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op Relu6(builder::Op operand,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op Relu(builder::Op operand,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Rem(builder::Op lhs, builder::Op rhs,
+                   std::vector<int64_t> broadcast_dimensions = {},
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op operator%(builder::Op lhs ,builder::Op rhs);
+   
+   builder::Op Reshape(builder::Op operand,
+                       builder::Type resultType);
+   
+   builder::Op Reshape(builder::Op operand, std::vector<int64_t> new_shape);
+   
+   builder::Op ResizeGrad(builder::Op grad_output, builder::Op roi,
+                          builder::Op scales, builder::Op sizes, int64_t mode,
+                          int64_t coordinate_transformation_mode,
+                          bool exclude_outside,
+                          std::experimental::optional<int64_t> nearest_mode = builder::nullopt,
+                          std::experimental::optional<float> extrapolation_value = builder::nullopt,
+                          std::experimental::optional<float> cubic_coeff_a = builder::nullopt,
+                          builder::Type resultType=builder::Type());
+   
+   builder::Op Resize(builder::Op input, builder::Op roi, builder::Op scales,
+                      builder::Op sizes, int64_t mode,
+                      int64_t coordinate_transformation_mode, bool exclude_outside,
+                      std::experimental::optional<int64_t> nearest_mode = builder::nullopt,
+                      std::experimental::optional<float> extrapolation_value = builder::nullopt,
+                      std::experimental::optional<float> cubic_coeff_a = builder::nullopt,
+                      std::vector<int64_t> resize_dimensions = {},
+                      builder::Type resultType=builder::Type());
+   
+   builder::Op Reverse(builder::Op operand, std::vector<int64_t> dimensions,
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op ReverseSequence(builder::Op input, builder::Op sequence_lens,
+                               int64_t batch_axis=1, int64_t time_axis=0,
+                               builder::Type resultType=builder::Type());
+   
+   builder::Op RngNormal(builder::Op mu, builder::Op sigma, builder::Op shape,
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op RngUniform(builder::Op a, builder::Op b, builder::Op shape,
+                          builder::Type resultType=builder::Type());
+   
+   builder::Op RoiAlign(builder::Op input, builder::Op rois,
+                        builder::Op batch_indices, std::vector<int64_t> dimensions,
+                        int64_t coordinate_transformation_mode=0, int64_t mode=0,
+                        int64_t output_height=1, int64_t output_width=1,
+                        int64_t sampling_ratio=0, float spatial_scale=1.0,
+                        builder::Type resultType=builder::Type());
+   
+   builder::Op Round(builder::Op operand,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op Rsqrt(builder::Op operand,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op ScatterND(builder::Op data, builder::Op indices,
+                         builder::Op updates,
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op Scatter(builder::Op operand, builder::Op scatter_indices,
+                       builder::Op updates,
+                       builder::ScatterDimensionNumbers scatter_dimension_numbers,
+                       std::vector<std::string> region_list,
+                       bool indices_are_sorted=false, bool unique_indices=false,
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op SelectAndScatter(builder::Op operand, builder::Op source,
+                                builder::Op init_value,
+                                std::vector<std::string> region_list,
+                                std::vector<int64_t> window_dimensions = {},
+                                std::vector<int64_t> window_strides = {},
+                                std::vector<int64_t> padding = {},
+                                builder::Type resultType=builder::Type());
+   
+   builder::Op SelectAndScatter(builder::Op operand, builder::Op source,
+                                builder::Op init_value,
+                                std::vector<std::string> region_list,
+                                std::vector<int64_t> window_dimensions = {},
+                                std::vector<int64_t> window_strides = {},
+                                std::vector<std::vector<int64_t>> padding = {{}},
+                                builder::Type resultType=builder::Type());
+   
+   builder::Op Select(builder::Op pred, builder::Op on_true, builder::Op on_false,
+                      builder::Type resultType=builder::Type());
+   
+   builder::Op SetDimensionSize(builder::Op operand, builder::Op size,
+                                int32_t dimension,
+                                builder::Type resultType=builder::Type());
+   
+   builder::Op Shape(builder::Op operand, int64_t start=0, int64_t end=LLONG_MAX,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op ShiftLeft(builder::Op lhs, builder::Op rhs,
+                         std::vector<int64_t> broadcast_dimensions = {},
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op operator<<(builder::Op lhs ,builder::Op rhs);
+   
+   builder::Op ShiftRightArithmetic(builder::Op lhs, builder::Op rhs,
+                                    std::vector<int64_t> broadcast_dimensions = {},
+                                    builder::Type resultType=builder::Type());
+   
+   builder::Op ShiftRightLogical(builder::Op lhs, builder::Op rhs,
+                                 std::vector<int64_t> broadcast_dimensions = {},
+                                 builder::Type resultType=builder::Type());
+   
+   builder::Op operator>>(builder::Op lhs ,builder::Op rhs);
+   
+   builder::Op Sigmoid(builder::Op input,
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op Sign(builder::Op operand,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Sin(builder::Op operand,
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op Sinh(builder::Op operand,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Size(builder::Op operand,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op SliceInDim(builder::Op operand, int64_t start_index,
+                          int64_t limit_index, int64_t stride, int64_t dim,
+                          builder::Type resultType=builder::Type());
+   
+   builder::Op Slice(builder::Op operand, std::vector<int64_t> start_indices,
+                     std::vector<int64_t> limit_indices,
+                     std::vector<int64_t> strides,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op Softmax(builder::Op logits, int64_t axis=-1, bool accurate=false,
+                       bool logarithmic=false, float epsilon=0,
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op Softplus(builder::Op input,
+                        std::experimental::optional<int64_t> beta = builder::nullopt,
+                        std::experimental::optional<int64_t> threshold = builder::nullopt,
+                        builder::Type resultType=builder::Type());
+   
+   builder::Op Sort(std::vector<builder::Op> operands,
+                    std::vector<std::string> region_list, int64_t dimension=-1,
+                    bool is_stable=false,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op SpaceToDepth(builder::Op input, std::vector<int64_t> space_dims,
+                            int64_t depth_dim, int64_t blocksize,
+                            builder::Type resultType=builder::Type());
+   
+   builder::Op Sqrt(builder::Op operand,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Squeeze(builder::Op data, builder::Op axes,
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op Statistic(std::vector<builder::Op> operand);
+   
+   builder::Op Sub(builder::Op lhs, builder::Op rhs,
+                   std::vector<int64_t> broadcast_dimensions = {},
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op operator-(builder::Op lhs ,builder::Op rhs);
+   
+   builder::Op SubQuant(builder::Op lhs, builder::Op rhs, float lhs_scale,
+                        float rhs_scale,
+                        std::vector<int64_t> broadcast_dimensions = {},
+                        builder::Type resultType=builder::Type());
+   
+   builder::Op Swish(builder::Op input,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op Tanh(builder::Op operand,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Tile(builder::Op input, builder::Op repeats,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op TopK(builder::Op input, builder::Op k, int64_t axis=-1,
+                    bool sorted=true, bool largest=true,
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op Transpose(builder::Op operand, std::vector<int64_t> permutation,
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op Trilu(builder::Op input, bool upper=true, int64_t k=0,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op Tuple(std::vector<builder::Op> val,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op TxOcrResize(std::vector<builder::Op> input_imgs, builder::Op params,
+                           std::vector<int64_t> mean, std::vector<int64_t> std,
+                           builder::Type resultType=builder::Type());
+   
+   builder::Op UnpackTensor(builder::Op operand, std::vector<int32_t> tensor_split,
+                            int32_t tensor_duplicate,
+                            builder::Type resultType=builder::Type());
+   
+   builder::Op Unsqueeze(builder::Op data, builder::Op axes,
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op Validation(builder::Op lhs, builder::Op rhs, float atol, float rtol,
+                          float confidence, std::string device="cpu",
+                          std::vector<int64_t> broadcast_dimensions = {},
+                          builder::Type resultType=builder::Type());
+   
+   builder::Op While(std::vector<builder::Op> arg,
+                     std::vector<std::string> region_list,
+                     std::vector<builder::Type> resultType=std::vector<builder::Type>());
+   
+   builder::Op Xor(builder::Op lhs, builder::Op rhs,
+                   std::vector<int64_t> broadcast_dimensions = {},
+                   builder::Type resultType=builder::Type());
+   
+   builder::Op operator^(builder::Op lhs ,builder::Op rhs);
+   
+   
+   }  // namespace builder
+   
+   #endif  // HLIR_BUILDER_DTU_HLIR_OPS_H_
+   

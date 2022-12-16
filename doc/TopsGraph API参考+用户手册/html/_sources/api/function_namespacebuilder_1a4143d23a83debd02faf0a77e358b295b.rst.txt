@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a4143d23a83debd02faf0a77e358b295b:
+
+Function builder::OcrRGB2Gray
+=============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::OcrRGB2Gray(std::vector<builder::Op>, builder::Op, int64_t, builder::Type)
+   :project: HLIR Builder

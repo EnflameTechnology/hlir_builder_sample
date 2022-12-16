@@ -1,0 +1,94 @@
+TopsGraph Compiler
+==================
+
+TopsGraph Compiler is the middle node of the whole pipeline:
+
+Build(``HLIR Builder``) --> Compile(``TopsGraph Compiler``) --> Run(``Tops Runtime``).
+
+So its interfaces can roughly be divided into three parts:
+
+- **Read Built IR**: Read the IR(Intermediate Representation) built by HLIR Builder.
+- **Compile Graph**: Compile the graph with multi-level optimization strategies.
+- **Produce Binary**: Produces a binary which can be read by runtime apis and then run on GCU devices.
+
+More details please refer to ``C++ API``, ``Get Started`` and "Pass Built IR to TopsGraph Compiler" in ``Example``.
+
+Read Built IR
+-------------
+
+There are two ways to read the built IR. The string format of ir is easy to read for users, while the data struct of ``hlir::Module`` is easy to parse by programming.
+
+.. code-block:: cpp
+
+  // receive pointer to ir string, which can be obtained by Builder::GetModuleStr
+  topsgraphResult topsgraphCreateProgramFromString(topsgraphProgram* program, const char* module);
+  // receive pointer to hlir::Module, which can be obtained by Builder::GetModule
+  topsgraphResult topsgraphCreateProgramFromModule(topsgraphProgram* program, hlir::Module* module);
+
+.. warning::
+
+  When the binary was obtained, do not forget to destroy the program created here by calling the following interface:
+
+.. code-block:: cpp
+
+  // destroy the created program to free resources
+  topsgraphResult topsgraphDestroyProgram(topsgraphProgram* program); 
+
+Compile Graph
+-------------
+
+This is the main part of TopsGraph Compiler. Users can set the compile options, which contains the target device and the optimizing pipeline. A sample code if as following:
+
+.. code-block:: cpp
+
+  // compile with compile options 
+  topsgraphResult topsgraphCompileProgram(topsgraphProgram program, int numOptions, const char** options);
+  
+  const char * options[] = {
+      "-arch=gcu210",
+      "-resource=1c4s",
+      "-hlir=tops-hlir-pipeline{shape-inference=true dynamic-shape=true}"};
+  // there are 3 options, so set numOptions as 3
+  auto ret = topsgraphCompileProgram(program, 3, options);
+
+For the target resource below, ``c`` is short for cluster and ``s`` is short for sip.
+
++--------+----------+
+| Arch   | Resource |
++========+==========+
+| gcu200 | 1c6s	    |
++--------+----------+
+| gcu200 | 4c24s    |
++--------+----------+
+| gcu210 | 1c4s	    |
++--------+----------+
+| gcu210 | 1c12s    |
++--------+----------+
+| gcu210 | 2c24s    |
++--------+----------+
+
+For the optimizing pipelines, we only take hlir in account. The demo in ``Get Started`` uses "hlir-pipeline{}" for graph with static shapes. 
+The upper sample code uses "tops-hlir-pipeline{shape-inference=true dynamic-shape=true}" for graph with dynamic shape. You can refer to the example of "Build Graph with Dynamic Shape" in ``Examples`` to learn how to build a graph with dynamic shape.
+Please concat to us to get more informaton of compile options. 
+
+Produce Binary
+--------------
+
+If compiled successfully, users can obtain the binary via the following interfaces:
+
+.. code-block:: cpp
+  
+  // get the binary size
+  topsgraphResult topsgraphGetBinSize(topsgraphProgram program, size_t* binary_size);
+  // get the binary pointer
+  topsgraphResult topsgraphGetBin(topsgraphProgram program, char* binary);
+  // save the binary to a file
+  topsgraphResult topsgraphSaveBinFile(topsgraphProgram program, const char* save_file);
+
+.. note::
+
+  For debug mode, users can set environment variables as following to dump all the irs of the compile pipelines to log files in the specified directory.
+
+.. code-block:: sh
+  
+  export COMPILE_OPTIONS_MLIR_DBG="-pass-timing -pass-statistics -mlir-elide-elementsattrs-if-larger=100 --print-ir-before-all=true --print-ir-after-all=true -log-output-path=/tmp/irdump/"

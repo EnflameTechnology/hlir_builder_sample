@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ae1b8faac6adb985a509aae6b5fe01e57:
+
+Function builder::Fusion
+========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Fusion(std::vector<builder::Op>, std::vector<std::string>, int32_t, std::vector<builder::Type>)

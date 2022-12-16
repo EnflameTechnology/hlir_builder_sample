@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a3838d9c2ee47615883a005779faa8309:
+
+Function builder::RoiAlign
+==========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::RoiAlign(builder::Op, builder::Op, builder::Op, std::vector<int64_t>, int64_t, int64_t, int64_t, int64_t, int64_t, float, builder::Type)
+   :project: HLIR Builder

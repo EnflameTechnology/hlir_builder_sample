@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a3f679e59062e2320b47660e39396893c:
+
+Function builder::MulQuant
+==========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::MulQuant(builder::Op, builder::Op, float, float, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

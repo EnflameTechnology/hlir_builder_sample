@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ac9c9ae2170c830c6f1df62c435ab2e9f:
+
+Function builder::NMS
+=====================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::NMS(builder::Op, builder::Op, builder::Op, builder::Op, builder::Op, bool, builder::Type)

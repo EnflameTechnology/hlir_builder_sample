@@ -1,0 +1,790 @@
+Meta Operation Semantics
+========================
+
+The following describes the semantics of meta operations defined in the HLIR Builder interface.
+
+Abs
+---
+
+Computes the absolute value of a tensor element-wise.
+
+.. math::
+
+    abs(x)=\left|x\right|
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-1, 0, 1], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Abs(input)
+    >>> # expect: [1, 0, 1]
+
+
+Acos
+----
+
+Computes the arccosine (inverse of cosine) of a tensor element-wise.
+
+.. math::
+
+    acos(x)=cos^{-1}(x)
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-0.4, -0.2, 0.1, 0.3], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Acos(input)
+    >>> # expect: [1.98231317, 1.77215425, 1.47062891, 1.26610367]
+
+
+Add
+---
+
+Add two tensors element-wise with `Numpy-style broadcasting <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_ support.
+
+.. math::
+
+    result=x+y
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+    - :math:`y` is an op whose data type is same as :math:`x`.
+
+**Parameters:**
+    - :math:`broadcast\_dimensions` specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow ``numpy-style broadcasting``, just use the default value of empty list. Default: [].
+
+**Outputs:**
+    - :math:`result` with the same data type as the inputs.
+
+**Examples:**
+    >>> a = np.array([1, -2, 3, -4], dtype=np.float32)
+    >>> b = np.array([0, 2, -1, 8], dtype=np.float32)
+    >>> lhs = hb.Const(builder, a)
+    >>> rhs = hb.Const(builder, b)
+    >>> output = hb.Add(lhs, rhs)
+    >>> # expect: [1., 0., 2., 4.]
+
+
+And
+---
+
+Computes logical AND of two bool tensors element-wise with `Numpy-style broadcasting <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_ support.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions, and it's data type should be bool.
+    - :math:`y` is an op whose data type is same as :math:`x`.
+
+**Parameters:**
+    - :math:`broadcast\_dimensions` specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow ``numpy-style broadcasting``, just use the default value of empty list. Default: [].
+
+**Outputs:**
+    - :math:`result` with the same data type as the inputs.
+
+**Examples:**
+    >>> a = np.array([True, True, False], dtype=np.bool)
+    >>> b = np.array([False, True, False], dtype=np.bool)
+    >>> lhs = hb.Const(builder, a)
+    >>> rhs = hb.Const(builder, b)
+    >>> output = hb.And(lhs, rhs)
+    >>> # expect: [False, True, False]
+
+
+Asin
+----
+
+Computes the arcsine (inverse of sine) of a tensor element-wise.
+
+.. math::
+
+    asin(x)=sin^{-1}(x)
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-0.4, -0.2, 0.1, 0.3], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Asin(input)
+    >>> # expect: [-0.41151685, -0.20135792,  0.10016742,  0.30469265]
+
+
+Asinh
+-----
+
+Computes inverse hyperbolic sine of a tensor element-wise.
+
+.. math::
+
+    asinh(x)=sinh^{-1}(x)
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-0.4, -0.2, 0.1, 0.3], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Asinh(input)
+    >>> # expect:  [-0.39003533, -0.19869010,  0.09983408,  0.29567307]
+
+
+Atan
+----
+
+Computes the arctangent (inverse of tangent) of a tensor element-wise.
+
+.. math::
+
+    atan(x)=tan^{-1}(x)
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-0.4, -0.2, 0.1, 0.3], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Atan(input)
+    >>> # expect: [-0.38050638, -0.19739556,  0.09966865,  0.29145679]
+
+
+Atan2
+-----
+
+Computes arctangent of :math:`x/y` with consideration of the quadrant element-wise. It follows the `Numpy-style broadcasting <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_.
+
+.. math::
+
+    atan2(x,y)=\begin{cases}
+    tan^{-1}\left ( \frac{x}{y} \right ), & \text y>0 \\
+    tan^{-1}\left ( \frac{x}{y} \right )+\pi, & \text x\geq 0,y<0 \\
+    tan^{-1}\left ( \frac{x}{y} \right )-\pi, & \text x<0,y<0 \\
+    +\frac{\pi}{2} & \text x>0,y=0 \\
+    -\frac{\pi}{2} & \text x<0,y=0 \\
+    0 & \text x=0,y=0
+    \end{cases}
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+    - :math:`y` is an op whose data type is same as :math:`x`.
+
+**Parameters:**
+    - :math:`broadcast\_dimensions` specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow ``numpy-style broadcasting``, just use the default value of empty list. Default: [].
+
+**Outputs:**
+    - :math:`result` with the same data type as the inputs.
+
+**Examples:**
+    >>> a = np.array([-1, +1, +1, -1], dtype=np.float32)
+    >>> b = np.array([-1, -1, +1, +1], dtype=np.float32)
+    >>> lhs = hb.Const(builder, a)
+    >>> rhs = hb.Const(builder, b)
+    >>> output = hb.Atan2(lhs, rhs)
+    >>> # expect: [-2.35619450, 2.35619450, 0.78539819, -0.78539819]
+
+
+Atanh
+-----
+
+Computes the hyperbolic arctangent (inverse of hyperbolic tangent) of a tensor element-wise.
+
+.. math::
+
+    atanh(x)=tanh^{-1}(x)
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-0.4, -0.2, 0.1, 0.3], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Atanh(input)
+    >>> # expect:  [-0.42364895, -0.20273256,  0.10033535,  0.30951962]
+
+
+Ceil
+----
+
+Computes ceil of a tensor element-wise, which returns values up to the closest integer to each element.
+
+.. math::
+
+    ceil(x)=\left \lceil x\right \rceil
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-0.4, -0.2, 0.1, 0.3], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Ceil(input)
+    >>> # expect: [-0., -0.,  1.,  1.]
+
+
+Cos
+---
+
+Computes cosine of a tensor element-wise.
+
+.. math::
+
+    result=cos(x)
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-0.4, -0.2, 0.1, 0.3], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Cos(input)
+    >>> # expect: [0.92106099, 0.98006658, 0.99500417, 0.95533649]
+
+
+Div
+---
+
+Divides two tensors element-wise with `Numpy-style broadcasting <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_ support.
+
+.. math::
+
+    result=\frac{x}{y}
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+    - :math:`y` is an op whose data type is same as :math:`x`.
+
+**Parameters:**
+    - :math:`broadcast\_dimensions` specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow ``numpy-style broadcasting``, just use the default value of empty list. Default: [].
+
+**Outputs:**
+    - :math:`result` with the same data type as the inputs.
+
+**Examples:**
+    >>> a = np.array([2, 3, 4], dtype=np.float32)
+    >>> b = np.array([1, 5, 2], dtype=np.float32)
+    >>> lhs = hb.Const(builder, a)
+    >>> rhs = hb.Const(builder, b)
+    >>> output = hb.Div(lhs, rhs)
+    >>> # expect: [2., 0.6, 2.]
+
+
+Exp
+---
+
+Computes natural exponential of a tensor element-wise.
+
+.. math::
+
+    exp(x)=e^{x}
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-0.4, -0.2, 0.1, 0.3], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Exp(input)
+    >>> # expect: [0.67032005, 0.81873075, 1.10517092, 1.34985881]
+
+
+Ceil
+----
+
+Computes floor of a tensor element-wise, which returns values down to the closest integer to each element.
+
+.. math::
+
+    floor(x)=\left \lfloor x\right \rfloor
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-0.4, -0.2, 0.1, 0.3], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Floor(input)
+    >>> # expect: [-1., -1.,  0.,  0.]
+
+
+IsFinite
+--------
+
+Tests whether each element of a tensor is finite, i.e., is not positive or negative infinity, and is not NaN.
+Returns a bool tensor with element is true if and only if the corresponding input element is finite.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and as the input and data type of bool.
+
+**Examples:**
+    >>> data = np.array([np.nan, np.inf, 1024, np.NINF], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.IsFinite(input)
+    >>> # expect: [False, False, True, False]
+
+
+Log
+---
+
+Computes natural logarithm of a tensor element-wise.
+
+.. math::
+
+    log(x)=log_{e}(x)=ln(x)
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([1.0, 2.0, 4.0], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Log(input)
+    >>> # expect: [0., 0.6931472, 1.3862944]
+
+
+Max
+---
+
+Computes the maximum of 2 tensors element-wise. element-wise with `Numpy-style broadcasting <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_ support.
+
+.. math::
+
+    result=max(x,y)
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+    - :math:`y` is an op whose data type is same as :math:`x`.
+
+**Parameters:**
+    - :math:`broadcast\_dimensions` specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow ``numpy-style broadcasting``, just use the default value of empty list. Default: [].
+
+**Outputs:**
+    - :math:`result` with the same data type as the inputs.
+
+**Examples:**
+    >>> a = np.array([[1, 2], [7, 8]], dtype=np.int32)
+    >>> b = np.array([[3, 4], [5, 6]], dtype=np.int32)
+    >>> lhs = hb.Const(builder, a)
+    >>> rhs = hb.Const(builder, b)
+    >>> output = hb.Max(lhs, rhs)
+    >>> # expect: [[3, 4], [7, 8]]
+
+
+Min
+---
+
+Computes the minimum of 2 tensors element-wise. element-wise with `Numpy-style broadcasting <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_ support.
+
+.. math::
+
+    result=min(x,y)
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+    - :math:`y` is an op whose data type is same as :math:`x`.
+
+**Parameters:**
+    - :math:`broadcast\_dimensions` specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow ``numpy-style broadcasting``, just use the default value of empty list. Default: [].
+
+**Outputs:**
+    - :math:`result` with the same data type as the inputs.
+
+**Examples:**
+    >>> a = np.array([[1, 2], [7, 8]], dtype=np.int32)
+    >>> b = np.array([[3, 4], [5, 6]], dtype=np.int32)
+    >>> lhs = hb.Const(builder, a)
+    >>> rhs = hb.Const(builder, b)
+    >>> output = hb.Min(lhs, rhs)
+    >>> # expect: [[1, 2], [5, 6]]
+
+
+Mul
+---
+
+Multiplies two tensors element-wise with `Numpy-style broadcasting <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_ support.
+
+.. math::
+
+    result=x\times y
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+    - :math:`y` is an op whose data type is same as :math:`x`.
+
+**Parameters:**
+    - :math:`broadcast\_dimensions` specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow ``numpy-style broadcasting``, just use the default value of empty list. Default: [].
+
+**Outputs:**
+    - :math:`result` with the same data type as the inputs.
+
+**Examples:**
+    >>> a = np.array([0.2015, -0.4255, 2.6087], dtype=np.float32)
+    >>> b = np.array([100], dtype=np.float32)
+    >>> lhs = hb.Const(builder, a)
+    >>> rhs = hb.Const(builder, b)
+    >>> output = hb.Mul(lhs, rhs)
+    >>> # expect: [20.1494, -42.5491, 260.8663]
+
+
+Neg
+---
+
+Computes negative of a tensor element-wise.
+
+.. math::
+
+    neg(x)=-x
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-0.4, -0.2, 0.1, 0.3], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Log(input)
+    >>> # expect: [0.4, 0.2, -0.1, -0.3]
+
+
+Not
+---
+
+Computes logical NOT of a tensor element-wise.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions, and it's data type should be bool.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([True, False], dtype=np.bool)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Not(input)
+    >>> # expect: [False, True]
+
+Or
+--
+
+Computes logical OR of two bool tensors element-wise with `Numpy-style broadcasting <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_ support.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions, and it's data type should be bool.
+    - :math:`y` is an op whose data type is same as :math:`x`.
+
+**Parameters:**
+    - :math:`broadcast\_dimensions` specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow ``numpy-style broadcasting``, just use the default value of empty list. Default: [].
+
+**Outputs:**
+    - :math:`result` with the same data type as the inputs.
+
+**Examples:**
+    >>> a = np.array([True, True, False], dtype=np.bool)
+    >>> b = np.array([False, True, False], dtype=np.bool)
+    >>> lhs = hb.Const(builder, a)
+    >>> rhs = hb.Const(builder, b)
+    >>> output = hb.Or(lhs, rhs)
+    >>> # expect: [True, True, False]
+
+
+Pow
+---
+
+Compute the power of input element-wise with `Numpy-style broadcasting <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_ support.
+
+.. math::
+
+    result=x^{y}
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+    - :math:`y` is an op whose data type is same as :math:`x`.
+
+**Parameters:**
+    - :math:`broadcast\_dimensions` specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow ``numpy-style broadcasting``, just use the default value of empty list. Default: [].
+
+**Outputs:**
+    - :math:`result` with the same data type as the inputs.
+
+**Examples:**
+    >>> a = np.array([1, 2, 3], dtype=np.float32)
+    >>> b = np.array([2], dtype=np.float32)
+    >>> lhs = hb.Const(builder, a)
+    >>> rhs = hb.Const(builder, b)
+    >>> output = hb.Add(lhs, rhs)
+    >>> # expect: [1., 4., 9.]
+
+
+Relu
+----
+
+Applies the rectified linear unit function element-wise.
+
+.. math::
+
+    relu(x)=\left ( x \right )^{+}=max(0,x)
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-1, 0, 1], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Relu(input)
+    >>> # expect: [0, 0, 1]
+
+
+Relu6
+-----
+
+Compute ReLU6 activation function element-wise. ReLU6 is similar to ReLU with a upper limit of 6, which if the inputs are greater than 6, the outputs will be suppressed to 6.
+
+.. math::
+
+    relu6(x)=min(max(0,x),6)
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-1, 0.3, 6.5], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Relu6(input)
+    >>> # expect: [0, 0.3, 6]
+
+
+Rem
+---
+
+Mod two tensors element-wise, returns the remainder of division (with `Numpy-style broadcasting <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_ support).
+
+.. math::
+
+    result=x\%y
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+    - :math:`y` is an op whose data type is same as :math:`x`.
+
+**Parameters:**
+    - :math:`broadcast\_dimensions` specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow ``numpy-style broadcasting``, just use the default value of empty list. Default: [].
+
+**Outputs:**
+    - :math:`result` with the same data type as the inputs.
+
+**Examples:**
+    >>> a = np.array([2, 3, 8, 7], dtype=np.int32)
+    >>> b = np.array([1, 5, 3, 3], dtype=np.int32)
+    >>> lhs = hb.Const(builder, a)
+    >>> rhs = hb.Const(builder, b)
+    >>> output = hb.Rem(lhs, rhs)
+    >>> # expect: [0, 3, 2, 1]
+
+
+Round
+-----
+
+Rounds elements of a tensor to the nearest integer element-wise.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions, and it's data type should be bool.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-0.5, -0.2, 0.6, 1.5], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Round(input)
+    >>> # expect: [-1., -0.,  1.,  2.]
+
+
+Rsqrt
+-----
+
+Computes reciprocal of square root of a tensor element-wise.
+
+.. math::
+
+    rsqrt(x)=\frac{1}{\sqrt{x}}
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions, and it's data type should be bool.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([0.1, 0.2, 0.3, 0.4], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Rsqrt(input)
+    >>> # expect: [3.16227766, 2.23606798, 1.82574186, 1.58113883]
+
+
+Sign
+----
+
+Returns the signs of the elements of a tensor element-wise.
+
+.. math::
+
+    sign(x)=\begin{cases}
+    -1, & \text{ if } x<0 \\
+    0, & \text{ if } x=0 \\
+    1, & \text{ if } x>0
+    \end{cases}
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions, and it's data type should be bool.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([3.0, 0.0, -2.0, 1.7], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Sign(input)
+    >>> # expect: [1.0, 0.0, -1.0, 1.0]
+
+
+Sqrt
+----
+
+Computes square root of a tensor element-wise.
+
+.. math::
+
+    sqrt(x)=\sqrt{x}
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions, and it's data type should be bool.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([0.1, 0.2, 0.3, 0.4], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Sqrt(input)
+    >>> # expect: [0.31622777, 0.4472136, 0.54772256, 0.63245553]
+
+
+Sub
+---
+
+Subtracts two tensors element-wise with `Numpy-style broadcasting <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_ support.
+
+.. math::
+
+    result=x-y
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+    - :math:`y` is an op whose data type is same as :math:`x`.
+
+**Parameters:**
+    - :math:`broadcast\_dimensions` specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow ``numpy-style broadcasting``, just use the default value of empty list. Default: [].
+
+**Outputs:**
+    - :math:`result` with the same data type as the inputs.
+
+**Examples:**
+    >>> a = np.array([[[3, 2, 1], [1, 2, 3]]], dtype=np.float32)
+    >>> b = np.array([1, 0, 4], dtype=np.float32)
+    >>> lhs = hb.Const(builder, a)
+    >>> rhs = hb.Const(builder, b)
+    >>> output = hb.Div(lhs, rhs)
+    >>> # expect: [[[ 2,  2, -3],
+    >>> #           [ 0,  2, -1]]]
+
+
+Tanh
+----
+
+Computes hyperbolic tangent of a tensor element-wise.
+
+.. math::
+
+    tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}=\frac{e^{2x}-1}{e^{2x}+1}
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions, and it's data type should be bool.
+
+**Outputs:**
+    - :math:`result` with the same shape and data type as the input.
+
+**Examples:**
+    >>> data = np.array([-0.4, -0.2, 0.1, 0.3], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Tanh(input)
+    >>> # expect: [-0.37994896, -0.19737532, 0.09966799, 0.29131261]
+
+
+Xor
+---
+
+Computes logical XOR of two bool tensors element-wise with `Numpy-style broadcasting <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_ support.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions, and it's data type should be bool.
+    - :math:`y` is an op whose data type is same as :math:`x`.
+
+**Parameters:**
+    - :math:`broadcast\_dimensions` specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow ``numpy-style broadcasting``, just use the default value of empty list. Default: [].
+
+**Outputs:**
+    - :math:`result` with the same data type as the inputs.
+
+**Examples:**
+    >>> a = np.array([True, True, False], dtype=np.bool)
+    >>> b = np.array([False, True, False], dtype=np.bool)
+    >>> lhs = hb.Const(builder, a)
+    >>> rhs = hb.Const(builder, b)
+    >>> output = hb.Xor(lhs, rhs)
+    >>> # expect: [True, False, False]
+

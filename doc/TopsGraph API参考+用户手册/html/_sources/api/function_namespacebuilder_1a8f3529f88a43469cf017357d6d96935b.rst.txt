@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a8f3529f88a43469cf017357d6d96935b:
+
+Function builder::ShiftLeft
+===========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::ShiftLeft(builder::Op, builder::Op, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

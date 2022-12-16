@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a109db72489cc39a88b2eba166af1882f:
+
+Function builder::Gemm
+======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Gemm(std::vector<builder::Op>, float, float, int64_t, int64_t, builder::Type)

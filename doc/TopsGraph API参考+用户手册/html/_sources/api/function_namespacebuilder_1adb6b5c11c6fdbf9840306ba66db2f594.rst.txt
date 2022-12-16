@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1adb6b5c11c6fdbf9840306ba66db2f594:
+
+Function builder::DynamicBroadcastInDim
+=======================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::DynamicBroadcastInDim(builder::Op, builder::Op, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

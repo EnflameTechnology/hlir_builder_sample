@@ -1,0 +1,105 @@
+:github_url: https://github.com/EnflameTechnology
+
+
+.. _file_headers_hlir_builder_client_ops.h:
+
+File hlir_builder_client_ops.h
+==============================
+
+|exhale_lsh| :ref:`Parent directory <dir_headers>` (``headers``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``headers/hlir_builder_client_ops.h``)
+--------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_headers_hlir_builder_client_ops.h.rst
+
+
+
+
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_headers_hlir_builder.h`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_builder`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_namespacebuilder_1ae6a5d426c747ac2919978130b7487882`
+
+- :ref:`exhale_function_namespacebuilder_1ac46efbb497d0364eb73c3311c1b11174`
+
+- :ref:`exhale_function_namespacebuilder_1a7c4dd1f5bc2f8487f0575bed0c489b48`
+
+- :ref:`exhale_function_namespacebuilder_1a1855443a554400b8cb1c3cc8076c6dd1`
+
+- :ref:`exhale_function_namespacebuilder_1a6a440dc2813ff00788154c53a6e19039`
+
+- :ref:`exhale_function_namespacebuilder_1ae7cddd5cc3e2b0578e2d3eaa17e8f62e`
+
+- :ref:`exhale_function_namespacebuilder_1af73ecb8f9da771400eac377cbffb5fc9`
+
+- :ref:`exhale_function_namespacebuilder_1af0cbdadffdd056dc4081854ae9fe6794`
+
+- :ref:`exhale_function_namespacebuilder_1a264a698ca37175917ede7a90c932921b`
+
+- :ref:`exhale_function_namespacebuilder_1a370912457dc7d4d98815606883e41531`
+
+- :ref:`exhale_function_namespacebuilder_1aaaf0f61039a3e43a63e0b27507600ac5`
+
+- :ref:`exhale_function_namespacebuilder_1ab1a141efc812f091dd2c9eaffd8fbdc2`
+
+- :ref:`exhale_function_namespacebuilder_1ae239409601e2a4bfca6587028c1d867c`
+
+- :ref:`exhale_function_namespacebuilder_1ab918d03e0e5240bba535a53d119460ee`
+
+- :ref:`exhale_function_namespacebuilder_1ad526357bddb87610def58aa36a005b96`
+
+- :ref:`exhale_function_namespacebuilder_1ac85755e2fd5afd155cc126d31036fb73`
+
+- :ref:`exhale_function_namespacebuilder_1a9337f12e170f4fca6f35899b3e390222`
+
+- :ref:`exhale_function_namespacebuilder_1a297f60d73254c99e5cbdd35a5a552444`
+
+- :ref:`exhale_function_namespacebuilder_1ac356ae3062452bb783c47fe935d51530`
+
+- :ref:`exhale_function_namespacebuilder_1a776607370df1d32380133f8a6006166c`
+
+- :ref:`exhale_function_namespacebuilder_1ab590b873bd46224349be1dc36651f414`
+
+- :ref:`exhale_function_namespacebuilder_1a90aff8c6815b8787040e199609d91db8`
+
+- :ref:`exhale_function_namespacebuilder_1a5c294f76d9fb02b126730120f654cf9d`
+
+- :ref:`exhale_function_namespacebuilder_1ae9f9fb682eb09aab96a9cdbb6dea4d71`
+
+- :ref:`exhale_function_namespacebuilder_1a4225587d682f7ce4eb129379b8759f34`
+
+- :ref:`exhale_function_namespacebuilder_1a87c84770be0f705870c2b624fcdce653`
+
+- :ref:`exhale_function_namespacebuilder_1a0bf2759c40bccf4d1e4f4a079d5b4740`
+

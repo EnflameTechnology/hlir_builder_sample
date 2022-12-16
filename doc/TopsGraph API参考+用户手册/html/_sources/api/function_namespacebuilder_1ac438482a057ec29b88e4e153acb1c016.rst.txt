@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ac438482a057ec29b88e4e153acb1c016:
+
+Function builder::GroupNorm
+===========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::GroupNorm(builder::Op, int64_t, int64_t, float, bool, builder::Type)
+   :project: HLIR Builder

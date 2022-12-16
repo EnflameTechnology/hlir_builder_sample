@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1af545f225b2cc92d6ebecc661105394f8:
+
+Function builder::Log1p
+=======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Log1p(builder::Op, builder::Type)
+   :project: HLIR Builder

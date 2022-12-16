@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ad526357bddb87610def58aa36a005b96:
+
+Function builder::LessEqual
+===========================
+
+- Defined in :ref:`file_headers_hlir_builder_client_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::LessEqual(builder::Op, builder::Op, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

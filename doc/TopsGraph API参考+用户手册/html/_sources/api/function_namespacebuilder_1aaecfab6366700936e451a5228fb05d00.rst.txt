@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1aaecfab6366700936e451a5228fb05d00:
+
+Function builder::GlobalMaxPool
+===============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::GlobalMaxPool(builder::Op, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

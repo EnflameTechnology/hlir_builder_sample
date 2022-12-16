@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ac008742fb81c8691eb2bd270f8e3a15e:
+
+Function builder::PackTensor
+============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::PackTensor(std::vector<builder::Op>, std::vector<int32_t>, int32_t, builder::Type)
+   :project: HLIR Builder

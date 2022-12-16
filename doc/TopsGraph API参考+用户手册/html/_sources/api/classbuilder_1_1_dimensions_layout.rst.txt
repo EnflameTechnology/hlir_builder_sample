@@ -1,0 +1,24 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_class_classbuilder_1_1_dimensions_layout:
+
+Class DimensionsLayout
+======================
+
+- Defined in :ref:`file_headers_hlir_builder_structs.h`
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: builder::DimensionsLayout
+   :project: HLIR Builder
+   :members:
+   :protected-members:
+   :undoc-members:

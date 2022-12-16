@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a296c9b445e257de54afd27a634de0c1a:
+
+Function builder::SoftmaxDyn
+============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::SoftmaxDyn(builder::Op, builder::Op, int64_t, bool, bool, float, builder::Type)
+   :project: HLIR Builder

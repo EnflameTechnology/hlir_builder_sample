@@ -1,0 +1,692 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Class Attribute &mdash; HLIR Builder master documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://pytorch.org/docs/stable/api/classbuilder_1_1_attribute.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="../_static/cpp_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class Builder" href="classbuilder_1_1_builder.html" />
+    <link rel="prev" title="Template Struct GetCallArgs&lt; Tuple, 1 &gt;" href="structbuilder_1_1_get_call_args_3_01_tuple_00_011_01_4.html" />
+  <!-- Google Analytics -->
+  
+  <!-- End Google Analytics -->
+  
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <!--a class="header-logo" href="https://www.enflame-tech.com" aria-label="Builder"></a> -->
+      <a class="header-logo" aria-label="Builder"></a>
+
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a class="reference internal" href="get_started.html">Get Started</a>
+          </li>
+
+          <li>
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="resource-option with-down-orange-arrow">
+                Operation Semantics
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="doc-dropdown-option nav-dropdown-item" href="meta_operation_semantics.html">
+                  <span class="dropdown-title">Meta Ops</span>
+                  <p></p>
+                </a>
+                <a class="doc-dropdown-option nav-dropdown-item" href="client_operation_semantics.html">
+                  <span class="dropdown-title">Client Ops</span>
+                  <p></p>
+                </a>
+            </div>
+          </li>
+
+          <li>
+            <a class="reference internal" href="api/library_root.html">C++ API</a>
+          </li>
+
+          <li>
+            <!--<a href="https://www.enflame-tech.com">Python API</a> -->
+            <a>Python API</a>
+          </li>
+
+          <li>
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="resource-option with-down-orange-arrow">
+                Tutorials
+              </a>
+              <div class="resources-dropdown-menu">
+                <!--<a class="doc-dropdown-option nav-dropdown-item" href="https://www.enflame-tech.com"> -->
+                <a class="doc-dropdown-option nav-dropdown-item">
+                  <span class="dropdown-title">Inference</span>
+                  <p></p>
+                </a>
+                <!--<a class="doc-dropdown-option nav-dropdown-item" href="https://www.enflame-tech.com"> -->
+                <a class="doc-dropdown-option nav-dropdown-item">
+                  <span class="dropdown-title">Trainning</span>
+                  <p></p>
+                </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+  </div>
+</div>
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  master
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get_started.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../meta_operation_semantics.html">Meta Operation Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client_operation_semantics.html">Client Operation Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tops_graph_compiler.html">TopsGraph Compiler</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="library_root.html">C++ API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notes/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/version.html">Version</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../index.html">
+          
+            Docs
+          
+        </a> &gt;
+      </li>
+
+        
+          <li><a href="library_root.html">C++ API</a> &gt;</li>
+        
+      <li>Class Attribute</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/EnflameTechnology" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+
+        
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <div class="section" id="class-attribute">
+<span id="exhale-class-classbuilder-1-1-attribute"></span><h1>Class Attribute<a class="headerlink" href="#class-attribute" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_headers_hlir_builder_common.h.html#file-headers-hlir-builder-common-h"><span class="std std-ref">File hlir_builder_common.h</span></a></p></li>
+</ul>
+<div class="contents local topic" id="page-contents">
+<p class="topic-title">Page Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#class-documentation" id="id1">Class Documentation</a></p></li>
+</ul>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp class">
+<dt id="_CPPv4N7builder9AttributeE">
+<span id="_CPPv3N7builder9AttributeE"></span><span id="_CPPv2N7builder9AttributeE"></span><span id="builder::Attribute"></span><span class="target" id="classbuilder_1_1_attribute"></span><em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">builder</span><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">Attribute</span></code><a class="headerlink" href="#_CPPv4N7builder9AttributeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9Attribute9AttributeEPKc">
+<span id="_CPPv3N7builder9Attribute9AttributeEPKc"></span><span id="_CPPv2N7builder9Attribute9AttributeEPKc"></span><span id="builder::Attribute::Attribute__cCP"></span><span class="target" id="classbuilder_1_1_attribute_1aa1554a15ef94c7f05fcf0a275737ffa4"></span><em class="property"><span class="pre">explicit</span></em> <code class="sig-name descname"><span class="pre">Attribute</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">char</span> <span class="pre">*</span><em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder9Attribute9AttributeEPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor an attribute of type string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – Incoming information data </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9Attribute9AttributeERKNSt6stringE">
+<span id="_CPPv3N7builder9Attribute9AttributeERKNSt6stringE"></span><span id="_CPPv2N7builder9Attribute9AttributeERKNSt6stringE"></span><span id="builder::Attribute::Attribute__ssCR"></span><span class="target" id="classbuilder_1_1_attribute_1a3be2942d74ee8530e7198077e5697e21"></span><em class="property"><span class="pre">explicit</span></em> <code class="sig-name descname"><span class="pre">Attribute</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <span class="pre">&amp;</span><em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder9Attribute9AttributeERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor an attribute of type string. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – Incoming information data </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9Attribute9AttributeEb">
+<span id="_CPPv3N7builder9Attribute9AttributeEb"></span><span id="_CPPv2N7builder9Attribute9AttributeEb"></span><span id="builder::Attribute::Attribute__b"></span><span class="target" id="classbuilder_1_1_attribute_1a515b22219f02eb71f92b51b4d9beb9b8"></span><em class="property"><span class="pre">explicit</span></em> <code class="sig-name descname"><span class="pre">Attribute</span></code><span class="sig-paren">(</span><span class="pre">bool</span> <em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder9Attribute9AttributeEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor an attribute of type bool. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – Incoming information data </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9Attribute9AttributeE7int32_t">
+<span id="_CPPv3N7builder9Attribute9AttributeE7int32_t"></span><span id="_CPPv2N7builder9Attribute9AttributeE7int32_t"></span><span id="builder::Attribute::Attribute__int32_t"></span><span class="target" id="classbuilder_1_1_attribute_1a1a6f0b4c691ac6539492a19074b8c631"></span><em class="property"><span class="pre">explicit</span></em> <code class="sig-name descname"><span class="pre">Attribute</span></code><span class="sig-paren">(</span><span class="pre">int32_t</span> <em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder9Attribute9AttributeE7int32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor an attribute of type int32_t. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – Incoming information data </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9Attribute9AttributeE7int64_t">
+<span id="_CPPv3N7builder9Attribute9AttributeE7int64_t"></span><span id="_CPPv2N7builder9Attribute9AttributeE7int64_t"></span><span id="builder::Attribute::Attribute__int64_t"></span><span class="target" id="classbuilder_1_1_attribute_1aa5171164e2d3e8f07c2d2e12b635d015"></span><em class="property"><span class="pre">explicit</span></em> <code class="sig-name descname"><span class="pre">Attribute</span></code><span class="sig-paren">(</span><span class="pre">int64_t</span> <em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder9Attribute9AttributeE7int64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor an attribute of type int64_t. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – Incoming information data </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9Attribute9AttributeEf">
+<span id="_CPPv3N7builder9Attribute9AttributeEf"></span><span id="_CPPv2N7builder9Attribute9AttributeEf"></span><span id="builder::Attribute::Attribute__float"></span><span class="target" id="classbuilder_1_1_attribute_1abe196f01dd82a4c31a8333bae196498f"></span><em class="property"><span class="pre">explicit</span></em> <code class="sig-name descname"><span class="pre">Attribute</span></code><span class="sig-paren">(</span><span class="pre">float</span> <em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder9Attribute9AttributeEf" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor an attribute of type float. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – Incoming information data </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9Attribute9AttributeEd">
+<span id="_CPPv3N7builder9Attribute9AttributeEd"></span><span id="_CPPv2N7builder9Attribute9AttributeEd"></span><span id="builder::Attribute::Attribute__double"></span><span class="target" id="classbuilder_1_1_attribute_1af34faa1dcb3614d5745eb219a0e2dbf9"></span><em class="property"><span class="pre">explicit</span></em> <code class="sig-name descname"><span class="pre">Attribute</span></code><span class="sig-paren">(</span><span class="pre">double</span> <em><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder9Attribute9AttributeEd" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor an attribute of type double. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – Incoming information data </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9Attribute9AttributeE4TypePv">
+<span id="_CPPv3N7builder9Attribute9AttributeE4TypePv"></span><span id="_CPPv2N7builder9Attribute9AttributeE4TypePv"></span><span id="builder::Attribute::Attribute__Type.voidP"></span><span class="target" id="classbuilder_1_1_attribute_1a576b92fafd5b2012ec06884e868ce4a4"></span><code class="sig-name descname"><span class="pre">Attribute</span></code><span class="sig-paren">(</span><a class="reference internal" href="classbuilder_1_1_type.html#_CPPv4N7builder4TypeE" title="builder::Type"><span class="pre">Type</span></a> <em><span class="pre">data_type</span></em>, <span class="pre">void</span> <span class="pre">*</span><em><span class="pre">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder9Attribute9AttributeE4TypePv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor an attribute of type Dense. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_type</strong> – tensor type </p></li>
+<li><p><strong>data</strong> – Data address </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9Attribute9AttributeE4TypeNSt10shared_ptrIvEE">
+<span id="_CPPv3N7builder9Attribute9AttributeE4TypeNSt10shared_ptrIvEE"></span><span id="_CPPv2N7builder9Attribute9AttributeE4TypeNSt10shared_ptrIvEE"></span><span id="builder::Attribute::Attribute__Type.std::shared_ptr:void:"></span><span class="target" id="classbuilder_1_1_attribute_1a6ff18f0e41c7526004ae93047627f936"></span><code class="sig-name descname"><span class="pre">Attribute</span></code><span class="sig-paren">(</span><a class="reference internal" href="classbuilder_1_1_type.html#_CPPv4N7builder4TypeE" title="builder::Type"><span class="pre">Type</span></a> <em><span class="pre">data_type</span></em>, <span class="pre">std</span><span class="pre">::</span><span class="pre">shared_ptr</span><span class="pre">&lt;</span><span class="pre">void</span><span class="pre">&gt;</span> <em><span class="pre">data_ptr</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder9Attribute9AttributeE4TypeNSt10shared_ptrIvEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor an attribute of type Dense. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_type</strong> – tensor type </p></li>
+<li><p><strong>data_ptr</strong> – shared_ptr data </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9AttributeD0Ev">
+<span id="_CPPv3N7builder9AttributeD0Ev"></span><span id="_CPPv2N7builder9AttributeD0Ev"></span><span id="builder::Attribute::~Attribute"></span><span class="target" id="classbuilder_1_1_attribute_1a8921f3db8388564e73381a1f501549ea"></span><code class="sig-name descname"><span class="pre">~Attribute</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="pre">=</span> <span class="pre">default</span><a class="headerlink" href="#_CPPv4N7builder9AttributeD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9Attribute9AttributeERK9Attribute">
+<span id="_CPPv3N7builder9Attribute9AttributeERK9Attribute"></span><span id="_CPPv2N7builder9Attribute9AttributeERK9Attribute"></span><span id="builder::Attribute::Attribute__AttributeCR"></span><span class="target" id="classbuilder_1_1_attribute_1aa022eda9421c02576b493ebc20c3df4e"></span><code class="sig-name descname"><span class="pre">Attribute</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv4N7builder9Attribute9AttributeERK9Attribute" title="builder::Attribute::Attribute"><span class="pre">Attribute</span></a><span class="pre">&amp;</span><span class="sig-paren">)</span> <span class="pre">=</span> <span class="pre">default</span><a class="headerlink" href="#_CPPv4N7builder9Attribute9AttributeERK9Attribute" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9AttributeaSERK9Attribute">
+<span id="_CPPv3N7builder9AttributeaSERK9Attribute"></span><span id="_CPPv2N7builder9AttributeaSERK9Attribute"></span><span id="builder::Attribute::assign-operator__AttributeCR"></span><span class="target" id="classbuilder_1_1_attribute_1a97985c998568b70e5780a03383ef2d95"></span><a class="reference internal" href="#_CPPv4N7builder9AttributeE" title="builder::Attribute"><span class="pre">Attribute</span></a> <span class="pre">&amp;</span><code class="sig-name descname"><span class="pre">operator=</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv4N7builder9AttributeE" title="builder::Attribute"><span class="pre">Attribute</span></a><span class="pre">&amp;</span><span class="sig-paren">)</span> <span class="pre">=</span> <span class="pre">default</span><a class="headerlink" href="#_CPPv4N7builder9AttributeaSERK9Attribute" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9Attribute9AttributeERR9Attribute">
+<span id="_CPPv3N7builder9Attribute9AttributeERR9Attribute"></span><span id="_CPPv2N7builder9Attribute9AttributeERR9Attribute"></span><span id="builder::Attribute::Attribute__AttributeRR"></span><span class="target" id="classbuilder_1_1_attribute_1a3b83a9aaa949fef30de2421cd1f9e625"></span><code class="sig-name descname"><span class="pre">Attribute</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7builder9Attribute9AttributeERR9Attribute" title="builder::Attribute::Attribute"><span class="pre">Attribute</span></a><span class="pre">&amp;</span><span class="pre">&amp;</span><span class="sig-paren">)</span> <span class="pre">=</span> <span class="pre">default</span><a class="headerlink" href="#_CPPv4N7builder9Attribute9AttributeERR9Attribute" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9AttributeaSERR9Attribute">
+<span id="_CPPv3N7builder9AttributeaSERR9Attribute"></span><span id="_CPPv2N7builder9AttributeaSERR9Attribute"></span><span id="builder::Attribute::assign-operator__AttributeRR"></span><span class="target" id="classbuilder_1_1_attribute_1a089a54af3ef5f3e98626dac88eef00f0"></span><a class="reference internal" href="#_CPPv4N7builder9AttributeE" title="builder::Attribute"><span class="pre">Attribute</span></a> <span class="pre">&amp;</span><code class="sig-name descname"><span class="pre">operator=</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N7builder9AttributeE" title="builder::Attribute"><span class="pre">Attribute</span></a><span class="pre">&amp;</span><span class="pre">&amp;</span><span class="sig-paren">)</span> <span class="pre">=</span> <span class="pre">default</span><a class="headerlink" href="#_CPPv4N7builder9AttributeaSERR9Attribute" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N7builder9AttributeeqERK9Attribute">
+<span id="_CPPv3N7builder9AttributeeqERK9Attribute"></span><span id="_CPPv2N7builder9AttributeeqERK9Attribute"></span><span id="builder::Attribute::eq-operator__AttributeCR"></span><span class="target" id="classbuilder_1_1_attribute_1a6f356b78d8e010fa9ee50ee28ce24154"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">operator==</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv4N7builder9AttributeE" title="builder::Attribute"><span class="pre">Attribute</span></a> <span class="pre">&amp;</span><em><span class="pre">attr</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N7builder9AttributeeqERK9Attribute" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder9Attribute7GetTypeEv">
+<span id="_CPPv3NK7builder9Attribute7GetTypeEv"></span><span id="_CPPv2NK7builder9Attribute7GetTypeEv"></span><span id="builder::Attribute::GetTypeC"></span><span class="target" id="classbuilder_1_1_attribute_1aa52cee21eefab8ad2b747b69c650577a"></span><a class="reference internal" href="classbuilder_1_1_type.html#_CPPv4N7builder4TypeE" title="builder::Type"><span class="pre">Type</span></a> <code class="sig-name descname"><span class="pre">GetType</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder9Attribute7GetTypeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the attribute <a class="reference internal" href="classbuilder_1_1_type.html#classbuilder_1_1_type"><span class="std std-ref">Type</span></a>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The attribute <a class="reference internal" href="classbuilder_1_1_type.html#classbuilder_1_1_type"><span class="std std-ref">Type</span></a> </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder9Attribute16GetValueAsDoubleEv">
+<span id="_CPPv3NK7builder9Attribute16GetValueAsDoubleEv"></span><span id="_CPPv2NK7builder9Attribute16GetValueAsDoubleEv"></span><span id="builder::Attribute::GetValueAsDoubleC"></span><span class="target" id="classbuilder_1_1_attribute_1a8547fa7cfdda49acb0bd76bc404ef316"></span><span class="pre">double</span> <code class="sig-name descname"><span class="pre">GetValueAsDouble</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder9Attribute16GetValueAsDoubleEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the attribute value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If it is float and double type, return value, otherwise return 0.0 </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder9Attribute13GetValueAsIntEv">
+<span id="_CPPv3NK7builder9Attribute13GetValueAsIntEv"></span><span id="_CPPv2NK7builder9Attribute13GetValueAsIntEv"></span><span id="builder::Attribute::GetValueAsIntC"></span><span class="target" id="classbuilder_1_1_attribute_1aeb5dfe9aa01823f82138a48d016a4d58"></span><span class="pre">int64_t</span> <code class="sig-name descname"><span class="pre">GetValueAsInt</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder9Attribute13GetValueAsIntEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the attribute value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If it is integer type, return value, otherwise return 0 </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder9Attribute14GetValueAsBoolEv">
+<span id="_CPPv3NK7builder9Attribute14GetValueAsBoolEv"></span><span id="_CPPv2NK7builder9Attribute14GetValueAsBoolEv"></span><span id="builder::Attribute::GetValueAsBoolC"></span><span class="target" id="classbuilder_1_1_attribute_1a63e78f39bdfd0f3285f0513a00e21fdf"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">GetValueAsBool</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder9Attribute14GetValueAsBoolEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the attribute value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If it is bool type, return value, otherwise return 0 </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder9Attribute16GetValueAsStringEv">
+<span id="_CPPv3NK7builder9Attribute16GetValueAsStringEv"></span><span id="_CPPv2NK7builder9Attribute16GetValueAsStringEv"></span><span id="builder::Attribute::GetValueAsStringC"></span><span class="target" id="classbuilder_1_1_attribute_1aae04c6408b3ffc0279da5a3d2494bec3"></span><span class="pre">std</span><span class="pre">::</span><span class="pre">string</span> <code class="sig-name descname"><span class="pre">GetValueAsString</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder9Attribute16GetValueAsStringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the attribute value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If it is string type, return value, otherwise return 0 </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder9Attribute17GetValueAsDataPtrEv">
+<span id="_CPPv3NK7builder9Attribute17GetValueAsDataPtrEv"></span><span id="_CPPv2NK7builder9Attribute17GetValueAsDataPtrEv"></span><span id="builder::Attribute::GetValueAsDataPtrC"></span><span class="target" id="classbuilder_1_1_attribute_1a124ff091e10c59d2bd43980dee5bedcb"></span><span class="pre">std</span><span class="pre">::</span><span class="pre">shared_ptr</span><span class="pre">&lt;</span><span class="pre">void</span><span class="pre">&gt;</span> <code class="sig-name descname"><span class="pre">GetValueAsDataPtr</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder9Attribute17GetValueAsDataPtrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the attribute value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If it is dense type, return value, otherwise return 0 </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder9Attribute5PrintERNSt7ostreamE">
+<span id="_CPPv3NK7builder9Attribute5PrintERNSt7ostreamE"></span><span id="_CPPv2NK7builder9Attribute5PrintERNSt7ostreamE"></span><span id="builder::Attribute::Print__osRC"></span><span class="target" id="classbuilder_1_1_attribute_1a85a062b7eb3e4e72731366d1c2fd3712"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">Print</span></code><span class="sig-paren">(</span><span class="pre">std</span><span class="pre">::</span><span class="pre">ostream</span> <span class="pre">&amp;</span><em><span class="pre">out</span></em><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder9Attribute5PrintERNSt7ostreamE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Print the <a class="reference internal" href="#classbuilder_1_1_attribute"><span class="std std-ref">Attribute</span></a> information to the specific output stream. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>out</strong> – Output stream </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK7builder9Attribute4DumpEv">
+<span id="_CPPv3NK7builder9Attribute4DumpEv"></span><span id="_CPPv2NK7builder9Attribute4DumpEv"></span><span id="builder::Attribute::DumpC"></span><span class="target" id="classbuilder_1_1_attribute_1ab41560968b7b501eb8310d0c99cefda9"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">Dump</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK7builder9Attribute4DumpEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Print the <a class="reference internal" href="#classbuilder_1_1_attribute"><span class="std std-ref">Attribute</span></a> information to stdout. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+             </article>
+             
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="classbuilder_1_1_builder.html" class="btn btn-neutral float-right" title="Class Builder" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+      
+      
+        <a href="structbuilder_1_1_get_call_args_3_01_tuple_00_011_01_4.html" class="btn btn-neutral" title="Template Struct GetCallArgs&lt; Tuple, 1 &gt;" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+      
+    </div>
+  
+
+  
+
+    <hr>
+
+  
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HLIR Builder Contributors.
+
+    </p>
+  </div>
+    
+      <div>
+        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+     
+
+</footer>
+
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              <ul>
+<li><a class="reference internal" href="#">Class Attribute</a><ul>
+<li><a class="reference internal" href="#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../_static/js/vendor/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <div class="container-fluid docs-tutorials-resources" id="docs-tutorials-resources">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <h2>Docs</h2>
+          <p>Access comprehensive developer documentation for HLIR Builder</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Docs</a> -->
+          <a class="with-right-arrow">View Docs</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Tutorials</h2>
+          <p>Get in-depth tutorials for beginners and advanced developers</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Tutorials</a> -->
+          <a class="with-right-arrow">View Tutorials</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Resources</h2>
+          <p>Find development resources and get your questions answered</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Resources</a> -->
+          <a class="with-right-arrow">View Resources</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <!--<div class="footer-logo-wrapper">
+        <a href="https://www.enflame-tech.com" class="footer-logo"></a>
+      </div>-->
+
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <ul>
+            <!--<li><a href="https://www.enflame-tech.com">Get Started</a></li> -->
+            <li><a>Get Started</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Features</a></li> -->
+            <li><a>C++ API</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Ecosystem</a></li> -->
+            <li><a>Python API</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Blog</a></li> -->
+            <li><a>Tutorials</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Contributing</a></li> -->
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <!--<li class="list-title"><a href="https://www.enflame-tech.com">Resources</a></li> -->
+            <li class="list-title"><a>Contributing</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Tutorials</a></li> -->
+            <!--<li><a href="https://www.enflame-tech.com">Docs</a></li> -->
+            <li><a>Applications</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Discuss</a></li> -->
+            <li><a>Discuss</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Github Issues</a></li> -->
+            <li><a>Github Issues</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Brand Guidelines</a></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cookie-banner-wrapper">
+  <div class="container">
+    <p class="gdpr-notice">To analyze traffic and optimize your experience, we serve cookies on this site. By clicking or navigating, you agree to allow our usage of cookies. As the current maintainers of this site, Facebook’s Cookies Policy applies. Learn more, including about available controls: <a href="https://www.facebook.com/policies/cookies/">Cookies Policy</a>.</p>
+    <img class="close-button" src="../_static/images/pytorch-x.svg">
+  </div>
+</div>
+
+  <!-- End Footer -->
+
+  <script type="text/javascript" src="../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+      mainMenuDropdown.bind();
+      filterTags.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

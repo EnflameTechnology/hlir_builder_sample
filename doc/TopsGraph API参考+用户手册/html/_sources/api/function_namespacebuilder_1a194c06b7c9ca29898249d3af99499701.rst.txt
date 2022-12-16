@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a194c06b7c9ca29898249d3af99499701:
+
+Function builder::Slice
+=======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Slice(builder::Op, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

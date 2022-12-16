@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a15a76207f2703b4db02de348300a66cd:
+
+Function builder::Sort
+======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Sort(std::vector<builder::Op>, std::vector<std::string>, int64_t, bool, builder::Type)
+   :project: HLIR Builder

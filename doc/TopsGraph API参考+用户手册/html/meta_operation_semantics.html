@@ -1,0 +1,1325 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Meta Operation Semantics &mdash; HLIR Builder master documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://pytorch.org/docs/stable/meta_operation_semantics.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="_static/cpp_theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Client Operation Semantics" href="client_operation_semantics.html" />
+    <link rel="prev" title="Get Started" href="get_started.html" />
+  <!-- Google Analytics -->
+  
+  <!-- End Google Analytics -->
+  
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <!--a class="header-logo" href="https://www.enflame-tech.com" aria-label="Builder"></a> -->
+      <a class="header-logo" aria-label="Builder"></a>
+
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a class="reference internal" href="get_started.html">Get Started</a>
+          </li>
+
+          <li>
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="resource-option with-down-orange-arrow">
+                Operation Semantics
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="doc-dropdown-option nav-dropdown-item" href="meta_operation_semantics.html">
+                  <span class="dropdown-title">Meta Ops</span>
+                  <p></p>
+                </a>
+                <a class="doc-dropdown-option nav-dropdown-item" href="client_operation_semantics.html">
+                  <span class="dropdown-title">Client Ops</span>
+                  <p></p>
+                </a>
+            </div>
+          </li>
+
+          <li>
+            <a class="reference internal" href="api/library_root.html">C++ API</a>
+          </li>
+
+          <li>
+            <!--<a href="https://www.enflame-tech.com">Python API</a> -->
+            <a>Python API</a>
+          </li>
+
+          <li>
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="resource-option with-down-orange-arrow">
+                Tutorials
+              </a>
+              <div class="resources-dropdown-menu">
+                <!--<a class="doc-dropdown-option nav-dropdown-item" href="https://www.enflame-tech.com"> -->
+                <a class="doc-dropdown-option nav-dropdown-item">
+                  <span class="dropdown-title">Inference</span>
+                  <p></p>
+                </a>
+                <!--<a class="doc-dropdown-option nav-dropdown-item" href="https://www.enflame-tech.com"> -->
+                <a class="doc-dropdown-option nav-dropdown-item">
+                  <span class="dropdown-title">Trainning</span>
+                  <p></p>
+                </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+  </div>
+</div>
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  master
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="get_started.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Meta Operation Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client_operation_semantics.html">Client Operation Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tops_graph_compiler.html">TopsGraph Compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/library_root.html">C++ API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notes/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/version.html">Version</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="index.html">
+          
+            Docs
+          
+        </a> &gt;
+      </li>
+
+        
+      <li>Meta Operation Semantics</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            <a href="_sources/meta_operation_semantics.rst.txt" rel="nofollow"><img src="_static/images/view-page-source-icon.svg"></a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+
+        
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <div class="section" id="meta-operation-semantics">
+<h1>Meta Operation Semantics<a class="headerlink" href="#meta-operation-semantics" title="Permalink to this headline">¶</a></h1>
+<p>The following describes the semantics of meta operations defined in the HLIR Builder interface.</p>
+<div class="section" id="abs">
+<h2>Abs<a class="headerlink" href="#abs" title="Permalink to this headline">¶</a></h2>
+<p>Computes the absolute value of a tensor element-wise.</p>
+<div class="math notranslate nohighlight">
+\[abs(x)=\left|x\right|\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Abs</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [1, 0, 1]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="acos">
+<h2>Acos<a class="headerlink" href="#acos" title="Permalink to this headline">¶</a></h2>
+<p>Computes the arccosine (inverse of cosine) of a tensor element-wise.</p>
+<div class="math notranslate nohighlight">
+\[acos(x)=cos^{-1}(x)\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Acos</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [1.98231317, 1.77215425, 1.47062891, 1.26610367]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="add">
+<h2>Add<a class="headerlink" href="#add" title="Permalink to this headline">¶</a></h2>
+<p>Add two tensors element-wise with <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Numpy-style broadcasting</a> support.</p>
+<div class="math notranslate nohighlight">
+\[result=x+y\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is an op whose data type is same as <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</dd>
+<dt><strong>Parameters:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(broadcast\_dimensions\)</span> specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow <code class="docutils literal notranslate"><span class="pre">numpy-style</span> <span class="pre">broadcasting</span></code>, just use the default value of empty list. Default: [].</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same data type as the inputs.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [1., 0., 2., 4.]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="and">
+<h2>And<a class="headerlink" href="#and" title="Permalink to this headline">¶</a></h2>
+<p>Computes logical AND of two bool tensors element-wise with <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Numpy-style broadcasting</a> support.</p>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions, and it’s data type should be bool.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is an op whose data type is same as <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</dd>
+<dt><strong>Parameters:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(broadcast\_dimensions\)</span> specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow <code class="docutils literal notranslate"><span class="pre">numpy-style</span> <span class="pre">broadcasting</span></code>, just use the default value of empty list. Default: [].</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same data type as the inputs.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [False, True, False]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="asin">
+<h2>Asin<a class="headerlink" href="#asin" title="Permalink to this headline">¶</a></h2>
+<p>Computes the arcsine (inverse of sine) of a tensor element-wise.</p>
+<div class="math notranslate nohighlight">
+\[asin(x)=sin^{-1}(x)\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Asin</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [-0.41151685, -0.20135792,  0.10016742,  0.30469265]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="asinh">
+<h2>Asinh<a class="headerlink" href="#asinh" title="Permalink to this headline">¶</a></h2>
+<p>Computes inverse hyperbolic sine of a tensor element-wise.</p>
+<div class="math notranslate nohighlight">
+\[asinh(x)=sinh^{-1}(x)\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Asinh</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect:  [-0.39003533, -0.19869010,  0.09983408,  0.29567307]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="atan">
+<h2>Atan<a class="headerlink" href="#atan" title="Permalink to this headline">¶</a></h2>
+<p>Computes the arctangent (inverse of tangent) of a tensor element-wise.</p>
+<div class="math notranslate nohighlight">
+\[atan(x)=tan^{-1}(x)\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Atan</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [-0.38050638, -0.19739556,  0.09966865,  0.29145679]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="atan2">
+<h2>Atan2<a class="headerlink" href="#atan2" title="Permalink to this headline">¶</a></h2>
+<p>Computes arctangent of <span class="math notranslate nohighlight">\(x/y\)</span> with consideration of the quadrant element-wise. It follows the <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Numpy-style broadcasting</a>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}atan2(x,y)=\begin{cases}
+tan^{-1}\left ( \frac{x}{y} \right ), &amp; \text y&gt;0 \\
+tan^{-1}\left ( \frac{x}{y} \right )+\pi, &amp; \text x\geq 0,y&lt;0 \\
+tan^{-1}\left ( \frac{x}{y} \right )-\pi, &amp; \text x&lt;0,y&lt;0 \\
++\frac{\pi}{2} &amp; \text x&gt;0,y=0 \\
+-\frac{\pi}{2} &amp; \text x&lt;0,y=0 \\
+0 &amp; \text x=0,y=0
+\end{cases}\end{split}\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is an op whose data type is same as <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</dd>
+<dt><strong>Parameters:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(broadcast\_dimensions\)</span> specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow <code class="docutils literal notranslate"><span class="pre">numpy-style</span> <span class="pre">broadcasting</span></code>, just use the default value of empty list. Default: [].</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same data type as the inputs.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Atan2</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [-2.35619450, 2.35619450, 0.78539819, -0.78539819]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="atanh">
+<h2>Atanh<a class="headerlink" href="#atanh" title="Permalink to this headline">¶</a></h2>
+<p>Computes the hyperbolic arctangent (inverse of hyperbolic tangent) of a tensor element-wise.</p>
+<div class="math notranslate nohighlight">
+\[atanh(x)=tanh^{-1}(x)\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Atanh</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect:  [-0.42364895, -0.20273256,  0.10033535,  0.30951962]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="ceil">
+<h2>Ceil<a class="headerlink" href="#ceil" title="Permalink to this headline">¶</a></h2>
+<p>Computes ceil of a tensor element-wise, which returns values up to the closest integer to each element.</p>
+<div class="math notranslate nohighlight">
+\[ceil(x)=\left \lceil x\right \rceil\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Ceil</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [-0., -0.,  1.,  1.]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="cos">
+<h2>Cos<a class="headerlink" href="#cos" title="Permalink to this headline">¶</a></h2>
+<p>Computes cosine of a tensor element-wise.</p>
+<div class="math notranslate nohighlight">
+\[result=cos(x)\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Cos</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [0.92106099, 0.98006658, 0.99500417, 0.95533649]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="div">
+<h2>Div<a class="headerlink" href="#div" title="Permalink to this headline">¶</a></h2>
+<p>Divides two tensors element-wise with <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Numpy-style broadcasting</a> support.</p>
+<div class="math notranslate nohighlight">
+\[result=\frac{x}{y}\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is an op whose data type is same as <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</dd>
+<dt><strong>Parameters:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(broadcast\_dimensions\)</span> specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow <code class="docutils literal notranslate"><span class="pre">numpy-style</span> <span class="pre">broadcasting</span></code>, just use the default value of empty list. Default: [].</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same data type as the inputs.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [2., 0.6, 2.]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="exp">
+<h2>Exp<a class="headerlink" href="#exp" title="Permalink to this headline">¶</a></h2>
+<p>Computes natural exponential of a tensor element-wise.</p>
+<div class="math notranslate nohighlight">
+\[exp(x)=e^{x}\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Exp</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [0.67032005, 0.81873075, 1.10517092, 1.34985881]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="id4">
+<h2>Ceil<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>Computes floor of a tensor element-wise, which returns values down to the closest integer to each element.</p>
+<div class="math notranslate nohighlight">
+\[floor(x)=\left \lfloor x\right \rfloor\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Floor</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [-1., -1.,  0.,  0.]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="isfinite">
+<h2>IsFinite<a class="headerlink" href="#isfinite" title="Permalink to this headline">¶</a></h2>
+<p>Tests whether each element of a tensor is finite, i.e., is not positive or negative infinity, and is not NaN.
+Returns a bool tensor with element is true if and only if the corresponding input element is finite.</p>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and as the input and data type of bool.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">NINF</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">IsFinite</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [False, False, True, False]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="log">
+<h2>Log<a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h2>
+<p>Computes natural logarithm of a tensor element-wise.</p>
+<div class="math notranslate nohighlight">
+\[log(x)=log_{e}(x)=ln(x)\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Log</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [0., 0.6931472, 1.3862944]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="max">
+<h2>Max<a class="headerlink" href="#max" title="Permalink to this headline">¶</a></h2>
+<p>Computes the maximum of 2 tensors element-wise. element-wise with <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Numpy-style broadcasting</a> support.</p>
+<div class="math notranslate nohighlight">
+\[result=max(x,y)\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is an op whose data type is same as <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</dd>
+<dt><strong>Parameters:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(broadcast\_dimensions\)</span> specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow <code class="docutils literal notranslate"><span class="pre">numpy-style</span> <span class="pre">broadcasting</span></code>, just use the default value of empty list. Default: [].</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same data type as the inputs.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Max</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [[3, 4], [7, 8]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="min">
+<h2>Min<a class="headerlink" href="#min" title="Permalink to this headline">¶</a></h2>
+<p>Computes the minimum of 2 tensors element-wise. element-wise with <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Numpy-style broadcasting</a> support.</p>
+<div class="math notranslate nohighlight">
+\[result=min(x,y)\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is an op whose data type is same as <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</dd>
+<dt><strong>Parameters:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(broadcast\_dimensions\)</span> specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow <code class="docutils literal notranslate"><span class="pre">numpy-style</span> <span class="pre">broadcasting</span></code>, just use the default value of empty list. Default: [].</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same data type as the inputs.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Min</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [[1, 2], [5, 6]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="mul">
+<h2>Mul<a class="headerlink" href="#mul" title="Permalink to this headline">¶</a></h2>
+<p>Multiplies two tensors element-wise with <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Numpy-style broadcasting</a> support.</p>
+<div class="math notranslate nohighlight">
+\[result=x\times y\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is an op whose data type is same as <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</dd>
+<dt><strong>Parameters:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(broadcast\_dimensions\)</span> specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow <code class="docutils literal notranslate"><span class="pre">numpy-style</span> <span class="pre">broadcasting</span></code>, just use the default value of empty list. Default: [].</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same data type as the inputs.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2015</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4255</span><span class="p">,</span> <span class="mf">2.6087</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Mul</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [20.1494, -42.5491, 260.8663]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="neg">
+<h2>Neg<a class="headerlink" href="#neg" title="Permalink to this headline">¶</a></h2>
+<p>Computes negative of a tensor element-wise.</p>
+<div class="math notranslate nohighlight">
+\[neg(x)=-x\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Log</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [0.4, 0.2, -0.1, -0.3]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="not">
+<h2>Not<a class="headerlink" href="#not" title="Permalink to this headline">¶</a></h2>
+<p>Computes logical NOT of a tensor element-wise.</p>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions, and it’s data type should be bool.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Not</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [False, True]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="or">
+<h2>Or<a class="headerlink" href="#or" title="Permalink to this headline">¶</a></h2>
+<p>Computes logical OR of two bool tensors element-wise with <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Numpy-style broadcasting</a> support.</p>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions, and it’s data type should be bool.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is an op whose data type is same as <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</dd>
+<dt><strong>Parameters:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(broadcast\_dimensions\)</span> specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow <code class="docutils literal notranslate"><span class="pre">numpy-style</span> <span class="pre">broadcasting</span></code>, just use the default value of empty list. Default: [].</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same data type as the inputs.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Or</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [True, True, False]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="pow">
+<h2>Pow<a class="headerlink" href="#pow" title="Permalink to this headline">¶</a></h2>
+<p>Compute the power of input element-wise with <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Numpy-style broadcasting</a> support.</p>
+<div class="math notranslate nohighlight">
+\[result=x^{y}\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is an op whose data type is same as <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</dd>
+<dt><strong>Parameters:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(broadcast\_dimensions\)</span> specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow <code class="docutils literal notranslate"><span class="pre">numpy-style</span> <span class="pre">broadcasting</span></code>, just use the default value of empty list. Default: [].</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same data type as the inputs.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [1., 4., 9.]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="relu">
+<h2>Relu<a class="headerlink" href="#relu" title="Permalink to this headline">¶</a></h2>
+<p>Applies the rectified linear unit function element-wise.</p>
+<div class="math notranslate nohighlight">
+\[relu(x)=\left ( x \right )^{+}=max(0,x)\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Relu</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [0, 0, 1]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="relu6">
+<h2>Relu6<a class="headerlink" href="#relu6" title="Permalink to this headline">¶</a></h2>
+<p>Compute ReLU6 activation function element-wise. ReLU6 is similar to ReLU with a upper limit of 6, which if the inputs are greater than 6, the outputs will be suppressed to 6.</p>
+<div class="math notranslate nohighlight">
+\[relu6(x)=min(max(0,x),6)\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Relu6</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [0, 0.3, 6]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="rem">
+<h2>Rem<a class="headerlink" href="#rem" title="Permalink to this headline">¶</a></h2>
+<p>Mod two tensors element-wise, returns the remainder of division (with <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Numpy-style broadcasting</a> support).</p>
+<div class="math notranslate nohighlight">
+\[result=x\%y\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is an op whose data type is same as <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</dd>
+<dt><strong>Parameters:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(broadcast\_dimensions\)</span> specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow <code class="docutils literal notranslate"><span class="pre">numpy-style</span> <span class="pre">broadcasting</span></code>, just use the default value of empty list. Default: [].</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same data type as the inputs.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Rem</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [0, 3, 2, 1]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="round">
+<h2>Round<a class="headerlink" href="#round" title="Permalink to this headline">¶</a></h2>
+<p>Rounds elements of a tensor to the nearest integer element-wise.</p>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions, and it’s data type should be bool.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Round</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [-1., -0.,  1.,  2.]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="rsqrt">
+<h2>Rsqrt<a class="headerlink" href="#rsqrt" title="Permalink to this headline">¶</a></h2>
+<p>Computes reciprocal of square root of a tensor element-wise.</p>
+<div class="math notranslate nohighlight">
+\[rsqrt(x)=\frac{1}{\sqrt{x}}\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions, and it’s data type should be bool.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Rsqrt</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [3.16227766, 2.23606798, 1.82574186, 1.58113883]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="sign">
+<h2>Sign<a class="headerlink" href="#sign" title="Permalink to this headline">¶</a></h2>
+<p>Returns the signs of the elements of a tensor element-wise.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}sign(x)=\begin{cases}
+-1, &amp; \text{ if } x&lt;0 \\
+0, &amp; \text{ if } x=0 \\
+1, &amp; \text{ if } x&gt;0
+\end{cases}\end{split}\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions, and it’s data type should be bool.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Sign</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [1.0, 0.0, -1.0, 1.0]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="sqrt">
+<h2>Sqrt<a class="headerlink" href="#sqrt" title="Permalink to this headline">¶</a></h2>
+<p>Computes square root of a tensor element-wise.</p>
+<div class="math notranslate nohighlight">
+\[sqrt(x)=\sqrt{x}\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions, and it’s data type should be bool.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Sqrt</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [0.31622777, 0.4472136, 0.54772256, 0.63245553]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="sub">
+<h2>Sub<a class="headerlink" href="#sub" title="Permalink to this headline">¶</a></h2>
+<p>Subtracts two tensors element-wise with <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Numpy-style broadcasting</a> support.</p>
+<div class="math notranslate nohighlight">
+\[result=x-y\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is an op whose data type is same as <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</dd>
+<dt><strong>Parameters:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(broadcast\_dimensions\)</span> specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow <code class="docutils literal notranslate"><span class="pre">numpy-style</span> <span class="pre">broadcasting</span></code>, just use the default value of empty list. Default: [].</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same data type as the inputs.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [[[ 2,  2, -3],</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#           [ 0,  2, -1]]]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="tanh">
+<h2>Tanh<a class="headerlink" href="#tanh" title="Permalink to this headline">¶</a></h2>
+<p>Computes hyperbolic tangent of a tensor element-wise.</p>
+<div class="math notranslate nohighlight">
+\[tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}=\frac{e^{2x}-1}{e^{2x}+1}\]</div>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions, and it’s data type should be bool.</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same shape and data type as the input.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [-0.37994896, -0.19737532, 0.09966799, 0.29131261]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="xor">
+<h2>Xor<a class="headerlink" href="#xor" title="Permalink to this headline">¶</a></h2>
+<p>Computes logical XOR of two bool tensors element-wise with <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">Numpy-style broadcasting</a> support.</p>
+<dl>
+<dt><strong>Inputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is an op whose result shape is <span class="math notranslate nohighlight">\((*)\)</span>, where <span class="math notranslate nohighlight">\(*\)</span> means any number of dimensions, and it’s data type should be bool.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> is an op whose data type is same as <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</dd>
+<dt><strong>Parameters:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(broadcast\_dimensions\)</span> specify the dimensions in the target shape each dimension of the input shape corresponds to. If inputs are static shape and the user want to follow <code class="docutils literal notranslate"><span class="pre">numpy-style</span> <span class="pre">broadcasting</span></code>, just use the default value of empty list. Default: [].</p></li>
+</ul>
+</dd>
+<dt><strong>Outputs:</strong></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(result\)</span> with the same data type as the inputs.</p></li>
+</ul>
+</dd>
+<dt><strong>Examples:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rhs</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">hb</span><span class="o">.</span><span class="n">Xor</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># expect: [True, False, False]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+
+
+             </article>
+             
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="client_operation_semantics.html" class="btn btn-neutral float-right" title="Client Operation Semantics" accesskey="n" rel="next">Next <img src="_static/images/chevron-right-orange.svg" class="next-page"></a>
+      
+      
+        <a href="get_started.html" class="btn btn-neutral" title="Get Started" accesskey="p" rel="prev"><img src="_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+      
+    </div>
+  
+
+  
+
+    <hr>
+
+  
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HLIR Builder Contributors.
+
+    </p>
+  </div>
+    
+      <div>
+        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+     
+
+</footer>
+
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              <ul>
+<li><a class="reference internal" href="#">Meta Operation Semantics</a><ul>
+<li><a class="reference internal" href="#abs">Abs</a></li>
+<li><a class="reference internal" href="#acos">Acos</a></li>
+<li><a class="reference internal" href="#add">Add</a></li>
+<li><a class="reference internal" href="#and">And</a></li>
+<li><a class="reference internal" href="#asin">Asin</a></li>
+<li><a class="reference internal" href="#asinh">Asinh</a></li>
+<li><a class="reference internal" href="#atan">Atan</a></li>
+<li><a class="reference internal" href="#atan2">Atan2</a></li>
+<li><a class="reference internal" href="#atanh">Atanh</a></li>
+<li><a class="reference internal" href="#ceil">Ceil</a></li>
+<li><a class="reference internal" href="#cos">Cos</a></li>
+<li><a class="reference internal" href="#div">Div</a></li>
+<li><a class="reference internal" href="#exp">Exp</a></li>
+<li><a class="reference internal" href="#id4">Ceil</a></li>
+<li><a class="reference internal" href="#isfinite">IsFinite</a></li>
+<li><a class="reference internal" href="#log">Log</a></li>
+<li><a class="reference internal" href="#max">Max</a></li>
+<li><a class="reference internal" href="#min">Min</a></li>
+<li><a class="reference internal" href="#mul">Mul</a></li>
+<li><a class="reference internal" href="#neg">Neg</a></li>
+<li><a class="reference internal" href="#not">Not</a></li>
+<li><a class="reference internal" href="#or">Or</a></li>
+<li><a class="reference internal" href="#pow">Pow</a></li>
+<li><a class="reference internal" href="#relu">Relu</a></li>
+<li><a class="reference internal" href="#relu6">Relu6</a></li>
+<li><a class="reference internal" href="#rem">Rem</a></li>
+<li><a class="reference internal" href="#round">Round</a></li>
+<li><a class="reference internal" href="#rsqrt">Rsqrt</a></li>
+<li><a class="reference internal" href="#sign">Sign</a></li>
+<li><a class="reference internal" href="#sqrt">Sqrt</a></li>
+<li><a class="reference internal" href="#sub">Sub</a></li>
+<li><a class="reference internal" href="#tanh">Tanh</a></li>
+<li><a class="reference internal" href="#xor">Xor</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+         <script src="_static/jquery.js"></script>
+         <script src="_static/underscore.js"></script>
+         <script src="_static/doctools.js"></script>
+         <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+         <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+     
+
+  
+
+  <script type="text/javascript" src="_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="_static/js/vendor/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <div class="container-fluid docs-tutorials-resources" id="docs-tutorials-resources">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <h2>Docs</h2>
+          <p>Access comprehensive developer documentation for HLIR Builder</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Docs</a> -->
+          <a class="with-right-arrow">View Docs</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Tutorials</h2>
+          <p>Get in-depth tutorials for beginners and advanced developers</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Tutorials</a> -->
+          <a class="with-right-arrow">View Tutorials</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Resources</h2>
+          <p>Find development resources and get your questions answered</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Resources</a> -->
+          <a class="with-right-arrow">View Resources</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <!--<div class="footer-logo-wrapper">
+        <a href="https://www.enflame-tech.com" class="footer-logo"></a>
+      </div>-->
+
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <ul>
+            <!--<li><a href="https://www.enflame-tech.com">Get Started</a></li> -->
+            <li><a>Get Started</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Features</a></li> -->
+            <li><a>C++ API</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Ecosystem</a></li> -->
+            <li><a>Python API</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Blog</a></li> -->
+            <li><a>Tutorials</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Contributing</a></li> -->
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <!--<li class="list-title"><a href="https://www.enflame-tech.com">Resources</a></li> -->
+            <li class="list-title"><a>Contributing</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Tutorials</a></li> -->
+            <!--<li><a href="https://www.enflame-tech.com">Docs</a></li> -->
+            <li><a>Applications</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Discuss</a></li> -->
+            <li><a>Discuss</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Github Issues</a></li> -->
+            <li><a>Github Issues</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Brand Guidelines</a></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cookie-banner-wrapper">
+  <div class="container">
+    <p class="gdpr-notice">To analyze traffic and optimize your experience, we serve cookies on this site. By clicking or navigating, you agree to allow our usage of cookies. As the current maintainers of this site, Facebook’s Cookies Policy applies. Learn more, including about available controls: <a href="https://www.facebook.com/policies/cookies/">Cookies Policy</a>.</p>
+    <img class="close-button" src="_static/images/pytorch-x.svg">
+  </div>
+</div>
+
+  <!-- End Footer -->
+
+  <script type="text/javascript" src="_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+      mainMenuDropdown.bind();
+      filterTags.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

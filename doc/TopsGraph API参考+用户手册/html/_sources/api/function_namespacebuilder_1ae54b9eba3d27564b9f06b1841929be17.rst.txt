@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ae54b9eba3d27564b9f06b1841929be17:
+
+Function builder::BCELoss
+=========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::BCELoss(std::vector<builder::Op>, std::string, builder::Type)
+   :project: HLIR Builder

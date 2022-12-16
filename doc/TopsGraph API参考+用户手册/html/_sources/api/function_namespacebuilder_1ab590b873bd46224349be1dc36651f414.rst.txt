@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ab590b873bd46224349be1dc36651f414:
+
+Function builder::ReduceL2
+==========================
+
+- Defined in :ref:`file_headers_hlir_builder_client_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::ReduceL2(builder::Op, bool, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

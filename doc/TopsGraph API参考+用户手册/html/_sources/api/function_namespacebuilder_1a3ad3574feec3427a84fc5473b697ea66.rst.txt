@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a3ad3574feec3427a84fc5473b697ea66:
+
+Function builder::TensorAttr
+============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::TensorAttr(builder::Op, std::vector<int64_t>, std::vector<int64_t>, std::string, std::string)
+   :project: HLIR Builder

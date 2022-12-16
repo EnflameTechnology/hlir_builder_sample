@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ade59521307cd08f878df2b9497a1c9f9:
+
+Function builder::AveragePoolQuant(builder::Op, std::vector<int64_t>, float, std::vector<int64_t>, bool, bool, std::vector<int64_t>, std::vector<int64_t>, std::string, builder::Type)
+======================================================================================================================================================================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::AveragePoolQuant(builder::Op, std::vector<int64_t>, float, std::vector<int64_t>, bool, bool, std::vector<int64_t>, std::vector<int64_t>, std::string, builder::Type)
+   :project: HLIR Builder

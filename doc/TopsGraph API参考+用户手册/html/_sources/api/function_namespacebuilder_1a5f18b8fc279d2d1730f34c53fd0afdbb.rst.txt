@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a5f18b8fc279d2d1730f34c53fd0afdbb:
+
+Function builder::Duplicate
+===========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Duplicate(builder::Op, int32_t, builder::Type)
+   :project: HLIR Builder

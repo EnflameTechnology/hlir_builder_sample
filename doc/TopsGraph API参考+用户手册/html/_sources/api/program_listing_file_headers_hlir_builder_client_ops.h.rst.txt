@@ -1,0 +1,161 @@
+:github_url: https://github.com/EnflameTechnology
+
+
+.. _program_listing_file_headers_hlir_builder_client_ops.h:
+
+Program Listing for File hlir_builder_client_ops.h
+==================================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_headers_hlir_builder_client_ops.h>` (``headers/hlir_builder_client_ops.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   /*===- TableGen'erated file -------------------------------------*- C++ -*-===*\
+   |*                                                                            *|
+   |* Op Declarations                                                            *|
+   |*                                                                            *|
+   |* Automatically generated file, do not edit!                                 *|
+   |*                                                                            *|
+   \*===----------------------------------------------------------------------===*/
+   
+   #ifndef HLIR_BUILDER_CHLIR_OPS_H_
+   #define HLIR_BUILDER_CHLIR_OPS_H_
+   
+   namespace builder {
+   
+   builder::Op ArgMax(builder::Op data, int64_t axis=0, bool keepdims=true,
+                      bool select_last_index=false,
+                      builder::Type resultType=builder::Type());
+   
+   builder::Op ArgMin(builder::Op data, int64_t axis=0, bool keepdims=true,
+                      bool select_last_index=false,
+                      builder::Type resultType=builder::Type());
+   
+   builder::Op ArgSort(builder::Op input, int64_t axis=0, bool descending=false,
+                       bool only_return_indices=true,
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op Conv1D(std::vector<builder::Op> input, int64_t group=1,
+                      std::string auto_pad="NOTSET", std::string layout="NLC",
+                      std::vector<int64_t> stride = {},
+                      std::vector<int64_t> padding = {},
+                      std::vector<int64_t> dilation = {},
+                      builder::Type resultType=builder::Type());
+   
+   builder::Op Conv1DTranspose(std::vector<builder::Op> input, int64_t group=1,
+                               std::string auto_pad="NOTSET",
+                               std::string layout="NHWC",
+                               std::vector<int64_t> stride = {},
+                               std::vector<int64_t> padding = {},
+                               std::vector<int64_t> output_padding = {},
+                               std::vector<int64_t> dilation = {},
+                               std::vector<int64_t> output_shape = {},
+                               builder::Type resultType=builder::Type());
+   
+   builder::Op Conv2D(std::vector<builder::Op> input, int64_t group=1,
+                      std::string auto_pad="NOTSET", std::string layout="NHWC",
+                      std::vector<int64_t> stride = {},
+                      std::vector<int64_t> padding = {},
+                      std::vector<int64_t> dilation = {},
+                      builder::Type resultType=builder::Type());
+   
+   builder::Op Conv2DTranspose(std::vector<builder::Op> input, int64_t group=1,
+                               std::string auto_pad="NOTSET",
+                               std::string layout="NHWC",
+                               std::vector<int64_t> stride = {},
+                               std::vector<int64_t> padding = {},
+                               std::vector<int64_t> output_padding = {},
+                               std::vector<int64_t> dilation = {},
+                               std::vector<int64_t> output_shape = {},
+                               builder::Type resultType=builder::Type());
+   
+   builder::Op Equal(builder::Op lhs, builder::Op rhs,
+                     std::vector<int64_t> broadcast_dimensions = {},
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op Flatten(builder::Op input, int64_t start_dim=1, int64_t end_dim=-1,
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op GreaterEqual(builder::Op lhs, builder::Op rhs,
+                            std::vector<int64_t> broadcast_dimensions = {},
+                            builder::Type resultType=builder::Type());
+   
+   builder::Op Greater(builder::Op lhs, builder::Op rhs,
+                       std::vector<int64_t> broadcast_dimensions = {},
+                       builder::Type resultType=builder::Type());
+   
+   builder::Op HardSigmoid(builder::Op operand, float slope=0.1666667,
+                           float offset=0.5,
+                           builder::Type resultType=builder::Type());
+   
+   builder::Op HardSwish(builder::Op operand,
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op LessEqual(builder::Op lhs, builder::Op rhs,
+                         std::vector<int64_t> broadcast_dimensions = {},
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op Less(builder::Op lhs, builder::Op rhs,
+                    std::vector<int64_t> broadcast_dimensions = {},
+                    builder::Type resultType=builder::Type());
+   
+   builder::Op MaxPool1D(builder::Op input, std::vector<int64_t> ksize,
+                         bool ceil_mode=false, bool return_indices=false,
+                         std::string auto_pad="NOTSET", std::string layout="NLC",
+                         std::vector<int64_t> stride = {},
+                         std::vector<int64_t> padding = {},
+                         std::vector<int64_t> dilation = {},
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op MaxPool2D(builder::Op input, std::vector<int64_t> ksize,
+                         bool ceil_mode=false, bool return_indices=false,
+                         std::string auto_pad="NOTSET", std::string layout="NHWC",
+                         std::vector<int64_t> stride = {},
+                         std::vector<int64_t> padding = {},
+                         std::vector<int64_t> dilation = {},
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op NotEqual(builder::Op lhs, builder::Op rhs,
+                        std::vector<int64_t> broadcast_dimensions = {},
+                        builder::Type resultType=builder::Type());
+   
+   builder::Op PRelu(builder::Op input, builder::Op slope,
+                     builder::Type resultType=builder::Type());
+   
+   builder::Op Reciprocal(builder::Op operand,
+                          builder::Type resultType=builder::Type());
+   
+   builder::Op ReduceL2(builder::Op input, bool keepdims=false,
+                        std::vector<int64_t> axis = {},
+                        builder::Type resultType=builder::Type());
+   
+   builder::Op ReduceMax(builder::Op input, bool keepdims=false,
+                         std::vector<int64_t> axis = {},
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op ReduceMean(builder::Op input, bool keepdims=false,
+                          std::vector<int64_t> axis = {},
+                          builder::Type resultType=builder::Type());
+   
+   builder::Op ReduceMin(builder::Op input, bool keepdims=false,
+                         std::vector<int64_t> axis = {},
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op ReduceProd(builder::Op input, bool keepdims=false,
+                          std::vector<int64_t> axis = {},
+                          builder::Type resultType=builder::Type());
+   
+   builder::Op ReduceSum(builder::Op input, bool keepdims=false,
+                         std::vector<int64_t> axis = {},
+                         builder::Type resultType=builder::Type());
+   
+   builder::Op Square(builder::Op operand,
+                      builder::Type resultType=builder::Type());
+   
+   
+   }  // namespace builder
+   
+   #endif  // HLIR_BUILDER_CHLIR_OPS_H_
+   

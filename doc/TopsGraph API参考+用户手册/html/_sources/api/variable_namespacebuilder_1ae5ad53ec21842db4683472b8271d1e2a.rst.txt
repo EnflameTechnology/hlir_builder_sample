@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_variable_namespacebuilder_1ae5ad53ec21842db4683472b8271d1e2a:
+
+Variable builder::kUnknownDim
+=============================
+
+- Defined in :ref:`file_headers_hlir_builder_common.h`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: builder::kUnknownDim
+   :project: HLIR Builder

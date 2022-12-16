@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a86aad8ab49887ac4bcad6119b8a98c01:
+
+Function builder::ReduceWindow(std::vector<builder::Op>, std::vector<builder::Op>, std::vector<int64_t>, std::vector<std::string>, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::string, bool, builder::Type)
+============================================================================================================================================================================================================================================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::ReduceWindow(std::vector<builder::Op>, std::vector<builder::Op>, std::vector<int64_t>, std::vector<std::string>, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::string, bool, builder::Type)

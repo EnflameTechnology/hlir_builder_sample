@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a264a698ca37175917ede7a90c932921b:
+
+Function builder::Flatten
+=========================
+
+- Defined in :ref:`file_headers_hlir_builder_client_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Flatten(builder::Op, int64_t, int64_t, builder::Type)
+   :project: HLIR Builder

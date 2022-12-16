@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a4c15c15c22685b9061421923c17de479:
+
+Function builder::GeneralSplit
+==============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::GeneralSplit(builder::Op, builder::Op, int64_t, builder::Type)

@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ab0ba033dd0e31553b4e8049cabe14227:
+
+Function builder::AddQuant
+==========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::AddQuant(builder::Op, builder::Op, float, float, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

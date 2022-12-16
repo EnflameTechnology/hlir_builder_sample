@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ada9ba26b2fa06787f2b7b3ad8b91a35e:
+
+Function builder::MaxRoiPool
+============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::MaxRoiPool(builder::Op, builder::Op, std::vector<int64_t>, std::vector<int64_t>, float, builder::Type)
+   :project: HLIR Builder

@@ -1,0 +1,24 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_struct_structbuilder_1_1_get_call_args:
+
+Template Struct GetCallArgs
+===========================
+
+- Defined in :ref:`file_headers_hlir_builder_common.h`
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: builder::GetCallArgs
+   :project: HLIR Builder
+   :members:
+   :protected-members:
+   :undoc-members:

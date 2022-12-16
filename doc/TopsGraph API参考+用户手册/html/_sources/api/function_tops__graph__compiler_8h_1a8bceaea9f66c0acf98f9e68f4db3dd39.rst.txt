@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_tops__graph__compiler_8h_1a8bceaea9f66c0acf98f9e68f4db3dd39:
+
+Function topsgraphCompileProgram
+================================
+
+- Defined in :ref:`file_headers_tops_graph_compiler.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: topsgraphCompileProgram(topsgraphProgram, int, const char **)
+   :project: HLIR Builder

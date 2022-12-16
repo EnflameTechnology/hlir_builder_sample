@@ -1,0 +1,427 @@
+:github_url: https://github.com/EnflameTechnology
+
+
+.. _file_headers_hlir_builder_ops.h:
+
+File hlir_builder_ops.h
+=======================
+
+|exhale_lsh| :ref:`Parent directory <dir_headers>` (``headers``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``headers/hlir_builder_ops.h``)
+-------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_headers_hlir_builder_ops.h.rst
+
+
+
+
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_headers_hlir_builder.h`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_builder`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_namespacebuilder_1a614e65575eb9e4ea12211c108ae683e5`
+
+- :ref:`exhale_function_namespacebuilder_1a5213b36ec50a0d68fe34d638e0810ae0`
+
+- :ref:`exhale_function_namespacebuilder_1a0aa42c765cebf6e9ecba9bd2d381886e`
+
+- :ref:`exhale_function_namespacebuilder_1ab0ba033dd0e31553b4e8049cabe14227`
+
+- :ref:`exhale_function_namespacebuilder_1ae2ad0ccc307f6d2dfee855015b64165f`
+
+- :ref:`exhale_function_namespacebuilder_1ab143f67f0f40d04d149d21dcf963f0fa`
+
+- :ref:`exhale_function_namespacebuilder_1a0940e9939e64642408d325d48f5b7417`
+
+- :ref:`exhale_function_namespacebuilder_1a7c61c42aefe7bb077b426b68b532e93c`
+
+- :ref:`exhale_function_namespacebuilder_1a14c25b3e2d79394065dcce878781deac`
+
+- :ref:`exhale_function_namespacebuilder_1a883fcbe54bfc0cc6b234823b483ea015`
+
+- :ref:`exhale_function_namespacebuilder_1aef3f2f5e4726957429a081d8e567e9ba`
+
+- :ref:`exhale_function_namespacebuilder_1a53e27239a9ee73e3e2870cc261856321`
+
+- :ref:`exhale_function_namespacebuilder_1a33097565e24a7f338074b992ab011035`
+
+- :ref:`exhale_function_namespacebuilder_1a6f776bd65095d41bbc5ec5d9ad622c59`
+
+- :ref:`exhale_function_namespacebuilder_1ade58bd84ed101b4dbc360cd8de1dc5f3`
+
+- :ref:`exhale_function_namespacebuilder_1ade59521307cd08f878df2b9497a1c9f9`
+
+- :ref:`exhale_function_namespacebuilder_1a03332442964954daa48b9e3883a2b2dc`
+
+- :ref:`exhale_function_namespacebuilder_1a5e07633e7ceb045a7103665337b8700e`
+
+- :ref:`exhale_function_namespacebuilder_1af45f236b46e99345face0db3b5e643e4`
+
+- :ref:`exhale_function_namespacebuilder_1ad7a50fc211f23df71d1122359aaf4b65`
+
+- :ref:`exhale_function_namespacebuilder_1a72f37ce8e8ad951a8953bb1a21b09502`
+
+- :ref:`exhale_function_namespacebuilder_1ae54b9eba3d27564b9f06b1841929be17`
+
+- :ref:`exhale_function_namespacebuilder_1acf753b1c4f6c1dfc82720e52cff0fb86`
+
+- :ref:`exhale_function_namespacebuilder_1a02e13892ccce29fbafdc78eb3dd4599b`
+
+- :ref:`exhale_function_namespacebuilder_1ad1659c27b77bc7d53c92bc42b57b2fc1`
+
+- :ref:`exhale_function_namespacebuilder_1ab31f0027f3c1aa2e91ce403aaf75fa94`
+
+- :ref:`exhale_function_namespacebuilder_1a1f2b36a597c2fce31adbaff22c394668`
+
+- :ref:`exhale_function_namespacebuilder_1aab64428402130ff4697fe408a4a5f09c`
+
+- :ref:`exhale_function_namespacebuilder_1a1a09483c923c8cd359e36b1599fbfefb`
+
+- :ref:`exhale_function_namespacebuilder_1ac926eae59a147910be2a1e42518fd966`
+
+- :ref:`exhale_function_namespacebuilder_1a2614523259de4276a4a2a2cfce46f8bb`
+
+- :ref:`exhale_function_namespacebuilder_1a3223411bbab7c2fffac7a19b7b211913`
+
+- :ref:`exhale_function_namespacebuilder_1a46ff6a2d2a902fa7e431c29fd4564419`
+
+- :ref:`exhale_function_namespacebuilder_1a832c64f21a88bf0f77f9723813ddc1e1`
+
+- :ref:`exhale_function_namespacebuilder_1a988d350679b988b4f4f8d441c311a360`
+
+- :ref:`exhale_function_namespacebuilder_1a09ff373cd9c65bc69a060bec0f8b68ab`
+
+- :ref:`exhale_function_namespacebuilder_1aec4e6f31b4dcb89a13bf7542fb994392`
+
+- :ref:`exhale_function_namespacebuilder_1a20a6eca0d1712c1ea363b004b95d5769`
+
+- :ref:`exhale_function_namespacebuilder_1a8dcc6faaa73848431d6a81a7b202ac42`
+
+- :ref:`exhale_function_namespacebuilder_1a78d65cdc042d357daaf11e894729a680`
+
+- :ref:`exhale_function_namespacebuilder_1aaf35b0463d23320d5e3d52f3cc4d4b17`
+
+- :ref:`exhale_function_namespacebuilder_1a59e08e37f1ff5920bc7f912439ffb5b3`
+
+- :ref:`exhale_function_namespacebuilder_1a33837a1fd772d1245d2f57e9513e604d`
+
+- :ref:`exhale_function_namespacebuilder_1a958549613fcf89adf8bc7bd7941475ab`
+
+- :ref:`exhale_function_namespacebuilder_1a6a2fd01fe55742126668854405ab0a0e`
+
+- :ref:`exhale_function_namespacebuilder_1adba33c82f86d26d5587450ecbbef67e1`
+
+- :ref:`exhale_function_namespacebuilder_1a7213a3b82d6c0b338c578cbd6607e0c8`
+
+- :ref:`exhale_function_namespacebuilder_1a1d6c43048f8cc0a29dcb10b1410406c8`
+
+- :ref:`exhale_function_namespacebuilder_1ab908c7941b9330363b8cf44951d395d4`
+
+- :ref:`exhale_function_namespacebuilder_1a7375ce03e133b1328f7536a3c42ad176`
+
+- :ref:`exhale_function_namespacebuilder_1a29fdad866a49b1bb11b31a3f42886141`
+
+- :ref:`exhale_function_namespacebuilder_1a02d9e568710c22a7d4201ee30e6450c8`
+
+- :ref:`exhale_function_namespacebuilder_1ac1944269db550725e9ee0026f3084e0d`
+
+- :ref:`exhale_function_namespacebuilder_1a58fea792c64c8174a67ce999c7603032`
+
+- :ref:`exhale_function_namespacebuilder_1a256ac8741ca052830790362567ac0ca9`
+
+- :ref:`exhale_function_namespacebuilder_1a5f18b8fc279d2d1730f34c53fd0afdbb`
+
+- :ref:`exhale_function_namespacebuilder_1adb6b5c11c6fdbf9840306ba66db2f594`
+
+- :ref:`exhale_function_namespacebuilder_1a07c1e41a999c4d3e1ff1ea3599ac3150`
+
+- :ref:`exhale_function_namespacebuilder_1a02348d5e755bdfdcb56af566503c73d8`
+
+- :ref:`exhale_function_namespacebuilder_1a0de171b69416b74c534568692bab0d34`
+
+- :ref:`exhale_function_namespacebuilder_1a1bbeb900ba236bbdfbc08d60ca6fe55a`
+
+- :ref:`exhale_function_namespacebuilder_1ae5b00b288d0ee114e105c9e992ecef8c`
+
+- :ref:`exhale_function_namespacebuilder_1a48ec84aae0e6d6275b700e4d74bd6346`
+
+- :ref:`exhale_function_namespacebuilder_1a44cc689495370298fe1347e827f4e32e`
+
+- :ref:`exhale_function_namespacebuilder_1a2135ea82cd992eff603e113af25c7c12`
+
+- :ref:`exhale_function_namespacebuilder_1a6f52c54476086af3d0139959b31e43c4`
+
+- :ref:`exhale_function_namespacebuilder_1a1c8390f31c9cd026c29895a6d378d0bb`
+
+- :ref:`exhale_function_namespacebuilder_1afff00d93c34f371ab45ecf86ed4b60f5`
+
+- :ref:`exhale_function_namespacebuilder_1abc7a807143901c998c5bd50fbd6b388c`
+
+- :ref:`exhale_function_namespacebuilder_1a9dcb7825c3676c32c22458a0e5bff672`
+
+- :ref:`exhale_function_namespacebuilder_1ab4a0766133c27584a81530d3ffc4e8d1`
+
+- :ref:`exhale_function_namespacebuilder_1a66706c96eb0ebb70e7c198ad66773df0`
+
+- :ref:`exhale_function_namespacebuilder_1ad1f3547a6433ef48fcdadffd3529dee0`
+
+- :ref:`exhale_function_namespacebuilder_1ac3cdd13fd94b2206d8b693feeb8d25c3`
+
+- :ref:`exhale_function_namespacebuilder_1a450bc2e070e155cb55798de65d1fd427`
+
+- :ref:`exhale_function_namespacebuilder_1ab4dff7fea31371489f70108173f43285`
+
+- :ref:`exhale_function_namespacebuilder_1a290a3ea76322b4c4845003fbd49f5ce6`
+
+- :ref:`exhale_function_namespacebuilder_1aaecfab6366700936e451a5228fb05d00`
+
+- :ref:`exhale_function_namespacebuilder_1a9fe64e55efc3e49f5dd87d9ccc8cf47d`
+
+- :ref:`exhale_function_namespacebuilder_1ae87889ee31e9b22e5a8ff6809b1f62eb`
+
+- :ref:`exhale_function_namespacebuilder_1addffe9072f88a26a1e5c0d26045eb4bf`
+
+- :ref:`exhale_function_namespacebuilder_1af8dc3feeda9a9144e7b62926abf16602`
+
+- :ref:`exhale_function_namespacebuilder_1adcd38613f004881171e2560ea0382514`
+
+- :ref:`exhale_function_namespacebuilder_1a499af89f499f2894c60bd1047cb51f6e`
+
+- :ref:`exhale_function_namespacebuilder_1a814fdd2e2bd9e982d9d05946e85b877c`
+
+- :ref:`exhale_function_namespacebuilder_1a3666f873280fd5eb01326ef26bc94802`
+
+- :ref:`exhale_function_namespacebuilder_1a8e3448174a32edd7749e5ee2f5b64c49`
+
+- :ref:`exhale_function_namespacebuilder_1a3c7320e68eac8047a5c999963897fea2`
+
+- :ref:`exhale_function_namespacebuilder_1af545f225b2cc92d6ebecc661105394f8`
+
+- :ref:`exhale_function_namespacebuilder_1a6faf66cce2be1b014660c2faaefb5a3d`
+
+- :ref:`exhale_function_namespacebuilder_1a720f93bb5c196bd0c9146e34ae828ee6`
+
+- :ref:`exhale_function_namespacebuilder_1afc4d093583c2aa8300ac94b2e44fac72`
+
+- :ref:`exhale_function_namespacebuilder_1a49727565c3d2dcb4c9d92820fc2677ba`
+
+- :ref:`exhale_function_namespacebuilder_1ada9ba26b2fa06787f2b7b3ad8b91a35e`
+
+- :ref:`exhale_function_namespacebuilder_1acc59b7896aec1e53502ccc8bd86929e4`
+
+- :ref:`exhale_function_namespacebuilder_1a168b5b3c29d5b3c90327c8b9c97cfab9`
+
+- :ref:`exhale_function_namespacebuilder_1a661ee279bd25f353161f687ad311e61a`
+
+- :ref:`exhale_function_namespacebuilder_1a3f679e59062e2320b47660e39396893c`
+
+- :ref:`exhale_function_namespacebuilder_1a9633c120703af895a08bb7b47f8f0197`
+
+- :ref:`exhale_function_namespacebuilder_1a4466cd3f32e5cdcf0e80090d4a73ad13`
+
+- :ref:`exhale_function_namespacebuilder_1a04d4c43f075ac0a4cc3740156a82d8c0`
+
+- :ref:`exhale_function_namespacebuilder_1a91cdc14d3d23d1c2d2af3304b76dd0d9`
+
+- :ref:`exhale_function_namespacebuilder_1affa8dcb195e35f1e2ffd90d6246dd83b`
+
+- :ref:`exhale_function_namespacebuilder_1aa5441b2dd24a97f54a7a8c3a0403c6f3`
+
+- :ref:`exhale_function_namespacebuilder_1a4143d23a83debd02faf0a77e358b295b`
+
+- :ref:`exhale_function_namespacebuilder_1a8c9d6e7619bf3c92b9cef3bd6c91f2d8`
+
+- :ref:`exhale_function_namespacebuilder_1af30fd86379ecff9a268a7027414a4edd`
+
+- :ref:`exhale_function_namespacebuilder_1a44aac9ee300750eeb3564d26b190fb99`
+
+- :ref:`exhale_function_namespacebuilder_1a8204a05e36c9d8cfd8a55875d799d7bd`
+
+- :ref:`exhale_function_namespacebuilder_1a255f690dcbba0db94d2f0a4d6e5220db`
+
+- :ref:`exhale_function_namespacebuilder_1a2a7c8befd90170d6ce77b729ef08475b`
+
+- :ref:`exhale_function_namespacebuilder_1a349bf70d8354bc840751be42b181288a`
+
+- :ref:`exhale_function_namespacebuilder_1a60bd298a043ace06d0e8253f08fa0739`
+
+- :ref:`exhale_function_namespacebuilder_1ac54a092a75ca4b0fead94cc1ce60d84a`
+
+- :ref:`exhale_function_namespacebuilder_1afb99d9a02c7c5d561b5d8862b1842d01`
+
+- :ref:`exhale_function_namespacebuilder_1ab388aecae70e546e4034cb392d7e720c`
+
+- :ref:`exhale_function_namespacebuilder_1addb6e6fcb14fc6f88f1a17fbd791c368`
+
+- :ref:`exhale_function_namespacebuilder_1ac862901eeaa905e4582f742a9fef35d8`
+
+- :ref:`exhale_function_namespacebuilder_1aab635c0355f5175f0b861b71d045176a`
+
+- :ref:`exhale_function_namespacebuilder_1ac008742fb81c8691eb2bd270f8e3a15e`
+
+- :ref:`exhale_function_namespacebuilder_1a5cdaca0e5f1d5f13d4d21377b0033a40`
+
+- :ref:`exhale_function_namespacebuilder_1ab58d862ec6b55e14b5cae01b69d4e9b1`
+
+- :ref:`exhale_function_namespacebuilder_1adc967ea6ec574094ed90368ce3a95390`
+
+- :ref:`exhale_function_namespacebuilder_1a373b0240e9556dcb5f1d1283cd028293`
+
+- :ref:`exhale_function_namespacebuilder_1a88c9d7b67fe698bc51405564a6f41f7a`
+
+- :ref:`exhale_function_namespacebuilder_1a5d683d234a05c52f1b89198455cf804e`
+
+- :ref:`exhale_function_namespacebuilder_1a9106eb170ccd8a33ac852b63217a56e6`
+
+- :ref:`exhale_function_namespacebuilder_1aa4adfafb3b374c5db7fa62d7b0db5216`
+
+- :ref:`exhale_function_namespacebuilder_1a4d1a04ba989954c1d5cc73d1c899d3f5`
+
+- :ref:`exhale_function_namespacebuilder_1ae3ddfefeda6bced64262257bc0243120`
+
+- :ref:`exhale_function_namespacebuilder_1a018379092369f18102eaee8da3afacf9`
+
+- :ref:`exhale_function_namespacebuilder_1a9c8d0bf425263893dce309a3203f096a`
+
+- :ref:`exhale_function_namespacebuilder_1a48c8cfa49e7435adbd149b8919c9149e`
+
+- :ref:`exhale_function_namespacebuilder_1a5eedac0d765cf4468e06c007653d9b72`
+
+- :ref:`exhale_function_namespacebuilder_1aff25810f119e6579a8e5f6ca64e2d183`
+
+- :ref:`exhale_function_namespacebuilder_1aeb33c36fe4011a345a9668c12dc41ccd`
+
+- :ref:`exhale_function_namespacebuilder_1a2c13f232b5883b152d4b3b78c1ef1b50`
+
+- :ref:`exhale_function_namespacebuilder_1a59bee3d68fc9dbbfecf5df359ac1b271`
+
+- :ref:`exhale_function_namespacebuilder_1a4055dfe34be6951c1fe62f30430e0d1b`
+
+- :ref:`exhale_function_namespacebuilder_1ac7772d17dc013da6b9f30f7abbc215ca`
+
+- :ref:`exhale_function_namespacebuilder_1a4ae698020cf74ee25c357217d6f5fbe3`
+
+- :ref:`exhale_function_namespacebuilder_1ad52b86ec57cd9b42fbc701745bb538a8`
+
+- :ref:`exhale_function_namespacebuilder_1a82cc2cb45fbd5eb86d958fcc9a76a2ac`
+
+- :ref:`exhale_function_namespacebuilder_1a7d88d4464af104ec518ee74fcee6271e`
+
+- :ref:`exhale_function_namespacebuilder_1a9c4ac4aec2676419d04e57e7ad18a668`
+
+- :ref:`exhale_function_namespacebuilder_1afb113c6221a3359a86a95c3d78fdd25d`
+
+- :ref:`exhale_function_namespacebuilder_1a3838d9c2ee47615883a005779faa8309`
+
+- :ref:`exhale_function_namespacebuilder_1aa9ae0f9f48ca8cc99ffad7571a68340e`
+
+- :ref:`exhale_function_namespacebuilder_1acc1153b12e2be426a3c05adf24fef0f4`
+
+- :ref:`exhale_function_namespacebuilder_1a4184a95eaaeb3a80aa784ebc9251c508`
+
+- :ref:`exhale_function_namespacebuilder_1a0ede5a19cf982aebe5a85fd0ea8fbf82`
+
+- :ref:`exhale_function_namespacebuilder_1a322f8f936ff4ec48b43574186f6cc33c`
+
+- :ref:`exhale_function_namespacebuilder_1aef73bc66efb2580b38f3f2fa90ec57af`
+
+- :ref:`exhale_function_namespacebuilder_1af5174a456941c00d70d1731ed49ff854`
+
+- :ref:`exhale_function_namespacebuilder_1aebea298be31c176ae0ef654a5c5560f5`
+
+- :ref:`exhale_function_namespacebuilder_1acc4bbec093abc63e8645722b85acbd36`
+
+- :ref:`exhale_function_namespacebuilder_1a8f3529f88a43469cf017357d6d96935b`
+
+- :ref:`exhale_function_namespacebuilder_1a216c343845dfb35d5d14a8f7e8013c58`
+
+- :ref:`exhale_function_namespacebuilder_1a64a3ec45dad8beaf2cdf6c7dd268d508`
+
+- :ref:`exhale_function_namespacebuilder_1a92cfecd3267b72566e52dd4555b64df3`
+
+- :ref:`exhale_function_namespacebuilder_1a67638ffebd39da8103d97542dad273c8`
+
+- :ref:`exhale_function_namespacebuilder_1a0b0e1b68078938712e6242616f65cbba`
+
+- :ref:`exhale_function_namespacebuilder_1ab9e605b12f6ff82fd2c01bd11b2eb08c`
+
+- :ref:`exhale_function_namespacebuilder_1a71de47e9c6c0de27ea518892b34f0b33`
+
+- :ref:`exhale_function_namespacebuilder_1a194c06b7c9ca29898249d3af99499701`
+
+- :ref:`exhale_function_namespacebuilder_1ac3513672196d5addd92c46d16f0a659d`
+
+- :ref:`exhale_function_namespacebuilder_1a8092efb664a88387a377ad0a01eb8485`
+
+- :ref:`exhale_function_namespacebuilder_1a4f3ef168690273de8b1cef7f09ff4f96`
+
+- :ref:`exhale_function_namespacebuilder_1a15a76207f2703b4db02de348300a66cd`
+
+- :ref:`exhale_function_namespacebuilder_1a75b801b677a7a2fd5c4ea234c7908aa7`
+
+- :ref:`exhale_function_namespacebuilder_1aab3963fa77f3db2e89bb18382c0884ec`
+
+- :ref:`exhale_function_namespacebuilder_1a2b6377ea158a66b359e02e3c90f369e5`
+
+- :ref:`exhale_function_namespacebuilder_1a1199bff1c975316edc75ae6c5960452b`
+
+- :ref:`exhale_function_namespacebuilder_1a643f2da869d25d47d2030ad1f9fece79`
+
+- :ref:`exhale_function_namespacebuilder_1aff3e4300010fb9c4267e9112527e35f2`
+
+- :ref:`exhale_function_namespacebuilder_1a0abf05a938a4d749fd947d3df71db9b6`
+
+- :ref:`exhale_function_namespacebuilder_1ad6dbf11b1804ccfd4bfa2e87e8c3b151`
+
+- :ref:`exhale_function_namespacebuilder_1a0dd84b5d5eca92be7872d9fc0bda0072`
+
+- :ref:`exhale_function_namespacebuilder_1a0080ce0defc081456a6f91b1764db2c3`
+
+- :ref:`exhale_function_namespacebuilder_1a5566c7bdaa883880587429177a16a58d`
+
+- :ref:`exhale_function_namespacebuilder_1a08cf1c3ed0b48c79cab3f1afd4e1140a`
+
+- :ref:`exhale_function_namespacebuilder_1a27164decbd0246b7d918fb98e3f88924`
+
+- :ref:`exhale_function_namespacebuilder_1aa031f3332b5ec77b761ed98f441c6bdf`
+
+- :ref:`exhale_function_namespacebuilder_1a958d6e04d4667e79beba0ab6bfd152ef`
+
+- :ref:`exhale_function_namespacebuilder_1a6d003b5a1b80944b66648c4ce1675998`
+
+- :ref:`exhale_function_namespacebuilder_1a2f74038508bbfed95bedd8b4e85a4daf`
+
+- :ref:`exhale_function_namespacebuilder_1a682984c895209f0fab2b67d730ec0b3f`
+
+- :ref:`exhale_function_namespacebuilder_1aa6ff9138c783f313d3f66d52a1b1a922`
+

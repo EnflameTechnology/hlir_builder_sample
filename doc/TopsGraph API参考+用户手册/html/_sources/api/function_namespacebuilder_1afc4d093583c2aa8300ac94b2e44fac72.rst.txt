@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1afc4d093583c2aa8300ac94b2e44fac72:
+
+Function builder::MaxPool(builder::Op, std::vector<int64_t>, bool, bool, int64_t, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::string, builder::Type)
+===============================================================================================================================================================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::MaxPool(builder::Op, std::vector<int64_t>, bool, bool, int64_t, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::string, builder::Type)
+   :project: HLIR Builder

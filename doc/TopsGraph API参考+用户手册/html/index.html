@@ -1,0 +1,790 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>HLIR Builder C++ API &mdash; HLIR Builder master documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://pytorch.org/docs/stable/index.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="_static/cpp_theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Get Started" href="get_started.html" />
+  <!-- Google Analytics -->
+  
+  <!-- End Google Analytics -->
+  
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <!--a class="header-logo" href="https://www.enflame-tech.com" aria-label="Builder"></a> -->
+      <a class="header-logo" aria-label="Builder"></a>
+
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a class="reference internal" href="get_started.html">Get Started</a>
+          </li>
+
+          <li>
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="resource-option with-down-orange-arrow">
+                Operation Semantics
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="doc-dropdown-option nav-dropdown-item" href="meta_operation_semantics.html">
+                  <span class="dropdown-title">Meta Ops</span>
+                  <p></p>
+                </a>
+                <a class="doc-dropdown-option nav-dropdown-item" href="client_operation_semantics.html">
+                  <span class="dropdown-title">Client Ops</span>
+                  <p></p>
+                </a>
+            </div>
+          </li>
+
+          <li>
+            <a class="reference internal" href="api/library_root.html">C++ API</a>
+          </li>
+
+          <li>
+            <!--<a href="https://www.enflame-tech.com">Python API</a> -->
+            <a>Python API</a>
+          </li>
+
+          <li>
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="resource-option with-down-orange-arrow">
+                Tutorials
+              </a>
+              <div class="resources-dropdown-menu">
+                <!--<a class="doc-dropdown-option nav-dropdown-item" href="https://www.enflame-tech.com"> -->
+                <a class="doc-dropdown-option nav-dropdown-item">
+                  <span class="dropdown-title">Inference</span>
+                  <p></p>
+                </a>
+                <!--<a class="doc-dropdown-option nav-dropdown-item" href="https://www.enflame-tech.com"> -->
+                <a class="doc-dropdown-option nav-dropdown-item">
+                  <span class="dropdown-title">Trainning</span>
+                  <p></p>
+                </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+  </div>
+</div>
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  master
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="get_started.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="meta_operation_semantics.html">Meta Operation Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client_operation_semantics.html">Client Operation Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tops_graph_compiler.html">TopsGraph Compiler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/library_root.html">C++ API</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notes/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/version.html">Version</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="#">
+          
+            Docs
+          
+        </a> &gt;
+      </li>
+
+        
+      <li>HLIR Builder C++ API</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"><img src="_static/images/view-page-source-icon.svg"></a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+
+        
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <div class="section" id="hlir-builder-c-api">
+<h1>HLIR Builder C++ API<a class="headerlink" href="#hlir-builder-c-api" title="Permalink to this headline">¶</a></h1>
+<p>These pages provide the documentation for the public portions of the HLIR Builder C++
+API.  This API can roughly be divided into four parts:</p>
+<ul class="simple">
+<li><p><strong>Builder</strong>: Global handle for building up the high level IR(Intermediate Representation).</p></li>
+<li><p><strong>Op</strong>: Fundamental operators to build the the IR, and there are hundreds of interfaces.</p></li>
+<li><p><strong>Type</strong>: Basic struct constains information of shape and primitive data type for the reuslt of Ops.</p></li>
+<li><p><strong>Attribute</strong>: Attributes that can be bound to <code class="docutils literal notranslate"><span class="pre">module</span></code>, <code class="docutils literal notranslate"><span class="pre">func</span></code> or <code class="docutils literal notranslate"><span class="pre">op</span></code> of the IR.</p></li>
+</ul>
+<p>HLIR Builder is the entrance to build up the high level IR for Enflame DTU.
+It is currently in use at Enflame in ONNX Bridge, and PyTorch/TensorFlow Bridge for the future.
+We are looking forward to welcome more users of the HLIR Builder C++ API.</p>
+<div class="section" id="builder">
+<h2>Builder<a class="headerlink" href="#builder" title="Permalink to this headline">¶</a></h2>
+<p>Builder is a global handle to build IR, which consists of Ops. You can use it to</p>
+<ul class="simple">
+<li><p>turn on or off Shape Inference of each Ops, including shape &amp; type inference;</p></li>
+<li><p>create functions, and <code class="docutils literal notranslate"><span class="pre">main</span></code> is created by default;</p></li>
+<li><p>set input/output of a specific function, and default is <code class="docutils literal notranslate"><span class="pre">main</span></code> when no function name is specified;</p></li>
+<li><p>print or dump the built IR, and PrintingFlags can be used to control the print behavior;</p></li>
+<li><p>get the built IR via a hlir::Module instance.</p></li>
+</ul>
+<p>A simple example of using Builder could look as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hlir_builder/hlir_builder.h&quot;</span><span class="cp"></span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">builder</span><span class="o">::</span><span class="n">Builder</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetShapeInference</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">ptype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">::</span><span class="n">F32</span><span class="p">();</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">};</span><span class="w"></span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="nf">type</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span><span class="w"> </span><span class="n">ptype</span><span class="p">);</span><span class="w"></span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">arg0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">arg1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">arg2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arg0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">arg1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">arg2</span><span class="p">;</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetOutput</span><span class="p">({</span><span class="n">res</span><span class="p">});</span><span class="w"></span>
+
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">AddFunc</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">arg0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foo&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">arg1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foo&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">arg2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foo&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Add</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span><span class="w"> </span><span class="n">arg2</span><span class="p">);</span><span class="w"></span>
+<span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Add</span><span class="p">(</span><span class="n">arg0</span><span class="p">,</span><span class="w"> </span><span class="n">res</span><span class="p">);</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetOutput</span><span class="p">({</span><span class="n">res</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;foo&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">Dump</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The built IR is:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>module {
+  func @foo(%arg0: tensor&lt;3x2xf32&gt;, %arg1: tensor&lt;3x2xf32&gt;, %arg2: tensor&lt;3x2xf32&gt;) -&gt; tensor&lt;3x2xf32&gt; {
+    %0 = &quot;dtu_hlir.add&quot;(%arg1, %arg2) : (tensor&lt;3x2xf32&gt;, tensor&lt;3x2xf32&gt;) -&gt; tensor&lt;3x2xf32&gt;
+    %1 = &quot;dtu_hlir.add&quot;(%arg0, %0) : (tensor&lt;3x2xf32&gt;, tensor&lt;3x2xf32&gt;) -&gt; tensor&lt;3x2xf32&gt;
+    &quot;dtu_hlir.return&quot;(%1) : (tensor&lt;3x2xf32&gt;) -&gt; ()
+  }
+  func @main(%arg0: tensor&lt;3x2xf32&gt;, %arg1: tensor&lt;3x2xf32&gt;, %arg2: tensor&lt;3x2xf32&gt;) -&gt; tensor&lt;3x2xf32&gt; {
+    %0 = &quot;dtu_hlir.mul&quot;(%arg1, %arg2) : (tensor&lt;3x2xf32&gt;, tensor&lt;3x2xf32&gt;) -&gt; tensor&lt;3x2xf32&gt;
+    %1 = &quot;dtu_hlir.add&quot;(%arg0, %0) : (tensor&lt;3x2xf32&gt;, tensor&lt;3x2xf32&gt;) -&gt; tensor&lt;3x2xf32&gt;
+    return %1 : tensor&lt;3x2xf32&gt;
+  }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="op">
+<h2>Op<a class="headerlink" href="#op" title="Permalink to this headline">¶</a></h2>
+<p>Op is short for operator, which is the basic unit to build the IR.
+All ops can be classified as client ops and meta ops, but you can completely ignore the differences while using the interfaces.</p>
+<ul class="simple">
+<li><p>meta ops are atomic operators that are implemented by the hardware;</p></li>
+<li><p>client ops can be decomposed to meta ops and aim for ease of use;</p></li>
+</ul>
+<p>There are hundreds of Op interfaces including some overloaded operators as following:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Overloaded Operator</p></th>
+<th class="head"><p>Op Inferface</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">builder::Op</span> <span class="pre">Neg(builder::Op</span> <span class="pre">operand)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">~</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">builder::Op</span> <span class="pre">Not(builder::Op</span> <span class="pre">operand)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">builder::Op</span> <span class="pre">Add(builder::Op</span> <span class="pre">lhs,</span> <span class="pre">builder::Op</span> <span class="pre">rhs)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">builder::Op</span> <span class="pre">Sub(builder::Op</span> <span class="pre">lhs,</span> <span class="pre">builder::Op</span> <span class="pre">rhs)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">builder::Op</span> <span class="pre">Mul(builder::Op</span> <span class="pre">lhs,</span> <span class="pre">builder::Op</span> <span class="pre">rhs)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">builder::Op</span> <span class="pre">Div(builder::Op</span> <span class="pre">lhs,</span> <span class="pre">builder::Op</span> <span class="pre">rhs)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">builder::Op</span> <span class="pre">Rem(builder::Op</span> <span class="pre">lhs,</span> <span class="pre">builder::Op</span> <span class="pre">rhs)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">builder::Op</span> <span class="pre">And(builder::Op</span> <span class="pre">lhs,</span> <span class="pre">builder::Op</span> <span class="pre">rhs)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">|</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">builder::Op</span> <span class="pre">Or(builder::Op</span> <span class="pre">lhs,</span> <span class="pre">builder::Op</span> <span class="pre">rhs)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">^</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">builder::Op</span> <span class="pre">Xor(builder::Op</span> <span class="pre">lhs,</span> <span class="pre">builder::Op</span> <span class="pre">rhs)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>There is an agument named resultType which means the Type of the output for this Op. It’s mostly can be infered if builder-&gt;SetShapeInference(true).
+But for sereval ops such as <code class="docutils literal notranslate"><span class="pre">Reshape</span></code> or <code class="docutils literal notranslate"><span class="pre">Convert</span></code>, it should be set explicitly.</p>
+</div>
+<div class="section" id="type">
+<h2>Type<a class="headerlink" href="#type" title="Permalink to this headline">¶</a></h2>
+<p>Type represents the output type of an Op. It contains the information of both the shape and the PrimitiveType, which stands for the basic data types.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>PrimitiveType</p></th>
+<th class="head"><p>Basic data type in C++</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NONE()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">none(for</span> <span class="pre">unkown</span> <span class="pre">data</span> <span class="pre">type)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PRED()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">S8()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int8_t</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">S16()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int16_t</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">F16()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">half(not</span> <span class="pre">a</span> <span class="pre">standard</span> <span class="pre">C++</span> <span class="pre">type)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">BF16()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bfloat16(not</span> <span class="pre">a</span> <span class="pre">standard</span> <span class="pre">C++</span> <span class="pre">type)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">S32()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int32_t</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">F32()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">S64()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int64_t</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">F64()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">double</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">TUPLE()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tuple(a</span> <span class="pre">list</span> <span class="pre">of</span> <span class="pre">above</span> <span class="pre">types)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In shape of {-1, 3, 224, 224}, <code class="docutils literal notranslate"><span class="pre">-1</span></code> means unkown dim;
+Shape of {-2} means unkown rank and shape, used for dynamic shape models.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>At the moment, unsigned integers(uint8_t, uint16_t, uint32_t, uint64_t) are not
+supported because of the old version of mlir we are using. The problem will be
+solved by upgrading the depended mlir. Another problem is that users should prepare
+the <code class="docutils literal notranslate"><span class="pre">float16.h</span></code> and <code class="docutils literal notranslate"><span class="pre">bfloat16.h</span></code> by themselves when there is need to use
+<code class="docutils literal notranslate"><span class="pre">F16()</span></code> and <code class="docutils literal notranslate"><span class="pre">BF16()</span></code> as inputs or construct <code class="docutils literal notranslate"><span class="pre">Const</span></code> ops with these primitive types.</p>
+</div>
+</div>
+<div class="section" id="attribute">
+<h2>Attribute<a class="headerlink" href="#attribute" title="Permalink to this headline">¶</a></h2>
+<p>Attributes are known-constant values of modules, functions and operators in the IR.
+There are kinds of attributes can be defined and bound to the targets.</p>
+<p>A simple example of set attributes could look as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;hlir_builder/hlir_builder.h&quot;</span><span class="cp"></span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">builder</span><span class="o">::</span><span class="n">Builder</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">ptype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">::</span><span class="n">S64</span><span class="p">();</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">};</span><span class="w"></span>
+<span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="nf">type</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span><span class="w"> </span><span class="n">ptype</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">arg0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">arg1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">-&gt;</span><span class="n">CreateInput</span><span class="p">(</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arg0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">arg1</span><span class="p">;</span><span class="w"></span>
+<span class="c1">// set attributes of Op</span>
+<span class="n">res</span><span class="p">.</span><span class="n">SetAttribute</span><span class="p">(</span><span class="s">&quot;op_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Attribute</span><span class="p">(</span><span class="s">&quot;sum&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="n">res</span><span class="p">.</span><span class="n">SetAttribute</span><span class="p">(</span><span class="s">&quot;op_type&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Attribute</span><span class="p">(</span><span class="s">&quot;Add&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetOutput</span><span class="p">({</span><span class="n">res</span><span class="p">});</span><span class="w"></span>
+<span class="c1">// construct an Array Attribute</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">builder</span><span class="o">::</span><span class="n">Attribute</span><span class="o">&gt;</span><span class="w"> </span><span class="n">min_shape_dim</span><span class="p">;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">min_shape_0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">};</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">dtype_i64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">PrimitiveType</span><span class="o">::</span><span class="n">S64</span><span class="p">();</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">attr_0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Attribute</span><span class="p">(</span><span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="p">({</span><span class="mi">2</span><span class="p">},</span><span class="w"> </span><span class="n">dtype_i64</span><span class="p">),</span><span class="w"></span>
+<span class="w">                                 </span><span class="n">min_shape_0</span><span class="p">.</span><span class="n">data</span><span class="p">());</span><span class="w"></span>
+<span class="n">min_shape_dim</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">attr_0</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">min_shape_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">};</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">attr_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Attribute</span><span class="p">(</span><span class="n">builder</span><span class="o">::</span><span class="n">Type</span><span class="p">({</span><span class="mi">2</span><span class="p">},</span><span class="w"> </span><span class="n">dtype_i64</span><span class="p">),</span><span class="w"></span>
+<span class="w">                                 </span><span class="n">min_shape_1</span><span class="p">.</span><span class="n">data</span><span class="p">());</span><span class="w"></span>
+<span class="n">min_shape_dim</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">attr_1</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// set attributes of function</span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetFuncAttribute</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;input_min_shape_dim&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">min_shape_dim</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// set attributes of module</span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">SetModuleAttribute</span><span class="p">(</span><span class="s">&quot;module_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">builder</span><span class="o">::</span><span class="n">Attribute</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">(</span><span class="mi">20</span><span class="p">)));</span><span class="w"></span>
+<span class="n">builder</span><span class="o">-&gt;</span><span class="n">Dump</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The built IR is:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>module attributes {module_id = 20 : i32} {
+  func @main(%arg0: tensor&lt;3x2xi64&gt;, %arg1: tensor&lt;3x2xi64&gt;) -&gt; tensor&lt;3x2xi64&gt; attributes {input_min_shape_dim = [dense&lt;[1, 2]&gt; : tensor&lt;2xi64&gt;, dense&lt;[1, 2]&gt; : tensor&lt;2xi64&gt;]} {
+    %0 = &quot;dtu_hlir.add&quot;(%arg0, %arg1) {op_name = &quot;sum&quot;, op_type = &quot;Add&quot;} : (tensor&lt;3x2xi64&gt;, tensor&lt;3x2xi64&gt;) -&gt; tensor&lt;3x2xi64&gt;
+    return %0 : tensor&lt;3x2xi64&gt;
+  }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="get_started.html">Get Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="get_started.html#minimal-example">Minimal Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="get_started.html#support">Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="meta_operation_semantics.html">Meta Operation Semantics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#abs">Abs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#acos">Acos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#add">Add</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#and">And</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#asin">Asin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#asinh">Asinh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#atan">Atan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#atan2">Atan2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#atanh">Atanh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#ceil">Ceil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#cos">Cos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#div">Div</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#exp">Exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#id4">Ceil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#isfinite">IsFinite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#log">Log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#max">Max</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#min">Min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#mul">Mul</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#neg">Neg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#not">Not</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#or">Or</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#pow">Pow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#relu">Relu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#relu6">Relu6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#rem">Rem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#round">Round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#rsqrt">Rsqrt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#sign">Sign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#sqrt">Sqrt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#sub">Sub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#tanh">Tanh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta_operation_semantics.html#xor">Xor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="client_operation_semantics.html">Client Operation Semantics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#argmax">ArgMax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#argmin">ArgMin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#argsort">ArgSort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#conv2d">Conv2D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#conv2dtranspose">Conv2DTranspose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#equal">Equal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#flatten">Flatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#greater">Greater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#greaterequal">GreaterEqual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#hardsigmoid">HardSigmoid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#hardswish">HardSwish</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#less">Less</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#lessequal">LessEqual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#maxpool2d">MaxPool2D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#notequal">NotEqual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#prelu">PRelu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#reciprocal">Reciprocal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#reducel2">ReduceL2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#reducemax">ReduceMax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#reducemean">ReduceMean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#reducemin">ReduceMin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#reduceprod">ReduceProd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#reducesum">ReduceSum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_operation_semantics.html#square">Square</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tops_graph_compiler.html">TopsGraph Compiler</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tops_graph_compiler.html#read-built-ir">Read Built IR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tops_graph_compiler.html#compile-graph">Compile Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tops_graph_compiler.html#produce-binary">Produce Binary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/library_root.html">C++ API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/library_root.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/library_root.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/library_root.html#full-api">Full API</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notes/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/version.html">Version</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+<div class="section" id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
+<p>This documentation website for the HLIR Builder C++ universe has been enabled by the
+<a class="reference external" href="https://github.com/svenevs/exhale/">Exhale</a> project and generous investment
+of time and effort by its maintainer, <a class="reference external" href="https://github.com/svenevs/">svenevs</a>.
+We thank Stephen for his work and his efforts providing help with the HLIR Builder C++ documentation.</p>
+</div>
+</div>
+
+
+             </article>
+             
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="get_started.html" class="btn btn-neutral float-right" title="Get Started" accesskey="n" rel="next">Next <img src="_static/images/chevron-right-orange.svg" class="next-page"></a>
+      
+      
+    </div>
+  
+
+  
+
+    <hr>
+
+  
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022, HLIR Builder Contributors.
+
+    </p>
+  </div>
+    
+      <div>
+        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+     
+
+</footer>
+
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              <ul>
+<li><a class="reference internal" href="#">HLIR Builder C++ API</a><ul>
+<li><a class="reference internal" href="#builder">Builder</a></li>
+<li><a class="reference internal" href="#op">Op</a></li>
+<li><a class="reference internal" href="#type">Type</a></li>
+<li><a class="reference internal" href="#attribute">Attribute</a></li>
+<li><a class="reference internal" href="#contents">Contents</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a><ul>
+<li><a class="reference internal" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+         <script src="_static/jquery.js"></script>
+         <script src="_static/underscore.js"></script>
+         <script src="_static/doctools.js"></script>
+         <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+         <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="_static/js/vendor/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <div class="container-fluid docs-tutorials-resources" id="docs-tutorials-resources">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <h2>Docs</h2>
+          <p>Access comprehensive developer documentation for HLIR Builder</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Docs</a> -->
+          <a class="with-right-arrow">View Docs</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Tutorials</h2>
+          <p>Get in-depth tutorials for beginners and advanced developers</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Tutorials</a> -->
+          <a class="with-right-arrow">View Tutorials</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Resources</h2>
+          <p>Find development resources and get your questions answered</p>
+          <!--<a class="with-right-arrow" href="https://www.enflame-tech.com">View Resources</a> -->
+          <a class="with-right-arrow">View Resources</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <!--<div class="footer-logo-wrapper">
+        <a href="https://www.enflame-tech.com" class="footer-logo"></a>
+      </div>-->
+
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <ul>
+            <!--<li><a href="https://www.enflame-tech.com">Get Started</a></li> -->
+            <li><a>Get Started</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Features</a></li> -->
+            <li><a>C++ API</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Ecosystem</a></li> -->
+            <li><a>Python API</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Blog</a></li> -->
+            <li><a>Tutorials</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Contributing</a></li> -->
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <!--<li class="list-title"><a href="https://www.enflame-tech.com">Resources</a></li> -->
+            <li class="list-title"><a>Contributing</a></li>
+            <!--<li><a href="https://www.enflame-tech.com">Tutorials</a></li> -->
+            <!--<li><a href="https://www.enflame-tech.com">Docs</a></li> -->
+            <li><a>Applications</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Discuss</a></li> -->
+            <li><a>Discuss</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Github Issues</a></li> -->
+            <li><a>Github Issues</a></li>
+            <!--<li><a href="https://www.enflame-tech.com" target="_blank">Brand Guidelines</a></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cookie-banner-wrapper">
+  <div class="container">
+    <p class="gdpr-notice">To analyze traffic and optimize your experience, we serve cookies on this site. By clicking or navigating, you agree to allow our usage of cookies. As the current maintainers of this site, Facebook’s Cookies Policy applies. Learn more, including about available controls: <a href="https://www.facebook.com/policies/cookies/">Cookies Policy</a>.</p>
+    <img class="close-button" src="_static/images/pytorch-x.svg">
+  </div>
+</div>
+
+  <!-- End Footer -->
+
+  <script type="text/javascript" src="_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+      mainMenuDropdown.bind();
+      filterTags.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

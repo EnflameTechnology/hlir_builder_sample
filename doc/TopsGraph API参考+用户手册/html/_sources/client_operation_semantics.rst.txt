@@ -1,0 +1,713 @@
+Client Operation Semantics
+==========================
+
+The following describes the semantics of client operations defined in the HLIR Builder interface.
+
+ArgMax
+------
+
+Computes the indices of the max elements of the input tensor's element along the provided :math:`axis`. The resulting tensor has the same rank as the input if :math:`keepdims` equals 1.
+If :math:`keepdims` equals 0, then the resulting tensor has the reduced dimension pruned. If :math:`select\_last\_index`` is True (default False), the index of the last occurrence of the max is selected if the max appears more than once in the input. Otherwise the index of the first occurrence is selected. The type of the output tensor is integer.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Parameters:**
+    - :math:`axis` is the dimension in which to compute the arg indices. Accepted range is :math:`[-R, R)`, where :math:`R` is :math:`Rank(x)`. Default: 0.
+    - :math:`keepdims` Keep the reduced dimension or not, default 1 means keep reduced dimension. Default: 1.
+    - :math:`select\_last\_index` Whether to select the last index or the first index if the {name} appears in multiple indices. Default: False (first index).
+
+**Outputs:**
+    - :math:`reduced\_indices` is the reduced indices op with data type int64.
+
+**Examples:**
+    >>> data = np.array([[2.0, 1.0, 2.0],
+    >>>                  [1.0, 3.0, 4.0]], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.ArgMax(input, axis=0, keepdims=True, select_last_index=False)
+    >>> # result: [0, 1, 1], dtype=np.int64
+
+
+ArgMin
+------
+
+Computes the indices of the min elements of the input tensor's element along the provided :math:`axis`. The resulting tensor has the same rank as the input if :math:`keepdims` equals 1.
+If :math:`keepdims` equals 0, then the resulting tensor has the reduced dimension pruned. If :math:`select\_last\_index`` is True (default False), the index of the last occurrence of the min is selected if the min appears more than once in the input. Otherwise the index of the first occurrence is selected. The type of the output tensor is integer.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Parameters:**
+    - :math:`axis` is the dimension in which to compute the arg indices. Accepted range is :math:`[-R, R)`, where :math:`R` is :math:`Rank(x)`. Default: 0.
+    - :math:`keepdims` Keep the reduced dimension or not, default 1 means keep reduced dimension. Default: 1.
+    - :math:`select\_last\_index` Whether to select the last index or the first index if the {name} appears in multiple indices. Default: False (first index).
+
+**Outputs:**
+    - :math:`reduced\_indices` is the reduced indices op with data type int64.
+
+**Examples:**
+    >>> data = np.array([[2.0, 1.0, 2.0],
+    >>>                  [1.0, 3.0, 4.0]], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.ArgMin(input, axis=0, keepdims=True, select_last_index=False)
+    >>> # result: [1, 0, 0], dtype=np.int64
+
+
+ArgSort
+-------
+
+Returns the indices that sort a tensor along a given dimension in the specified order by value. The default sort algorithm is ascending, if you want the sort algorithm to be descending, you must set the ``descending`` as True.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Parameters:**
+    - :math:`axis` is the dimension to sort along. The effective range is :math:`[-R, R)`, where :math:`R` is :math:`Rank(x)`. Default: 0.
+    - :math:`descending` controls the sorting order (ascending or descending). Default: false.
+    - :math:`only\_return\_indices` if true, will return the sorted indices only. Otherwise, will return both the sorted data and indices. Default: true.
+
+**Outputs:**
+    - :math:`sorted\_indices` is an op with the same shape as :math:`x` and with data type int64.
+    - :math:`sorted\_data` is an op with the same shape and data type as :math:`x`. Optional, will not be present when :math:`only\_return\_indices` is true.
+
+**Examples:**
+    >>> data = np.array([[[5., 8., 9., 5.],
+    >>>                   [4., 7., 7., 9.],
+    >>>                   [1., 7., 0., 6.]]], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.ArgSort(input, axis=-1, descending=True)
+    >>> # result: [[[2, 1, 0, 3],
+    >>> #           [3, 1, 2, 0],
+    >>> #           [1, 3, 0, 2]]], dtype=np.int64
+
+
+Conv2D
+------
+
+Applies a 2D convolution over an input signal composed of several input planes.
+
+In the simplest case for layout of "NCHW", the output value of the layer with input size :math:`\left ( N,C_{in},H_{in},W_{in} \right )` and output :math:`\left ( N,C_{out},H_{out},W_{out} \right )` can be precisely described as:
+
+.. math::
+
+    output\left ( N_{i},C_{out_{j}} \right )=bias\left (C_{out_{j}}  \right )+\sum_{k=0}^{C_{in}-1}kernel\left ( C_{out_{j}},k \right ) \bigstar input\left ( N_{i},k \right )
+
+.. math::
+
+    H_{out}=\left \lfloor \frac{H_{in}+padding\left [ 0 \right ]+padding\left [ 1 \right ]-dilation\left [ 0 \right ]\times \left ( H_{kernel}-1 \right )-1}{b}+1\right \rfloor
+
+    W_{out}=\left \lfloor \frac{W_{in}+padding\left [ 2 \right ]+padding\left [ 3 \right ]-dilation\left [ 1 \right ]\times \left ( W_{kernel}-1 \right )-1}{b}+1\right \rfloor
+
+where :math:`\bigstar` is the valid 2D `cross-correlation <https://en.wikipedia.org/wiki/Cross-correlation>`_ operator, :math:`N` is a batch size, :math:`C` denotes a number of channels, :math:`H` is a height in pixels, and :math:`W` is width in pixels.
+
+The first introduction can be found in paper `Gradient Based Learning Applied to Document Recognition <http://vision.stanford.edu/cs598_spring07/papers/Lecun98.pdf>`_. More detailed introduction can be found `here <http://cs231n.github.io/convolutional-networks/>`_.
+
+**Inputs:**
+    - :math:`input` is an op whose result shape is of 4D. Shape is :math:`\left ( N,C_{in},H_{in},W_{in} \right )` for layout of "NCHW" and :math:`\left ( N,H_{in},W_{in},C_{in} \right )` for "NHWC". Required.
+    - :math:`kernel` is an op whose result shape is of 4D. Shape is :math:`\left ( C_{out},C_{in},H_{kernel},W_{kernel} \right )` for layout of "NCHW" and :math:`\left ( H_{kernel},W_{kernel},C_{in},C_{out} \right )` for "NHWC". Required.
+    - :math:`bias` is an op whose result shape is 1D, :math:`\left ( C_{out} \right )`. Optional.
+
+**Parameters:**
+    - :math:`group` is number of blocked connections from input channels to output channels. Default: 1.
+    - :math:`auto\_pad` is a string for automatically padding. If it sets as the default value, explicit padding is used. Default: "NOTSET".
+    - :math:`layout` is a string for data format, "NCHW" or "NHWC". Default: "NHWC".
+    - :math:`stride` is the stride of the sliding window for each dimension of input. Size is 2 for both :math:`H_{in}` and :math:`W_{in}`. Default: [1, 1].
+    - :math:`padding` specifies the amount of zero padding to be applied to the base area. Size is 4 for :math:`\left [ top,bottom,left,right \right ]`. Default: [0, 0, 0, 0].
+    - :math:`dilation` controls the spacing between the kernel points; also known as the atrous algorithm. It is harder to describe, but this `link <https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md>`_ has a nice visualization of what dilation does. Size is 2 for both :math:`H_{kernel}` and :math:`W_{kernel}`. Default: [1, 1].
+
+**Outputs:**
+    - :math:`result` of convolution with shape of :math:`\left ( N,C_{out},H_{out},W_{out} \right )` for layout of "NCHW" and :math:`\left ( N,H_{out},W_{out},C_{out} \right )` for "NHWC".
+
+**Examples:**
+    >>> input_data = np.random.uniform(-1, 1, (1, 4, 4, 1)).astype(np.float32)
+    >>> kernel_data = np.random.uniform(-1, 1, (3, 3, 1, 2)).astype(np.float32)
+    >>> bias_data = np.random.uniform(-1, 1, (2)).astype(np.float32)
+    >>> input = hb.Const(builder, input_data)
+    >>> kernel = hb.Const(builder, kernel_data)
+    >>> bias = hb.Const(builder, bias_data)
+    >>> output = hb.Conv2D([input, kernel, bias], # inputs are put in a list
+    >>>                    group=1,
+    >>>                    layout="NHWC",
+    >>>                    stride=[2, 2],
+    >>>                    padding=[0, 1, 0, 1])
+
+
+Conv2DTranspose
+---------------
+
+Applies a 2D transposed convolution operator over an input image composed of several input planes.
+
+This module can be seen as the gradient of Conv2D with respect to its input. It is also known as a fractionally-strided convolution or a deconvolution (although it is not an actual deconvolution operation as it does not compute a true inverse of convolution). Actually it is implemented by Conv2D with new calculated :math:`stride`, :math:`padding` and :math:`dilation` instead of the ones in parameters.
+
+.. math::
+
+    output\left ( N_{i},C_{out_{j}} \right )=bias\left (C_{out_{j}}  \right )+\sum_{k=0}^{C_{in}-1}kernel\left ( C_{out_{j}},k \right ) \bigstar input\left ( N_{i},k \right )
+
+where :math:`\bigstar` is the valid 2D `cross-correlation <https://en.wikipedia.org/wiki/Cross-correlation>`_ operator, :math:`N` is a batch size, :math:`C` denotes a number of channels, :math:`H` is a height in pixels, and :math:`W` is width in pixels.
+
+If the padding parameter is provided the shape of the output is calculated via the following equation:
+
+.. math::
+
+    H_{out}=stride[0]\times \left ( H_{in}-1 \right )+output\_padding[0]+\left ( \left ( H_{kernel}-1 \right ) \times dilation[0]+1\right )-padding[0]-padding[1]
+
+    W_{out}=stride[1]\times \left ( W_{in}-1 \right )+output\_padding[1]+\left ( \left ( W_{kernel}-1 \right ) \times dilation[1]+1\right )-padding[2]-padding[3]
+
+For more information, see the visualizations `here <https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md>`_ and `Deconvolutional Networks <https://www.matthewzeiler.com/mattzeiler/deconvolutionalnetworks.pdf>`_.
+
+**Inputs:**
+    - :math:`input` is an op whose result shape is of 4D. Shape is :math:`\left ( N,C_{in},H_{in},W_{in} \right )` for layout of "NCHW" and :math:`\left ( N,H_{in},W_{in},C_{in} \right )` for "NHWC". Required.
+    - :math:`kernel` is an op whose result shape is of 4D. Shape is :math:`\left ( C_{in},C_{out},H_{kernel},W_{kernel} \right )` for layout of "NCHW" and :math:`\left ( H_{kernel},W_{kernel},C_{out},C_{in} \right )` for "NHWC". Required.
+    - :math:`bias` is an op whose result shape is 1D, :math:`\left ( C_{out} \right )`. Optional.
+
+**Parameters:**
+    - :math:`group` is number of blocked connections from input channels to output channels. Default: 1.
+    - :math:`auto\_pad` is a string for automatically padding. If it sets as the default value, explicit padding is used. Default: "NOTSET".
+    - :math:`layout` is a string for data format, "NCHW" or "NHWC". Default: "NHWC".
+    - :math:`stride` is the stride of the sliding window for each dimension of input. Size is 2 for both :math:`H_{in}` and :math:`W_{in}`. Default: [1, 1].
+    - :math:`padding` specifies the amount of zero padding to be applied to the base area. Size is 4 for :math:`\left [ top,bottom,left,right \right ]`. Default: [0, 0, 0, 0].
+    - :math:`output\_padding` is additional size added to one side of spatial dimensions. Size is 2 for :math:`\left [ bottom,right \right ]`. Default: [0, 0].
+    - :math:`dilation` controls the spacing between the kernel points; also known as the atrous algorithm. It is harder to describe, but this `link <https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md>`_ has a nice visualization of what dilation does. Size is 2 for both :math:`H_{kernel}` and :math:`W_{kernel}`. Default: [1, 1].
+    - :math:`output\_shape` can be explicitly set which will cause padding values to be auto generated. If output_shape is specified padding values are ignored. It should be size of 4 or empty. Default: [].
+
+**Outputs:**
+    - :math:`result` of convolution with shape of :math:`\left ( N,C_{out},H_{out},W_{out} \right )` for layout of "NCHW" and :math:`\left ( N,H_{out},W_{out},C_{out} \right )` for "NHWC".
+
+**Examples:**
+    >>> input_data = np.random.uniform(-1, 1, (1, 1, 3, 3)).astype(np.float32)
+    >>> kernel_data = np.random.uniform(-1, 1, (1, 1, 3, 3)).astype(np.float32)
+    >>> bias_data = np.random.uniform(-1, 1, (1)).astype(np.float32)
+    >>> input = hb.Const(builder, input_data)
+    >>> kernel = hb.Const(builder, kernel_data)
+    >>> bias = hb.Const(builder, bias_data)
+    >>> output = hb.Conv2DTranspose([input, kernel, bias], # inputs are put in a list
+    >>>                             group=1,
+    >>>                             layout="NCHW",
+    >>>                             stride=[2, 2],
+    >>>                             padding=[1, 1, 1, 1],
+    >>>                             output_padding=[1, 1])
+    >>> # output shape should be [1, 1, 6, 6]
+
+
+Equal
+-----
+
+Returns the truth value of (x == y) element-wise.
+
+It supports Numpy-style broadcasting, for more details please check the `doc <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_.
+
+.. math::
+
+    equal(x_{i}, y_{i})=\begin{cases}
+    true & \text{ if } x_{i}=y_{i} \\
+    false & \text{ if } x_{i}\neq y_{i}
+    \end{cases}
+
+**Inputs:**
+    - :math:`x` is the first input op.
+    - :math:`y` is the second input op.
+
+**Outputs:**
+    - :math:`result` with broadcasting shape of the inputs and data type of bool.
+
+**Examples:**
+    >>> x_data = np.array([1, 2, 3], dtype=np.int32)
+    >>> y_data = np.array([1, 3, 2], dtype=np.int32)
+    >>> x = hb.Const(builder, x_data)
+    >>> y = hb.Const(builder, y_data)
+    >>> output = hb.Equal(x, y)
+    >>> # result: [True, False, False]
+
+
+Flatten
+-------
+
+Flattens a contiguous range of dims into a tensor.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Parameters:**
+    - :math:`start\_dim` is the start of the range to be flatten If :math:`start\_dim < 0`, then :math:`start\_dim` will become :math:`start\_dim + Rank(x)`. Default: 1.
+    - :math:`end\_dim` is the end of the range to be flatten. If :math:`end\_dim < 0`, then :math:`end\_dim` will become :math:`end\_dim + Rank(x)`. Default: -1.
+
+**Outputs:**
+    - :math:`result` with the flattened shape and the same data type of the input.
+
+**Examples:**
+    >>> data = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]], dtype=np.float32)  # shape : [2, 2, 2]
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.flatten(input, 1, 2) # shape : [2, 4]
+    >>> # result : [[1, 2, 3, 4],[5, 6, 7, 8]]
+
+
+Greater
+-------
+
+Returns the truth value of (x > y) element-wise.
+
+It supports Numpy-style broadcasting, for more details please check the `doc <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_.
+
+.. math::
+
+    greater(x_{i}, y_{i})=\begin{cases}
+    true & \text{ if } x_{i}> y_{i} \\
+    false & \text{ if } x_{i}\leq y_{i}
+    \end{cases}
+
+**Inputs:**
+    - :math:`x` is the first input op.
+    - :math:`y` is the second input op.
+
+**Outputs:**
+    - :math:`result` with broadcasting shape of the inputs and data type of bool.
+
+**Examples:**
+    >>> x_data = np.array([1, 2, 3], dtype=np.int32)
+    >>> y_data = np.array([1, 3, 2], dtype=np.int32)
+    >>> x = hb.Const(builder, x_data)
+    >>> y = hb.Const(builder, y_data)
+    >>> output = hb.Greater(x, y)
+    >>> # result: [False, False, True]
+
+
+GreaterEqual
+------------
+
+Returns the truth value of (x >= y) element-wise.
+
+It supports Numpy-style broadcasting, for more details please check the `doc <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_.
+
+.. math::
+
+    greater\_equal(x_{i}, y_{i})=\begin{cases}
+    true & \text{ if } x_{i}\geq  y_{i} \\
+    false & \text{ if } x_{i}< y_{i}
+    \end{cases}
+
+**Inputs:**
+    - :math:`x` is the first input op.
+    - :math:`y` is the second input op.
+
+**Outputs:**
+    - :math:`result` with broadcasting shape of the inputs and data type of bool.
+
+**Examples:**
+    >>> x_data = np.array([1, 2, 3], dtype=np.int32)
+    >>> y_data = np.array([1, 3, 2], dtype=np.int32)
+    >>> x = hb.Const(builder, x_data)
+    >>> y = hb.Const(builder, y_data)
+    >>> output = hb.GreaterEqual(x, y)
+    >>> # result: [True, False, True]
+
+
+HardSigmoid
+-----------
+
+Applies the hard sigmoid function element-wise.
+
+A 3-part piecewise linear approximation of sigmoid, which is much faster than sigmoid. For more details please refer to this `link <https://arxiv.org/abs/1603.00391>`_.
+By default, :math:`slope=\frac{1}{6}` and :math:`offset=\frac{1}{2}`. The formula is
+
+.. math::
+
+    hard\_sigmoid\left ( x \right )=\left\{\begin{matrix}
+    0, & x\leq -3 \\
+    1, & x\geq 3 \\
+    \frac{1}{6}\times x+\frac{1}{2}, & otherwise \\
+    \end{matrix}\right.
+
+While in the general case, the formula is
+
+.. math::
+
+    hard\_sigmoid\left ( x \right )=\left\{\begin{matrix}
+    0, & x\leq -\frac{offset}{slope} \\
+    1, & x\geq \frac{1-offset}{slope} \\
+    slope\times x+offset, & otherwise \\
+    \end{matrix}\right.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with shape of :math:`(*)`, same as the input.
+
+**Examples:**
+    >>> data = np.array([-4., 5., 1.], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.hard_sigmoid(input) # [0., 1, 0.666667]
+
+
+HardSwish
+-----------
+
+Applies the hard swish function element-wise.
+
+A 3-part piecewise linear approximation of swish, which performs better in computational stability and efficiency compared to swish function. For more details please refer to this `link <https://arxiv.org/pdf/1905.02244.pdf>`_.
+
+.. math::
+
+    hard\_swish\left ( x \right )=\left\{\begin{matrix}
+    0, & x\leq -3 \\
+    1, & x\geq 3 \\
+    \frac{x\left ( x+3 \right )}{6}, & otherwise \\
+    \end{matrix}\right.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with shape of :math:`(*)`, same as the input.
+
+**Examples:**
+    >>> data = np.array([-4., 5., 1.], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.hard_swish(input) # [0., 5., 0.666667]
+
+
+Less
+----
+
+Returns the truth value of (x < y) element-wise.
+
+It supports Numpy-style broadcasting, for more details please check the `doc <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_.
+
+.. math::
+
+    less(x_{i}, y_{i})=\begin{cases}
+    true & \text{ if } x_{i}<  y_{i} \\
+    false & \text{ if } x_{i}\geq  y_{i}
+    \end{cases}
+
+**Inputs:**
+    - :math:`x` is the first input op.
+    - :math:`y` is the second input op.
+
+**Outputs:**
+    - :math:`result` with broadcasting shape of the inputs and data type of bool.
+
+**Examples:**
+    >>> x_data = np.array([1, 2, 3], dtype=np.int32)
+    >>> y_data = np.array([1, 3, 2], dtype=np.int32)
+    >>> x = hb.Const(builder, x_data)
+    >>> y = hb.Const(builder, y_data)
+    >>> output = hb.Less(x, y)
+    >>> # result: [False, True, False]
+
+
+LessEqual
+---------
+
+Returns the truth value of (x <= y) element-wise.
+
+It supports Numpy-style broadcasting, for more details please check the `doc <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_.
+
+.. math::
+
+    less\_equal(x_{i}, y_{i})=\begin{cases}
+    true & \text{ if } x_{i}\leq   y_{i} \\
+    false & \text{ if } x_{i}> y_{i}
+    \end{cases}
+
+**Inputs:**
+    - :math:`x` is the first input op.
+    - :math:`y` is the second input op.
+
+**Outputs:**
+    - :math:`result` with broadcasting shape of the inputs and data type of bool.
+
+**Examples:**
+    >>> x_data = np.array([1, 2, 3], dtype=np.int32)
+    >>> y_data = np.array([1, 3, 2], dtype=np.int32)
+    >>> x = hb.Const(builder, x_data)
+    >>> y = hb.Const(builder, y_data)
+    >>> output = hb.LessEqual(x, y)
+    >>> # result: [True, True, False]
+
+
+MaxPool2D
+---------
+
+Applies a 2D max pooling over an input signal composed of several input planes.
+
+In the simplest case for layout of "NCHW", the output value of the layer with input size :math:`\left ( N,C_{in},H_{in},W_{in} \right )`, output :math:`\left ( N,C_{out},H_{out},W_{out} \right )` and ksize :math:`\left ( H_{kernel},W_{kernel} \right )` can be precisely described as
+.. math::
+
+    output\left ( N_{i},C_{j},h,w \right )=\underset{m=0,\cdots ,H_{kernel}-1}{max}\underset{n=0,\cdots ,W_{kernel}-1}{max}input\left ( N_{i},C_{j},stride\left [ 0 \right ]\times h+m,stride\left [ 1 \right ]\times w+n \right )
+
+.. math::
+
+    H_{out}=\left \lfloor \frac{H_{in}+padding\left [ 0 \right ]+padding\left [ 1 \right ]-dilation\left [ 0 \right ]\times \left ( H_{kernel}-1 \right )-1}{b}+1\right \rfloor
+
+    W_{out}=\left \lfloor \frac{W_{in}+padding\left [ 2 \right ]+padding\left [ 3 \right ]-dilation\left [ 1 \right ]\times \left ( W_{kernel}-1 \right )-1}{b}+1\right \rfloor
+
+**Inputs:**
+    - :math:`input` is an op whose result shape is of 4D. Shape is :math:`\left ( N,C_{in},H_{in},W_{in} \right )` for layout of "NCHW" and :math:`\left ( N,H_{in},W_{in},C_{in} \right )` for "NHWC". Required.
+
+**Parameters:**
+    - :math:`ksize` is the size of the sliding window for each dimension of input. Size is 2 for both :math:`H_{kernel}` and :math:`W_{kernel}`. Required.
+    - :math:`ceil\_mode` whether to use ceil or floor (default) to compute the output shape. Default: false.
+    - :math:`return\_indices` if true, will return the max indices along with the outputs. Default: false.
+    - :math:`auto\_pad` is a string for automatically padding. If it sets as the default value, explicit padding is used. Default: "NOTSET".
+    - :math:`layout` is a string for data format, "NCHW" or "NHWC". Default: "NHWC".
+    - :math:`stride` is the stride of the sliding window for each dimension of input. Size is 2 for both :math:`H_{in}` and :math:`W_{in}`. Default: [1, 1].
+    - :math:`padding` specifies the amount of zero padding to be applied to the base area. Size is 4 for :math:`\left [ top,bottom,left,right \right ]`. Default: [0, 0, 0, 0].
+    - :math:`dilation` controls the spacing between the kernel points. It is harder to describe, but this `link <https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md>`_ has a nice visualization of what dilation does. Size is 2 for both :math:`H_{kernel}` and :math:`W_{kernel}`. Default: [1, 1].
+
+**Outputs:**
+    - :math:`result` of max pooling with shape of :math:`\left ( N,C,H_{out},W_{out} \right )` for layout of "NCHW" and :math:`\left ( N,H_{out},W_{out},C \right )` for "NHWC".
+    - :math:`indices` is an optional output which will present if return_indices is true. The dimensions of indices are the same as result. The values in indices are the indices of the selected values during pooling.
+
+**Examples:**
+    >>> input_data = np.random.uniform(-1, 1, (1, 5, 5, 1)).astype(np.float32)
+    >>> input = hb.Const(builder, input_data)
+    >>> output = hb.MaxPool2D(input,            # input
+    >>>                       ksize=[2, 2],
+    >>>                       ceil_mode=false,
+    >>>                       return_indices=false,
+    >>>                       layout="NHWC",
+    >>>                       stride=[2, 2],
+    >>>                       padding=[0, 0, 0, 1])
+
+
+NotEqual
+--------
+
+Returns the truth value of (x != y) element-wise.
+
+It supports Numpy-style broadcasting, for more details please check the `doc <https://numpy.org/doc/stable/user/basics.broadcasting.html>`_.
+
+.. math::
+
+    not\_equal(x_{i}, y_{i})=\begin{cases}
+    false & \text{ if } x_{i}=y_{i} \\
+    true & \text{ if } x_{i}\neq y_{i}
+    \end{cases}
+
+**Inputs:**
+    - :math:`x` is the first input op.
+    - :math:`y` is the second input op.
+
+**Outputs:**
+    - :math:`result` with broadcasting shape of the inputs and data type of bool.
+
+**Examples:**
+    >>> x_data = np.array([1, 2, 3], dtype=np.int32)
+    >>> y_data = np.array([1, 3, 2], dtype=np.int32)
+    >>> x = hb.Const(builder, x_data)
+    >>> y = hb.Const(builder, y_data)
+    >>> output = hb.Equal(x, y)
+    >>> # result: [False, True, True]
+
+
+PRelu
+-----
+
+PRelu takes input data (Tensor) and slope tensor as input, and produces one output data (Tensor) where the below function :math:`prelu(x_{i})` is applied to the data tensor elementwise.
+
+.. math::
+
+    prelu(x_{i})=\begin{cases}
+    x_{i} & \text{ if } x_{i}> 0 \\
+    slope_{i}x_{i} & \text{ if } x_{i}\leq  0
+    \end{cases}
+
+**Inputs:**
+    - :math:`x` is the input op.
+    - :math:`slope` is the slope op. The shape of slope can be smaller then first input :math:`x`; if so, its shape must be unidirectional broadcastable to :math:`x`.
+
+**Outputs:**
+    - :math:`result` same size and data type as :math:`x`.
+
+**Examples:**
+    >>> x_data = np.array([1, 2, 3], dtype=np.float32)
+    >>> slope_data = np.array([0.1, 0.2, 0.3], dtype=np.float32)
+    >>> x = hb.Const(builder, x_data)
+    >>> slope = hb.Const(builder, slope_data)
+    >>> output = hb.PRelu(x, slope)
+    >>> # result: [0.1, 0.4, 0.9]
+
+
+Reciprocal
+----------
+
+Computes the reciprocal of x element-wise.
+
+.. math::
+
+   reciprocal\left ( x \right )=\frac{1}{x}
+
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with shape of :math:`(*)`, same as the input.
+
+**Examples:**
+    >>> data = np.array([-0.4, -0.2, 0.1, 0.3], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Reciprocal(input)
+    >>> # result: [-2.5, -5., 10., 3.33333333]
+
+
+ReduceL2
+--------
+
+Computes the L2 norm of the input tensor's element along the provided axis. The resulting tensor has the same rank as the input if keepdims is true. If keepdims is false, the resulting tensor has the reduced dimension pruned.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Parameters:**
+    - :math:`keepdims` is an optional bool. If true, keep these reduced dimensions and the length is 1. If false, don't keep these dimensions. Default: False.
+    - :math:`axis` is the dimensions along which the reduce is performed. If empty, reduce all elements of :math:`x` and return a scalar, otherwise must be in the range :math:`[-R, R)`, where :math:`R` is :math:`Rank(x)`. If :math:`axis[i]< 0`, the dimension to reduce is :math:`R + axis[i]`. Default: empty.
+
+**Outputs:**
+    - :math:`result` with the same data type of the input and the reduced shape.
+
+**Examples:**
+    >>> data = np.array([[[1., 2.], [3., 4.]], [[5., 6.], [7., 8.]], [[9., 10.], [11., 12.]]], dtype=np.float32)
+    >>> input = hb.Const(builder, data) # shape: [3, 2, 2]
+    >>> output = hb.ReduceL2(input, keepdims=True, axis=[2])
+    >>> # result: [[[2.23606798], [5.]]
+    >>> #          [[7.81024968], [10.63014581]]
+    >>> #          [[13.45362405], [16.2788206 ]]]
+
+
+ReduceMax
+---------
+
+Computes the max of the input tensor's element along the provided axis. The resulting tensor has the same rank as the input if keepdims is true. If keepdims is false, the resulting tensor has the reduced dimension pruned.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Parameters:**
+    - :math:`keepdims` is an optional bool. If true, keep these reduced dimensions and the length is 1. If false, don't keep these dimensions. Default: False.
+    - :math:`axis` is the dimensions along which the reduce is performed. If empty, reduce all elements of :math:`x` and return a scalar, otherwise must be in the range :math:`[-R, R)`, where :math:`R` is :math:`Rank(x)`. If :math:`axis[i]< 0`, the dimension to reduce is :math:`R + axis[i]`. Default: empty.
+
+**Outputs:**
+    - :math:`result` with the same data type of the input and the reduced shape.
+
+**Examples:**
+    >>> data = np.array([[[5, 1], [20, 2]], [[30, 1], [40, 2]], [[55, 1], [60, 2]]], dtype=np.float32)
+    >>> input = hb.Const(builder, data) # shape: [3, 2, 2]
+    >>> output = hb.ReduceMax(input, keepdims=False, axis=[1])
+    >>> # result: [[20., 2.]
+    >>> #          [40., 2.]
+    >>> #          [60., 2.]]
+
+
+ReduceMean
+----------
+
+Computes the mean of the input tensor's element along the provided axis. The resulting tensor has the same rank as the input if keepdims is true. If keepdims is false, the resulting tensor has the reduced dimension pruned.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Parameters:**
+    - :math:`keepdims` is an optional bool. If true, keep these reduced dimensions and the length is 1. If false, don't keep these dimensions. Default: False.
+    - :math:`axis` is the dimensions along which the reduce is performed. If empty, reduce all elements of :math:`x` and return a scalar, otherwise must be in the range :math:`[-R, R)`, where :math:`R` is :math:`Rank(x)`. If :math:`axis[i]< 0`, the dimension to reduce is :math:`R + axis[i]`. Default: empty.
+
+**Outputs:**
+    - :math:`result` with the same data type of the input and the reduced shape.
+
+**Examples:**
+    >>> data = np.array([[[5, 1], [20, 2]], [[30, 1], [40, 2]], [[55, 1], [60, 2]]], dtype=np.float32)
+    >>> input = hb.Const(builder, data) # shape: [3, 2, 2]
+    >>> output = hb.ReduceMean(input, keepdims=True)
+    >>> # result: [[[18.25]]]
+
+
+ReduceMin
+---------
+
+Computes the min of the input tensor's element along the provided axis. The resulting tensor has the same rank as the input if keepdims is true. If keepdims is false, the resulting tensor has the reduced dimension pruned.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Parameters:**
+    - :math:`keepdims` is an optional bool. If true, keep these reduced dimensions and the length is 1. If false, don't keep these dimensions. Default: False.
+    - :math:`axis` is the dimensions along which the reduce is performed. If empty, reduce all elements of :math:`x` and return a scalar, otherwise must be in the range :math:`[-R, R)`, where :math:`R` is :math:`Rank(x)`. If :math:`axis[i]< 0`, the dimension to reduce is :math:`R + axis[i]`. Default: empty.
+
+**Outputs:**
+    - :math:`result` with the same data type of the input and the reduced shape.
+
+**Examples:**
+    >>> data = np.array([[[5, 1], [20, 2]], [[30, 1], [40, 2]], [[55, 1], [60, 2]]], dtype=np.float32)
+    >>> input = hb.Const(builder, data) # shape: [3, 2, 2]
+    >>> output = hb.ReduceMin(input, keepdims=True, axis=[-2])
+    >>> # result: [[[5., 1.]]
+    >>> #          [[30., 1.]]
+    >>> #          [[55., 1.]]]
+
+
+ReduceProd
+----------
+
+Computes the product of the input tensor's element along the provided axis. The resulting tensor has the same rank as the input if keepdims is true. If keepdims is false, the resulting tensor has the reduced dimension pruned.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Parameters:**
+    - :math:`keepdims` is an optional bool. If true, keep these reduced dimensions and the length is 1. If false, don't keep these dimensions. Default: False.
+    - :math:`axis` is the dimensions along which the reduce is performed. If empty, reduce all elements of :math:`x` and return a scalar, otherwise must be in the range :math:`[-R, R)`, where :math:`R` is :math:`Rank(x)`. If :math:`axis[i]< 0`, the dimension to reduce is :math:`R + axis[i]`. Default: empty.
+
+**Outputs:**
+    - :math:`result` with the same data type of the input and the reduced shape.
+
+**Examples:**
+    >>> data = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]], dtype=np.float32)
+    >>> input = hb.Const(builder, data) # shape: [3, 2, 2]
+    >>> output = hb.ReduceProd(input, keepdims=False, axis=[1])
+    >>> # result: [[3., 8.]
+    >>> #          [35., 48.]
+    >>> #          [99., 120.]]
+
+
+ReduceSum
+---------
+
+Computes the sum of the input tensor's element along the provided axis. The resulting tensor has the same rank as the input if keepdims is true. If keepdims is false, the resulting tensor has the reduced dimension pruned.
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Parameters:**
+    - :math:`keepdims` is an optional bool. If true, keep these reduced dimensions and the length is 1. If false, don't keep these dimensions. Default: False.
+    - :math:`axis` is the dimensions along which the reduce is performed. If empty, reduce all elements of :math:`x` and return a scalar, otherwise must be in the range :math:`[-R, R)`, where :math:`R` is :math:`Rank(x)`. If :math:`axis[i]< 0`, the dimension to reduce is :math:`R + axis[i]`. Default: empty.
+
+**Outputs:**
+    - :math:`result` with the same data type of the input and the reduced shape.
+
+**Examples:**
+    >>> data = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]], [[9, 10], [11, 12]]], dtype=np.float32)
+    >>> input = hb.Const(builder, data) # shape: [3, 2, 2]
+    >>> output = hb.ReduceSum(input)
+    >>> # result: 78.
+
+
+Square
+------
+
+Applies the square function element-wise:
+
+.. math::
+
+    square\left ( x \right )=x^{2}
+
+**Inputs:**
+    - :math:`x` is an op whose result shape is :math:`(*)`, where :math:`*` means any number of dimensions.
+
+**Outputs:**
+    - :math:`result` with shape of :math:`(*)`, same as the input.
+
+**Examples:**
+    >>> data = np.array([1, 2, 3, 4], dtype=np.float32)
+    >>> input = hb.Const(builder, data)
+    >>> output = hb.Square(input)

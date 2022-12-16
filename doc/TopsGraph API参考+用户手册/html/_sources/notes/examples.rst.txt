@@ -1,0 +1,413 @@
+Examples
+========
+
+This page shows some exmaples of using HLIR Builder C++ API.
+
+Bind Function to Op
+-------------------
+
+There are some Ops need to bind *Function* to it. This behavior is similar to passing a 
+comparison function to ``std::sort`` in C++. The function to bind is defined by users.
+Note that the function number to bind is pre-defined as the following table.
+
++----------------------+-----------------------+
+| Op Name              | Bound Function Number |
++======================+=======================+
+| ``Fusion``           | 1                     |
++----------------------+-----------------------+
+| ``Map``              | 1                     |
++----------------------+-----------------------+
+| ``PartialReduce``    | 1                     |
++----------------------+-----------------------+
+| ``Reduce``           | 1                     | 
++----------------------+-----------------------+
+| ``ReduceWindow``     | 1                     |
++----------------------+-----------------------+
+| ``Scatter``          | 1                     |
++----------------------+-----------------------+
+| ``SelectAndScatter`` | 2                     |
++----------------------+-----------------------+
+| ``Sort``             | 1                     |
++----------------------+-----------------------+
+
+The following example is using ``builder::ReduceWindow`` and ``builder::Max`` to apply ``MaxPool``.
+The input is a float tensor with shape = [1, 112, 112, 64] and layout of NHWC. The kernel_size is
+[3, 3], stride is [2, 2], padding size is 1 to be added on both sides.
+
+.. code-block:: cpp
+
+  auto builder = std::make_shared<builder::Builder>();
+  auto dtype = builder::PrimitiveType::F32();
+  std::vector<int64_t> input_shape{1, 112, 112, 64};
+  std::vector<int64_t> output_shape{1, 56, 56, 64};
+  builder::Type input_type(input_shape, dtype);
+  builder::Type scalar_type(dtype);
+  builder::Type output_type(output_shape, dtype);
+
+  float min_f32 = std::numeric_limits<float>::lowest();
+  void* data_ptr = static_cast<void*>(&min_f32);
+  auto init_value = builder::Const(builder, data_ptr, scalar_type);
+  
+  // create a function named body
+  builder->AddFunc("body");
+  auto arg0 = builder->CreateInput(scalar_type, "body");
+  auto arg1 = builder->CreateInput(scalar_type, "body");
+  auto maximum = Max(arg0, arg1, {}, scalar_type);
+  builder->SetOutput({maximum}, "body");
+
+  auto input = builder->CreateInput(input_type);
+  auto reduce_window = builder::ReduceWindow(
+      {input}, {init_value},
+      /*window_dimensions=*/{1, 3, 3, 1}, {"body"},
+      /*window_strides=*/{1, 2, 2, 1}, 
+      /*base_dilations=*/{}, /*window_dilations=*/{},
+      /*padding=*/{{0, 0}, {1, 1}, {1, 1}, {0, 0}},
+      "NOTSET", false, output_type);
+  builder->SetOutput({reduce_window});
+  builder->Dump();
+
+In the following dumped ir, the function named "body" disappeared. 
+
+.. code-block:: cpp
+
+  module {
+    func @main(%arg0: tensor<1x112x112x64xf32>) -> tensor<1x56x56x64xf32> {
+      %0 = dtu_hlir.constant dense<-3.40282347E+38> : tensor<f32>
+      %1 = "dtu_hlir.reduce_window"(%arg0, %0) ( {
+      ^bb0(%arg1: tensor<f32>, %arg2: tensor<f32>):       // no predecessors
+        %2 = "dtu_hlir.max"(%arg1, %arg2) : (tensor<f32>, tensor<f32>) -> tensor<f32>
+        "dtu_hlir.return"(%2) : (tensor<f32>) -> ()
+      }) {auto_pad = "NOTSET", ceil_mode = false, padding = dense<[[0, 0], [1, 1], [1, 1], [0, 0]]> : tensor<4x2xi64>, window_dimensions = dense<[1, 3, 3, 1]> : tensor<4xi64>, window_strides = dense<[1, 2, 2, 1]> : tensor<4xi64>} : (tensor<1x112x112x64xf32>, tensor<f32>) -> tensor<1x56x56x64xf32>
+      return %1 : tensor<1x56x56x64xf32>
+    }
+  }
+
+.. attention::
+
+  The added ``function`` will be removed, and then acted as the ``region`` of the bound Op.
+  So when another Op binds the same function, you need to call ``builder->AddFunc`` and create it again.
+
+
+Build Constant Ops
+------------------
+
+There is only one constant Op interface named ``builder::Const``. User may assign a scalar, a tensor and even a empty value to it.
+For some ONNX operators, there are optional inputs. In this case, an empty tensor should be set as the placeholder when you don't pass the optional input.
+Note that the empty ``builder::Const`` does not have shape or value, but data type should be set.
+
+.. code-block:: cpp
+
+  auto builder = std::make_shared<builder::Builder>();
+  // scalar
+  float zero = 0;
+  void* data_ptr = static_cast<void*>(&zero);
+  builder::Type scalar_type(builder::PrimitiveType::F32());
+  auto constant_zero = builder::Const(builder, data_ptr, scalar_type);
+
+  // tensor with shape [2, 3]
+  std::vector<int32_t> ones(6, 1);
+  data_ptr = static_cast<void*>(ones.data()); 
+  builder::Type tensor_type({2, 3}, builder::PrimitiveType::S32());
+  auto constant_ones = builder::Const(builder, data_ptr, tensor_type);
+  // if the Op is Const, you can get the values as a std::vector
+  if (constant_ones.IsConstant()) { 
+    auto const_data_vec = constant_ones.GetConstData<int32_t>();
+  }
+   
+  // empty
+  builder::Type empty_type({}, builder::PrimitiveType::F16());
+  auto constant_empty = builder::Const(builder, nullptr, empty_type);
+  data_ptr = constant_empty.GetConstDataPtr().get();
+  // if data_ptr == nullptr, this Op is an empty Constant Op
+  
+  builder->SetOutput({constant_empty});
+  builder->Dump();
+
+Attention should be paid to the difference of the following dumped ir.
+
+.. code-block:: cpp
+
+  module {
+    func @main() -> tensor<f16> {
+      %0 = dtu_hlir.constant dense<0.000000e+00> : tensor<f32>
+      %1 = dtu_hlir.constant dense<1> : tensor<2x3xi32>
+      %2 = dtu_hlir.constant dense<[]> : tensor<0xf16>
+      return %2 : tensor<f16>
+    }
+  }
+
+Build Graph with Dynamic Shape
+------------------------------
+
+For some models of object detection, the input image size is not fixed. This is called dynamic shape because the input shapes may change.
+In the deployment environment, there must be a constraint on the shape range. So min/max dimensions of shape for each input should be set.
+
+.. code-block:: cpp
+
+  auto builder = std::make_shared<builder::Builder>();
+  // for dynamic shape, the unknown dimensions should be set as -1
+  builder::Type type({-1, -1}, builder::PrimitiveType::F32());
+  auto input = builder->CreateInput(type);
+
+  // set dynamic shape range of inputs
+  std::vector<builder::Attribute> min_shape_dim;
+  std::vector<int64_t> min_shape_0 = {1, 1};
+  auto dtype_i64 = builder::PrimitiveType::S64();
+  auto attr_0 = builder::Attribute(builder::Type({2}, dtype_i64),
+                                   min_shape_0.data());
+  min_shape_dim.push_back(attr_0);
+  std::vector<builder::Attribute> max_shape_dim;
+  std::vector<int64_t> max_shape_0 = {5, 5};
+  auto attr_1 = builder::Attribute(builder::Type({2}, dtype_i64),
+                                   max_shape_0.data());
+  max_shape_dim.push_back(attr_1);
+  // max and min shape info of the inputs are set respectively
+  builder->SetFuncAttribute("main", "min_shape_dim", min_shape_dim);
+  builder->SetFuncAttribute("main", "max_shape_dim", max_shape_dim);
+
+  auto res = builder::Relu(input);
+  builder->SetOutput({res});
+  builder->Dump();
+
+For this example, there is only one input with rank 2 and both dimensions sizes are unknown. We set the max/min shape information as the function attribute.
+The following is the dumped ir.
+
+.. code-block:: cpp
+
+  module {
+    func @main(%arg0: tensor<?x?xf32>) -> tensor<?x?xf32> attributes {max_shape_dim = [dense<5> : tensor<2xi64>], min_shape_dim = [dense<1> : tensor<2xi64>]} {
+      %0 = "dtu_hlir.relu"(%arg0) : (tensor<?x?xf32>) -> tensor<?x?xf32>
+      return %0 : tensor<?x?xf32>
+    }
+  }
+
+Debug Tips of Printing Messages
+-------------------------------
+
+PrimitiveType, Type, Op, Attribute and Graph IR can be printed for debugging. The following sample code shows how to print the messages.
+
+.. code-block:: cpp
+
+  auto builder = std::make_shared<builder::Builder>();
+  auto dtype = builder::PrimitiveType::F32();
+  // print instance of PrimitiveType
+  dtype.Dump();
+  std::cout << std::endl; 
+  std::cout << dtype << std::endl; 
+ 
+  // print instance of Type
+  builder::Type type({2, 3}, dtype);
+  type.Dump();
+  std::cout << std::endl; 
+  std::cout << type << std::endl; 
+
+  auto input = builder->CreateInput(type);
+  auto relu = builder::Relu(input);
+  relu.SetAttribute("op_name", builder::Attribute("relu_0"));
+  // print instance of Op 
+  relu.Dump();
+  std::cout << relu << std::endl;
+
+  auto attr = relu.GetAttribute("op_name");
+  // print instance of Attribute 
+  attr.Dump();
+  std::cout << attr << std::endl;
+
+  builder->SetOutput({relu});
+  // print the built ir
+  builder->Dump();
+  std::cout << builder << std::endl;
+
+You can read the printed messages below according to the upper codes.
+
+.. code-block:: cpp
+
+  F32
+  F32
+  tensor<2x3xf32>
+  tensor<2x3xf32>
+  %0 = "dtu_hlir.relu"(<<UNKNOWN SSA VALUE>>) {op_name = "relu_0"} : (tensor<2x3xf32>) -> tensor<2x3xf32>
+  %0 = "dtu_hlir.relu"(%arg0) {op_name = "relu_0"} : (tensor<2x3xf32>) -> tensor<2x3xf32>
+  
+  "relu_0"
+  "relu_0"
+  
+  
+  module {
+    func @main(%arg0: tensor<2x3xf32>) -> tensor<2x3xf32> {
+      %0 = "dtu_hlir.relu"(%arg0) {op_name = "relu_0"} : (tensor<2x3xf32>) -> tensor<2x3xf32>
+      return %0 : tensor<2x3xf32>
+    }
+  }
+  
+  
+  module {
+    func @main(%arg0: tensor<2x3xf32>) -> tensor<2x3xf32> {
+      %0 = "dtu_hlir.relu"(%arg0) {op_name = "relu_0"} : (tensor<2x3xf32>) -> tensor<2x3xf32>
+      return %0 : tensor<2x3xf32>
+    }
+  }
+
+
+Easily Use Arithmetic Ops
+-------------------------
+
+There are some overloaded operators of Ops, such as ``Add``, ``Sub``, ``Mul`` and ``Div``.
+You can use these operators as using them in C++.
+
+.. code-block:: cpp
+
+
+Implicit Broadcasting
+---------------------
+
+Binary ops support Numpy-style broadcasting, for more details please check the `doc
+<https://numpy.org/doc/stable/user/basics.broadcasting.html>`_.
+
+.. code-block:: cpp
+
+  void test_add_broadcast() {
+    auto builder = std::make_shared<builder::Builder>();
+    builder->SetShapeInference(/*enable_shape_inference=*/true);
+    auto dtype = builder::PrimitiveType::S32();
+    builder::Type lhs_type({1, 2}, dtype);
+    builder::Type rhs_type({2, 1}, dtype);
+    auto lhs = builder->CreateInput(lhs_type);
+    auto rhs = builder->CreateInput(rhs_type);
+    auto output = lhs + rhs;
+    builder->SetOutput({output});
+  }
+
+The following dumped ir shows the broadcasting steps.
+
+.. code-block:: cpp
+
+  module {
+    func @main(%arg0: tensor<1x2xi32>, %arg1: tensor<2x1xi32>) -> tensor<2x2xi32> {
+      %0 = "dtu_hlir.reshape"(%arg0) : (tensor<1x2xi32>) -> tensor<2xi32>
+      %1 = "dtu_hlir.broadcast_in_dim"(%0) {broadcast_dimensions = dense<1> : tensor<1xi64>} : (tensor<2xi32>) -> tensor<2x2xi32>
+      %2 = "dtu_hlir.reshape"(%arg1) : (tensor<2x1xi32>) -> tensor<2xi32>
+      %3 = "dtu_hlir.broadcast_in_dim"(%2) {broadcast_dimensions = dense<0> : tensor<1xi64>} : (tensor<2xi32>) -> tensor<2x2xi32>
+      %4 = "dtu_hlir.add"(%1, %3) : (tensor<2x2xi32>, tensor<2x2xi32>) -> tensor<2x2xi32>
+      return %4 : tensor<2x2xi32>
+    }
+  }
+
+Pass Built IR to TopsGraph Compiler
+-----------------------------------
+
+The IR built by HLIR Builder should be passed to TopsGraph Compiler for further optimization.
+
+.. code-block:: cpp
+
+  #include "hlir_builder/hlir_builder.h"
+  #include "dtu_compiler/tops_graph_compiler.h"
+    auto builder = std::make_shared<builder::Builder>();
+    ... // codes of building ops
+    builder->SetOutput({res});
+    auto hlir_module = builder->GetModule();
+
+    // compile
+    topsgraphProgram program;
+    auto ret = topsgraphCreateProgramFromModule(&program, hlir_module.get());
+    // specify device by setting argumnents of "-arch" and "-resource"
+    // specify the pipeline of grpah optimization passes by setting "-hlir"
+    const char * options[] = {
+        "-arch=gcu210",
+        "-resource=1c4s",
+        "-hlir=hlir-pipeline{}"};
+    // here the numper of options is 3
+    topsgraphCompileProgram(program, 3, options);
+    size_t binary_size = 0;
+    topsgraphGetBinSize(program, &binary_size);
+    // memory management of the binary belongs to the user
+    char* binary = new char[binary_size];
+    ret = topsgraphGetBin(program, binary);
+    delete [] binary;
+    topsgraphDestroyProgram(&program);
+
+Set Up Shape Inference
+----------------------
+
+``Shape Inference`` consists of inference of both shape and data type.
+It is turned off by default. In this example of matrix multiplication,
+we set the flag of ``Shape Inference`` as true.
+Then, we only set the types of inputs, and the correct type of output will be set automatically.
+
+.. code-block:: cpp
+
+  auto builder = std::make_shared<builder::Builder>();
+  builder->SetShapeInference(true);
+  auto dtype = builder::PrimitiveType::F32();
+  builder::Type lhs_type{{2, 3}, dtype};
+  builder::Type rhs_type{{3, 4}, dtype};
+  auto arg0 = builder->CreateInput(lhs_type);
+  auto arg1 = builder->CreateInput(rhs_type);
+  builder::DotDimensionNumbers dims_attr(/*lhs_batching_dimensions*/{}, 
+                                         /*rhs_batching_dimensions*/{},
+                                         /*lhs_contracting_dimensions*/{1},
+                                         /*rhs_contracting_dimensions*/{0});
+  // here we do not set the type of output
+  auto output = builder::DotGeneral(arg0, arg1, dims_attr);
+  builder->SetOutput({output});
+  builder->Dump();
+ 
+The following is the dumped ir. And we get the correct type of output with shape of [2, 4] and data type of float.
+
+.. code-block:: cpp
+
+  module {
+    func @main(%arg0: tensor<2x3xf32>, %arg1: tensor<3x4xf32>) -> tensor<2x4xf32> {
+      %0 = "dtu_hlir.dot_general"(%arg0, %arg1) {dot_dimension_numbers = {lhs_batching_dimensions = dense<[]> : tensor<0xi64>, lhs_contracting_dimensions = dense<1> : tensor<1xi64>, rhs_batching_dimensions = dense<[]> : tensor<0xi64>, rhs_contracting_dimensions = dense<0> : tensor<1xi64>}} : (tensor<2x3xf32>, tensor<3x4xf32>) -> tensor<2x4xf32>
+      return %0 : tensor<2x4xf32>
+    }
+  }
+
+Use Tuple
+---------
+
+In HLIR, only one output is allowed for any Ops and Funcs. If you want to return more than one results, you must put them in a ``builder::Tuple``.
+We defined a type named ``builder::PrimitiveType::TUPLE()`` and several interfaces to handle this.
+
+.. code-block:: cpp
+
+  auto builder = std::make_shared<builder::Builder>();
+  auto dtype_f32 = builder::PrimitiveType::F32();
+  auto dtype_i32 = builder::PrimitiveType::S32();
+  // shapes and dtypes in a tuple can be different
+  std::vector<int64_t> arg0_shape{1, 2};
+  std::vector<int64_t> arg1_shape{2, 3, 4};
+  builder::Type arg0_type{arg0_shape, dtype_f32};
+  builder::Type arg1_type{arg1_shape, dtype_i32};
+
+  auto arg0 = builder->CreateInput(arg0_type);
+  auto arg1 = builder->CreateInput(arg1_type);
+  std::vector<std::vector<int64_t>> tuple_shape{arg0_shape, arg1_shape};
+  std::vector<builder::PrimitiveType> tuple_dtype{dtype_f32, dtype_i32};
+  builder::Type outputs_type(tuple_shape, tuple_dtype);
+  // make a tuple
+  auto outputs = builder::Tuple({arg0, arg1}, outputs_type);
+  auto result_type = outputs.GetType();
+  // get infomation of tuple from Type
+  bool is_tuple = result_type.IsTuple();
+  int64_t tuple_size = result_type.GetTupleSize();
+  auto tuple_shapes = result_type.GetTupleShapes();
+  auto tuple_dtypes = result_type.GetTuplePrimitiveTypes();
+  // get elements in the tuple 
+  auto tuple_elem_0 = builder::GetTupleElement(outputs, 0, arg0_type);
+  auto tuple_elem_1 = builder::GetTupleElement(outputs, 1, arg1_type);
+  builder->SetOutput({outputs});
+  builder->Dump();
+
+You can learn the usage of tuple by comparing the upper codes and the dumped ir below.
+
+.. code-block:: cpp
+
+  module {
+    func @main(%arg0: tensor<1x2xf32>, %arg1: tensor<2x3x4xi32>) -> tuple<tensor<1x2xf32>, tensor<2x3x4xi32>> {
+      %0 = "dtu_hlir.tuple"(%arg0, %arg1) : (tensor<1x2xf32>, tensor<2x3x4xi32>) -> tuple<tensor<1x2xf32>, tensor<2x3x4xi32>>
+      %1 = "dtu_hlir.get_tuple_element"(%0) {index = 0 : i32} : (tuple<tensor<1x2xf32>, tensor<2x3x4xi32>>) -> tensor<1x2xf32>
+      %2 = "dtu_hlir.get_tuple_element"(%0) {index = 1 : i32} : (tuple<tensor<1x2xf32>, tensor<2x3x4xi32>>) -> tensor<2x3x4xi32>
+      return %0 : tuple<tensor<1x2xf32>, tensor<2x3x4xi32>>
+    }
+  }

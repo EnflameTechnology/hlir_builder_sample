@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a0abf05a938a4d749fd947d3df71db9b6:
+
+Function builder::Swish
+=======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Swish(builder::Op, builder::Type)
+   :project: HLIR Builder

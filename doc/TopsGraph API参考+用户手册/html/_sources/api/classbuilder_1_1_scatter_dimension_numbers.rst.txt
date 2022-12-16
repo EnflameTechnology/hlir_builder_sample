@@ -1,0 +1,24 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_class_classbuilder_1_1_scatter_dimension_numbers:
+
+Class ScatterDimensionNumbers
+=============================
+
+- Defined in :ref:`file_headers_hlir_builder_structs.h`
+
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: builder::ScatterDimensionNumbers
+   :project: HLIR Builder
+   :members:
+   :protected-members:
+   :undoc-members:

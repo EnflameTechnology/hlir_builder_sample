@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a7d88d4464af104ec518ee74fcee6271e:
+
+Function builder::ReverseSequence
+=================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::ReverseSequence(builder::Op, builder::Op, int64_t, int64_t, builder::Type)
+   :project: HLIR Builder

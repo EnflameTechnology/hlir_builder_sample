@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a2614523259de4276a4a2a2cfce46f8bb:
+
+Function builder::Compare
+=========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Compare(builder::Op, builder::Op, std::string, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

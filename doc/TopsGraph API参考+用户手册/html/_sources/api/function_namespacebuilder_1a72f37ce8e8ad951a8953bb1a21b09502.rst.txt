@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a72f37ce8e8ad951a8953bb1a21b09502:
+
+Function builder::BatchNormTraining
+===================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::BatchNormTraining(builder::Op, builder::Op, builder::Op, float, int64_t, builder::Type)
+   :project: HLIR Builder

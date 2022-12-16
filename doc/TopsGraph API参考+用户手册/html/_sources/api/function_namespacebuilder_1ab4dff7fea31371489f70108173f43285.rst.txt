@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1ab4dff7fea31371489f70108173f43285:
+
+Function builder::GlobalAveragePool
+===================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::GlobalAveragePool(builder::Op, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

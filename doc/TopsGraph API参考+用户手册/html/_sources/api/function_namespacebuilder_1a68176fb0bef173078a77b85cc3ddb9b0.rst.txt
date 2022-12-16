@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a68176fb0bef173078a77b85cc3ddb9b0:
+
+Function builder::ConvQuant(builder::Op, builder::Op, builder::Op, builder::Op, builder::ConvDimensionNumbers, int64_t, int64_t, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::string, std::vector<std::string>, builder::Type)
+====================================================================================================================================================================================================================================================================================================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::ConvQuant(builder::Op, builder::Op, builder::Op, builder::Op, builder::ConvDimensionNumbers, int64_t, int64_t, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::vector<int64_t>, std::string, std::vector<std::string>, builder::Type)

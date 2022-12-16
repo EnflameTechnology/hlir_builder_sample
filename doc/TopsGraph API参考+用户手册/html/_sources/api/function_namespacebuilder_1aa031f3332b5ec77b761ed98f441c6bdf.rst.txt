@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1aa031f3332b5ec77b761ed98f441c6bdf:
+
+Function builder::TxOcrResize
+=============================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::TxOcrResize(std::vector<builder::Op>, builder::Op, std::vector<int64_t>, std::vector<int64_t>, builder::Type)
+   :project: HLIR Builder

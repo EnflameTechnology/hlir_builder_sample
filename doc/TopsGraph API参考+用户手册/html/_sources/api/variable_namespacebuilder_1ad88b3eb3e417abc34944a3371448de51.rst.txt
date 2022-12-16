@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_variable_namespacebuilder_1ad88b3eb3e417abc34944a3371448de51:
+
+Variable builder::kUnknownRank
+==============================
+
+- Defined in :ref:`file_headers_hlir_builder_common.h`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: builder::kUnknownRank
+   :project: HLIR Builder

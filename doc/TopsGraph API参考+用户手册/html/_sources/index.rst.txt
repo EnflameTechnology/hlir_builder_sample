@@ -1,0 +1,237 @@
+HLIR Builder C++ API
+====================
+
+These pages provide the documentation for the public portions of the HLIR Builder C++
+API.  This API can roughly be divided into four parts:
+
+- **Builder**: Global handle for building up the high level IR(Intermediate Representation).
+- **Op**: Fundamental operators to build the the IR, and there are hundreds of interfaces.
+- **Type**: Basic struct constains information of shape and primitive data type for the reuslt of Ops.
+- **Attribute**: Attributes that can be bound to ``module``, ``func`` or ``op`` of the IR.
+
+HLIR Builder is the entrance to build up the high level IR for Enflame DTU.
+It is currently in use at Enflame in ONNX Bridge, and PyTorch/TensorFlow Bridge for the future.
+We are looking forward to welcome more users of the HLIR Builder C++ API.
+
+Builder
+-------
+
+Builder is a global handle to build IR, which consists of Ops. You can use it to
+
+- turn on or off Shape Inference of each Ops, including shape & type inference;
+- create functions, and ``main`` is created by default;
+- set input/output of a specific function, and default is ``main`` when no function name is specified;
+- print or dump the built IR, and PrintingFlags can be used to control the print behavior;
+- get the built IR via a hlir::Module instance.
+
+A simple example of using Builder could look as follows:
+
+.. code-block:: cpp
+
+  #include "hlir_builder/hlir_builder.h"
+
+  auto builder = std::make_shared<builder::Builder>();
+  builder->SetShapeInference(true);
+  auto ptype = builder::PrimitiveType::F32();
+  std::vector<int64_t> shape = {3, 2};
+  builder::Type type(shape, ptype);
+
+  auto arg0 = builder->CreateInput(type);
+  auto arg1 = builder->CreateInput(type);
+  auto arg2 = builder->CreateInput(type);
+  auto res = arg0 + arg1 * arg2;
+  builder->SetOutput({res});
+
+  builder->AddFunc("foo");
+  arg0 = builder->CreateInput(type, "foo");
+  arg1 = builder->CreateInput(type, "foo");
+  arg2 = builder->CreateInput(type, "foo");
+  res = builder::Add(arg1, arg2);
+  res = builder::Add(arg0, res);
+  builder->SetOutput({res}, "foo");
+
+  builder->Dump();
+
+The built IR is:
+
+.. code-block:: cpp
+
+  module {
+    func @foo(%arg0: tensor<3x2xf32>, %arg1: tensor<3x2xf32>, %arg2: tensor<3x2xf32>) -> tensor<3x2xf32> {
+      %0 = "dtu_hlir.add"(%arg1, %arg2) : (tensor<3x2xf32>, tensor<3x2xf32>) -> tensor<3x2xf32>
+      %1 = "dtu_hlir.add"(%arg0, %0) : (tensor<3x2xf32>, tensor<3x2xf32>) -> tensor<3x2xf32>
+      "dtu_hlir.return"(%1) : (tensor<3x2xf32>) -> ()
+    }
+    func @main(%arg0: tensor<3x2xf32>, %arg1: tensor<3x2xf32>, %arg2: tensor<3x2xf32>) -> tensor<3x2xf32> {
+      %0 = "dtu_hlir.mul"(%arg1, %arg2) : (tensor<3x2xf32>, tensor<3x2xf32>) -> tensor<3x2xf32>
+      %1 = "dtu_hlir.add"(%arg0, %0) : (tensor<3x2xf32>, tensor<3x2xf32>) -> tensor<3x2xf32>
+      return %1 : tensor<3x2xf32>
+    }
+  }
+
+Op
+--
+
+Op is short for operator, which is the basic unit to build the IR.
+All ops can be classified as client ops and meta ops, but you can completely ignore the differences while using the interfaces.
+
+- meta ops are atomic operators that are implemented by the hardware;
+- client ops can be decomposed to meta ops and aim for ease of use;
+
+There are hundreds of Op interfaces including some overloaded operators as following:
+
++---------------------+-------------------------------------------------------+
+| Overloaded Operator | Op Inferface                                          |
++=====================+=======================================================+
+| ``-``               | ``builder::Op Neg(builder::Op operand)``              |
++---------------------+-------------------------------------------------------+
+| ``~``               | ``builder::Op Not(builder::Op operand)``              |
++---------------------+-------------------------------------------------------+
+| ``+``               | ``builder::Op Add(builder::Op lhs, builder::Op rhs)`` |
++---------------------+-------------------------------------------------------+
+| ``-``               | ``builder::Op Sub(builder::Op lhs, builder::Op rhs)`` |
++---------------------+-------------------------------------------------------+
+| ``*``               | ``builder::Op Mul(builder::Op lhs, builder::Op rhs)`` |
++---------------------+-------------------------------------------------------+
+| ``/``               | ``builder::Op Div(builder::Op lhs, builder::Op rhs)`` |
++---------------------+-------------------------------------------------------+
+| ``%``               | ``builder::Op Rem(builder::Op lhs, builder::Op rhs)`` |
++---------------------+-------------------------------------------------------+
+| ``&``               | ``builder::Op And(builder::Op lhs, builder::Op rhs)`` |
++---------------------+-------------------------------------------------------+
+| ``|``               | ``builder::Op Or(builder::Op lhs, builder::Op rhs)``  |
++---------------------+-------------------------------------------------------+
+| ``^``               | ``builder::Op Xor(builder::Op lhs, builder::Op rhs)`` |
++---------------------+-------------------------------------------------------+
+
+There is an agument named resultType which means the Type of the output for this Op. It's mostly can be infered if builder->SetShapeInference(true).
+But for sereval ops such as ``Reshape`` or ``Convert``, it should be set explicitly.
+
+Type
+----
+
+Type represents the output type of an Op. It contains the information of both the shape and the PrimitiveType, which stands for the basic data types.
+
++---------------+---------------------------------------+
+| PrimitiveType | Basic data type in C++                |
++===============+=======================================+
+| ``NONE()``    | ``none(for unkown data type)``        |
++---------------+---------------------------------------+
+| ``PRED()``    | ``bool``                              |
++---------------+---------------------------------------+
+| ``S8()``      | ``int8_t``                            |
++---------------+---------------------------------------+
+| ``S16()``     | ``int16_t``                           |
++---------------+---------------------------------------+
+| ``F16()``     | ``half(not a standard C++ type)``     |
++---------------+---------------------------------------+
+| ``BF16()``    | ``bfloat16(not a standard C++ type)`` |
++---------------+---------------------------------------+
+| ``S32()``     | ``int32_t``                           |
++---------------+---------------------------------------+
+| ``F32()``     | ``float``                             |
++---------------+---------------------------------------+
+| ``S64()``     | ``int64_t``                           |
++---------------+---------------------------------------+
+| ``F64()``     | ``double``                            |
++---------------+---------------------------------------+
+| ``TUPLE()``   | ``tuple(a list of above types)``      |
++---------------+---------------------------------------+
+
+.. note::
+
+ In shape of {-1, 3, 224, 224}, ``-1`` means unkown dim;
+ Shape of {-2} means unkown rank and shape, used for dynamic shape models.
+
+.. warning::
+
+  At the moment, unsigned integers(uint8_t, uint16_t, uint32_t, uint64_t) are not
+  supported because of the old version of mlir we are using. The problem will be
+  solved by upgrading the depended mlir. Another problem is that users should prepare
+  the ``float16.h`` and ``bfloat16.h`` by themselves when there is need to use
+  ``F16()`` and ``BF16()`` as inputs or construct ``Const`` ops with these primitive types.
+
+Attribute
+---------
+
+Attributes are known-constant values of modules, functions and operators in the IR.
+There are kinds of attributes can be defined and bound to the targets.
+
+A simple example of set attributes could look as follows:
+
+.. code-block:: cpp
+
+  #include "hlir_builder/hlir_builder.h"
+
+  auto builder = std::make_shared<builder::Builder>();
+  auto ptype = builder::PrimitiveType::S64();
+  std::vector<int64_t> shape = {3, 2};
+  builder::Type type(shape, ptype);
+  auto arg0 = builder->CreateInput(type);
+  auto arg1 = builder->CreateInput(type);
+  auto res = arg0 + arg1;
+  // set attributes of Op
+  res.SetAttribute("op_name", builder::Attribute("sum"));
+  res.SetAttribute("op_type", builder::Attribute("Add"));
+  builder->SetOutput({res});
+  // construct an Array Attribute
+  std::vector<builder::Attribute> min_shape_dim;
+  std::vector<int64_t> min_shape_0 = {1, 2};
+  auto dtype_i64 = builder::PrimitiveType::S64();
+  auto attr_0 = builder::Attribute(builder::Type({2}, dtype_i64),
+                                   min_shape_0.data());
+  min_shape_dim.push_back(attr_0);
+  std::vector<int64_t> min_shape_1 = {1, 2};
+  auto attr_1 = builder::Attribute(builder::Type({2}, dtype_i64),
+                                   min_shape_1.data());
+  min_shape_dim.push_back(attr_1);
+  // set attributes of function
+  builder->SetFuncAttribute("main", "input_min_shape_dim", min_shape_dim);
+  // set attributes of module
+  builder->SetModuleAttribute("module_id", builder::Attribute(int32_t(20)));
+  builder->Dump();
+
+The built IR is:
+
+.. code-block:: cpp
+
+  module attributes {module_id = 20 : i32} {
+    func @main(%arg0: tensor<3x2xi64>, %arg1: tensor<3x2xi64>) -> tensor<3x2xi64> attributes {input_min_shape_dim = [dense<[1, 2]> : tensor<2xi64>, dense<[1, 2]> : tensor<2xi64>]} {
+      %0 = "dtu_hlir.add"(%arg0, %arg1) {op_name = "sum", op_type = "Add"} : (tensor<3x2xi64>, tensor<3x2xi64>) -> tensor<3x2xi64>
+      return %0 : tensor<3x2xi64>
+    }
+  }
+
+Contents
+--------
+
+.. toctree::
+   :maxdepth: 2
+
+   get_started
+   meta_operation_semantics
+   client_operation_semantics
+   tops_graph_compiler
+   api/library_root
+
+.. toctree::
+  :glob:
+  :maxdepth: 1
+  :caption: Notes
+
+  notes/*
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
+Acknowledgements
+----------------
+
+This documentation website for the HLIR Builder C++ universe has been enabled by the
+`Exhale <https://github.com/svenevs/exhale/>`_ project and generous investment
+of time and effort by its maintainer, `svenevs <https://github.com/svenevs/>`_.
+We thank Stephen for his work and his efforts providing help with the HLIR Builder C++ documentation.

@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a27164decbd0246b7d918fb98e3f88924:
+
+Function builder::Tuple
+=======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Tuple(std::vector<builder::Op>, builder::Type)
+   :project: HLIR Builder

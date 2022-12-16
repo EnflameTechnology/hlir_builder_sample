@@ -1,0 +1,15 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1a58df87c91e9ac9d6c53cac1ca83deb5a:
+
+Function builder::Resize
+========================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Resize(builder::Op, builder::Op, builder::Op, builder::Op, int64_t, int64_t, bool, int64_t, float, float, builder::Type)

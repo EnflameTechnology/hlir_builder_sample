@@ -1,0 +1,16 @@
+:github_url: https://github.com/EnflameTechnology
+
+.. _exhale_function_namespacebuilder_1adcd38613f004881171e2560ea0382514:
+
+Function builder::Iota
+======================
+
+- Defined in :ref:`file_headers_hlir_builder_ops.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: builder::Iota(std::shared_ptr<builder::Builder>, int64_t, builder::Type)
+   :project: HLIR Builder
